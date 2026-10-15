@@ -1,0 +1,1490 @@
+<!DOCTYPE html>
+<html lang="vi" data-lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Avibi — Brand Guideline Playbook</title>
+<link rel="icon" type="image/svg+xml" href="favicon.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com/">
+<link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin="">
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap&subset=vietnamese" rel="stylesheet">
+<script src="https://unpkg.com/@phosphor-icons/web@2.1.1"></script>
+<style>
+:root{
+  /* Avibi tokens — sampled from the master logo */
+  --navy:#041837;      /* Avibi Navy — wordmark */
+  --navy-80:#1B2F52;
+  --navy-60:#3A4D70;
+  --blue:#0059FC;      /* Avibi Blue — gradient start */
+  --blue-mid:#0064F2;
+  --sky:#0CBAFC;       /* Avibi Sky — gradient end */
+  --grad:linear-gradient(128deg,#0059FC 0%,#0064F2 50%,#0CBAFC 100%);
+  --paper:#FFFFFF;
+  --ink:#041837;
+  --g50:#F4F7FC;
+  --g100:#E8EDF5;
+  --g200:#D7DFEB;
+  --g400:#98A6BC;
+  --g600:#5A6B85;
+  --radius:18px;
+  --maxw:1060px;
+  --head:'Plus Jakarta Sans',system-ui,sans-serif;
+  --body:'Inter',system-ui,sans-serif;
+  --mono:'JetBrains Mono',ui-monospace,Consolas,monospace;
+  color-scheme:light;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:var(--body);color:var(--ink);background:var(--paper);line-height:1.6;-webkit-font-smoothing:antialiased}
+
+/* language toggling */
+[data-lang="vi"] .en{display:none}
+[data-lang="en"] .vi{display:none}
+[data-lang="both"] .en{display:block;color:var(--g600);font-weight:400}
+[data-lang="both"] .en.inline{display:inline}
+.en.inline,.vi.inline{display:inline}
+[data-lang="vi"] .en.inline{display:none}
+[data-lang="en"] .vi.inline{display:none}
+[data-lang="both"] h1 .en,[data-lang="both"] h2 .en,[data-lang="both"] h3 .en{font-size:.62em;letter-spacing:.02em}
+
+/* layout */
+.wrap{--wrappad:28px;max-width:var(--maxw);margin:0 auto;padding:0 var(--wrappad)}
+section{padding:80px 0;border-top:1px solid var(--g100);scroll-margin-top:72px}
+section:first-of-type{border-top:none}
+
+/* top bar */
+.topbar{position:fixed;top:0;left:0;right:0;z-index:50;background:transparent;border-bottom:1px solid transparent;transition:background .3s,border-color .3s,backdrop-filter .3s}
+.topbar.scrolled{background:rgba(255,255,255,.9);backdrop-filter:blur(12px);border-bottom:1px solid var(--g100)}
+.brandmini .logo-color{display:none}
+.topbar.scrolled .brandmini .logo-white{display:none}
+.topbar.scrolled .brandmini .logo-color{display:block}
+.topbar .menu-btn{background:rgba(255,255,255,.16);color:#fff}
+.topbar .menu-btn:hover{background:rgba(255,255,255,.28)}
+.topbar.scrolled .menu-btn{background:var(--g100);color:var(--navy)}
+.topbar.scrolled .menu-btn:hover{background:var(--g200)}
+.topbar .langtoggle{background:rgba(255,255,255,.16)}
+.topbar .langtoggle button{color:rgba(255,255,255,.85)}
+.topbar .langtoggle button.active{background:#fff;color:var(--navy)}
+.topbar.scrolled .langtoggle{background:var(--g100)}
+.topbar.scrolled .langtoggle button{color:var(--g600)}
+.topbar.scrolled .langtoggle button.active{background:var(--navy);color:#fff}
+.topbar .wrap{display:flex;align-items:center;justify-content:space-between;padding-top:12px;padding-bottom:12px;gap:16px}
+.brandmini{display:flex;align-items:center}
+.brandmini svg{height:30px;width:120px;display:block}
+.topbar-right{display:flex;align-items:center;gap:12px}
+.menu-wrap{position:relative}
+.menu-btn{display:flex;align-items:center;gap:10px;justify-content:space-between;min-width:170px;font-family:var(--head);font-weight:600;font-size:13px;color:var(--navy);background:var(--g100);border:none;padding:9px 15px;border-radius:10px;cursor:pointer;transition:.15s}
+.menu-btn #menuLabel{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.menu-btn:hover{background:var(--g200)}
+.menu-btn .caret{transition:.2s;font-size:10px}
+.menu-btn.open .caret{transform:rotate(180deg)}
+.menu-panel{position:absolute;right:0;top:calc(100% + 12px);background:#fff;border:1px solid var(--g100);border-radius:16px;box-shadow:0 24px 60px rgba(4,24,55,.18);padding:10px;width:340px;display:none;grid-template-columns:1fr 1fr;gap:2px;z-index:60}
+.menu-panel.open{display:grid}
+.menu-panel a{display:flex;gap:10px;align-items:center;padding:11px 12px;border-radius:11px;text-decoration:none;color:var(--navy);font-weight:600;font-size:13px;transition:.12s}
+.menu-panel a:hover{background:var(--g50)}
+.menu-panel a b{font-family:var(--head);color:var(--blue);font-size:12px;font-weight:700;min-width:18px}
+@media(max-width:560px){.menu-panel{grid-template-columns:1fr;width:230px}}
+/* right-side section rail — desktop only, and only wide enough that it sits in
+   the gutter beside the 1060px content instead of over it */
+.railnav{position:fixed;right:20px;top:50%;transform:translateY(-50%);z-index:45;display:none;
+  flex-direction:column;align-items:flex-end;gap:2px;opacity:0;pointer-events:none;transition:opacity .3s}
+.railnav.show{opacity:1;pointer-events:auto}
+.railnav a{position:relative;display:flex;align-items:center;justify-content:flex-end;
+  width:34px;padding:6px 0;text-decoration:none;border-radius:6px}
+.railnav .rn-dot{width:9px;height:9px;border-radius:50%;background:var(--g200);flex:none;
+  transition:width .2s,background .2s,border-radius .2s}
+.railnav a:hover .rn-dot{background:var(--navy-60)}
+.railnav a.active .rn-dot{background:var(--grad);width:24px;border-radius:5px}
+/* label is absolutely positioned so the link's hit area stays dot-sized */
+.railnav .rn-label{position:absolute;right:20px;top:50%;white-space:nowrap;
+  font-family:var(--head);font-weight:600;font-size:12px;color:var(--navy);background:#fff;
+  border:1px solid var(--g100);box-shadow:0 8px 22px rgba(4,24,55,.14);padding:5px 11px;border-radius:9px;
+  opacity:0;transform:translateY(-50%) translateX(8px);transition:opacity .18s,transform .18s;pointer-events:none}
+.railnav a:hover .rn-label,.railnav a:focus-visible .rn-label{opacity:1;transform:translateY(-50%)}
+.railnav a:focus-visible{outline:2px solid var(--blue);outline-offset:3px}
+/* 1200px: content is 1060 wide, the rail needs 54px (right:20 + 34), and a
+   scrollbar eats ~15px — below this the rail would sit on top of the content */
+@media(min-width:1200px){.railnav{display:flex}}
+@media(prefers-reduced-motion:reduce){.railnav,.railnav *{transition:none}}
+.langtoggle{display:flex;background:var(--g100);border-radius:10px;padding:3px}
+.langtoggle button{border:none;background:none;font-family:var(--body);font-size:12px;font-weight:600;color:var(--g600);padding:5px 11px;border-radius:7px;cursor:pointer;transition:.15s}
+.langtoggle button.active{background:var(--navy);color:#fff}
+
+/* hero */
+/*hero bg in avibi block*/.hero{color:#fff;padding:80px 0;border:none;min-height:100vh;min-height:100dvh;display:flex;flex-direction:column;justify-content:center;align-items:stretch;text-align:left}
+.hero .kicker{display:inline-block;font-family:var(--head);font-weight:600;letter-spacing:.22em;text-transform:uppercase;font-size:12px;color:var(--sky);margin-bottom:22px}
+.hero h1{font-family:var(--head);font-weight:800;font-size:clamp(38px,6vw,68px);line-height:1.05;letter-spacing:-.02em;color:#fff;margin-bottom:8px}
+.hero h1 .en{color:#fff;font-weight:800}
+.hero p.lead{max-width:620px;font-size:17px;color:rgba(255,255,255,.78);margin-top:24px}
+.hero .herologo{margin-bottom:44px}
+.hero .herologo svg{height:60px;width:240px;display:block}
+.hero .meta{margin-top:44px;display:flex;gap:32px;flex-wrap:wrap;font-size:13px;color:rgba(255,255,255,.6)}
+.hero .meta b{display:block;color:#fff;font-family:var(--head);font-weight:600;font-size:15px;margin-bottom:2px}
+
+/* typography */
+.sec-num{font-family:var(--head);font-weight:700;color:var(--navy);font-size:13px;letter-spacing:.18em;text-transform:uppercase;margin-bottom:14px;display:flex;align-items:center;gap:0}
+.sec-num .num{color:var(--navy);position:relative;padding-bottom:3px}
+.sec-num .num::after{content:"";position:absolute;left:0;right:0;bottom:0;height:3px;background:var(--grad);border-radius:2px}
+.sec-num .dash{color:var(--g400);margin:0 9px}
+.secico{font-size:17px;color:#fff;background:var(--grad);width:30px;height:30px;min-width:30px;border-radius:8px;display:inline-flex;align-items:center;justify-content:center;margin-right:11px}
+.cardico{width:46px;height:46px;border-radius:12px;background:var(--navy);color:var(--sky);display:flex;align-items:center;justify-content:center;font-size:24px;margin-bottom:14px}
+.pill i{margin-right:6px;font-size:14px;vertical-align:-2px}
+.asset .fmt i{margin-right:6px;color:var(--navy);vertical-align:-2px}
+.dlbtn i{font-size:14px;vertical-align:-2px}
+.clean li i,.subhead i{color:var(--navy)}
+h2{font-family:var(--head);font-weight:700;font-size:clamp(26px,3.4vw,38px);line-height:1.12;letter-spacing:-.015em;color:var(--navy);margin-bottom:8px}
+h2 .en{margin-top:2px}
+h3{font-family:var(--head);font-weight:600;font-size:19px;color:var(--navy);margin-bottom:6px}
+h3 .en{margin-top:1px}
+.sub{max-width:640px;color:var(--g600);font-size:16px;margin-bottom:38px}
+p+p{margin-top:12px}
+
+/* cards & grids */
+.grid{display:grid;gap:20px}
+.g2{grid-template-columns:repeat(2,1fr)}
+.g3{grid-template-columns:repeat(3,1fr)}
+.g4{grid-template-columns:repeat(4,1fr)}
+@media(max-width:820px){.g2,.g3,.g4{grid-template-columns:1fr}.g4{grid-template-columns:repeat(2,1fr)}}
+.card{background:var(--g50);border:1px solid var(--g100);border-radius:var(--radius);padding:26px}
+.card h3{margin-bottom:10px}
+.card p{font-size:14px;color:var(--g600)}
+
+/* logo stage */
+.stage{background:#fff;border:1px solid var(--g200);border-radius:var(--radius);display:flex;align-items:center;justify-content:center;padding:56px 32px;min-height:200px}
+.stage.navy{background:var(--navy);border-color:var(--navy)}
+.stage.blue{background:var(--blue);border-color:var(--blue)}
+.stage.grad{background:var(--grad);border:none}
+.stage.cloud{background:var(--g50)}
+.stage.grey{background:var(--g100);border-color:var(--g200)}
+.stage svg{max-width:78%;height:auto;max-height:96px}
+.stage img.previmg{max-width:72%;height:auto;max-height:80px;display:block}
+.stage.icononly{height:240px;min-height:0;padding:32px}
+.stage.icononly svg{max-height:120px;max-width:150px;width:auto}
+.label{font-size:12px;font-weight:600;color:var(--g600);margin-top:12px;text-align:center;font-family:var(--head);letter-spacing:.03em}
+.label .tag{display:inline-block;font-size:10px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;padding:2px 8px;border-radius:20px;margin-left:6px}
+.label .tag.pri{background:var(--blue);color:#fff}
+.label .tag.alt{background:var(--g100);color:var(--g600)}
+.subh{font-family:var(--head);font-weight:600;font-size:15px;color:var(--navy);margin:34px 0 14px;display:flex;align-items:center;gap:8px}
+.subh i{color:var(--blue);font-size:18px}
+.stage-wrap{display:flex;flex-direction:column}
+
+/* clear space diagram */
+/* --clh drives the whole diagram: logo height, clear-space band and tick size.
+   The logo symbol is 776x194 user units (ratio 4:1) and the bubble inside it is
+   186.5x178.3. The tick symbol is a 214x188 box holding that same bubble, so for
+   the faded bubbles to render at the same size as the logo's own bubble:
+   tick height = .969 x --clh, tick width = 1.103 x --clh. */
+.clearbox{--clh:64px;position:relative;background:var(--g50);border-radius:var(--radius);border:1px solid var(--g100);padding:44px;display:flex;justify-content:center}
+.clearframe{position:relative;padding:calc(var(--clh) * .625);border:2px dashed var(--blue);border-radius:8px;background:#fff}
+.clearframe .cl-logo{height:var(--clh);width:calc(var(--clh) * 3.159);display:block}
+.clearframe .tick{position:absolute;height:calc(var(--clh) * .625);width:calc(var(--clh) * .631);opacity:.16}
+.clearframe .t-top{top:1px;left:50%;transform:translateX(-50%)}
+.clearframe .t-left{left:1px;top:50%;transform:translateY(-50%)}
+.clearframe .t-right{right:1px;top:50%;transform:translateY(-50%)}
+.clearframe .t-bot{bottom:1px;left:50%;transform:translateX(-50%)}
+
+/* colors */
+.swatches{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+@media(max-width:820px){.swatches{grid-template-columns:1fr}}
+.swatch{border-radius:var(--radius);overflow:hidden;border:1px solid var(--g100);cursor:pointer;transition:.18s;background:#fff}
+.swatch:hover{transform:translateY(-3px);box-shadow:0 12px 30px rgba(4,24,55,.12)}
+.swatch .chip{height:120px;display:flex;align-items:flex-end;padding:14px}
+.swatch .chip>span{font-size:11px;font-weight:700;font-family:var(--head);background:rgba(255,255,255,.9);color:var(--navy);padding:3px 8px;border-radius:20px;opacity:0;transition:.18s}
+.swatch:hover .chip>span{opacity:1}
+.swatch .info{padding:14px 16px}
+.swatch .info .nm{font-family:var(--head);font-weight:600;font-size:14px;color:var(--navy)}
+.swatch .info .hx{font-size:12px;color:var(--g600);font-family:var(--body);margin-top:2px;letter-spacing:.02em}
+.swatch .info .rgb{font-size:11px;color:var(--g400);margin-top:1px}
+
+.tintbar{display:flex;border-radius:12px;overflow:hidden;border:1px solid var(--g100);margin-top:8px}
+.tintbar div{flex:1;height:56px;display:flex;align-items:flex-end;justify-content:center;padding-bottom:6px;font-size:10px;font-weight:600;font-family:var(--head)}
+
+/* type specimen */
+.specimen{background:var(--g50);border:1px solid var(--g100);border-radius:var(--radius);padding:32px;display:flex;flex-direction:column;height:100%}
+.specimen .big{font-family:var(--head);font-weight:800;font-size:54px;color:var(--navy);line-height:1;letter-spacing:-.02em}
+.specimen .scale{font-family:var(--head);color:var(--navy);line-height:1.15;margin-top:4px}
+.specimen .row{display:flex;justify-content:space-between;align-items:baseline;padding:12px 0;border-bottom:1px solid var(--g100)}
+.specimen .row:last-child{border:none}
+.specimen .row .meta{font-size:12px;color:var(--g400);font-family:var(--body)}
+.glyphset{font-family:var(--head);letter-spacing:.04em;color:var(--navy);font-size:26px;font-weight:500;margin-top:14px;word-spacing:6px}
+
+/* do / dont */
+.dd{border-radius:var(--radius);overflow:hidden;border:1px solid var(--g100);display:flex;flex-direction:column;height:100%}
+.dd .top{flex:1;min-height:150px;display:flex;align-items:center;justify-content:center;background:#fff;padding:20px}
+.dd .top svg{max-height:64px;max-width:80%}
+.dd .cap{padding:14px 16px;font-size:13px;display:flex;gap:9px;align-items:center;min-height:72px}
+.dd .cap .mk{font-weight:800;font-family:var(--head);flex-shrink:0}
+.dd.no .cap{background:#FCEEEE}.dd.no .mk{color:#C0392B}
+.dd.yes .cap{background:#EAF6EE}.dd.yes .mk{color:#1E8E4E}
+.dd .cap .tx{color:var(--g600)}
+
+/* architecture */
+.arch{display:flex;flex-direction:column;align-items:center}
+.arch .master{background:var(--navy);border-radius:16px;padding:24px 44px;display:flex;justify-content:center}
+.arch .master svg{height:44px;width:auto}
+.arch .stem{width:2px;height:30px;background:var(--g200)}
+.arch{--archgap:24px;--archstem:30px}
+.arch .children{display:flex;gap:var(--archgap);width:100%;justify-content:center;position:relative;padding-top:var(--archstem)}
+.child{position:relative;flex:1;max-width:360px;background:#fff;border:1px solid var(--g200);border-radius:14px;padding:22px 26px;display:flex;flex-direction:column;align-items:center;gap:6px}
+/* vertical stem down into each child */
+.child::before{content:"";position:absolute;top:calc(-1 * var(--archstem));left:50%;width:2px;height:var(--archstem);background:var(--g200);transform:translateX(-50%)}
+/* horizontal connector: each child draws its own segment from its centre to the
+   middle of the gap, so the line starts and ends exactly on the outer stems */
+.child::after{content:"";position:absolute;top:calc(-1 * var(--archstem));height:2px;background:var(--g200);left:calc(-1 * var(--archgap) / 2);right:calc(-1 * var(--archgap) / 2)}
+.child:first-child::after{left:50%}
+.child:last-child::after{right:50%}
+.child svg{height:34px;max-width:210px}
+@media(max-width:640px){
+  /* stacked tree: keep a short stem so the master card never touches the children,
+     and match the master's width to the cards so all edges line up */
+  .arch .master{width:100%;max-width:340px;padding:22px 24px}
+  .arch .stem{height:20px}
+  .arch .children{flex-direction:column;align-items:center;padding-top:0;gap:16px}
+  .child::before,.child::after{display:none}
+  .child{width:100%;max-width:340px}
+}
+.child .role{font-size:12px;color:var(--g600);text-align:center;font-family:var(--body);margin-top:4px}
+.child .role b{font-family:var(--head);color:var(--navy);display:block;font-size:13px}
+
+/* voice */
+.voice{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+@media(max-width:820px){.voice{grid-template-columns:1fr}}
+.pill{display:inline-block;background:var(--navy);color:#fff;font-family:var(--head);font-weight:600;font-size:13px;padding:7px 15px;border-radius:30px;margin:4px 6px 4px 0}
+.pill.y{background:var(--blue);color:#fff}
+.saytable .r{display:grid;grid-template-columns:1fr 1fr;gap:14px;padding:14px 0;border-bottom:1px solid var(--g100)}
+.saytable .r>div{font-size:14px}
+.saytable .h{font-family:var(--head);font-weight:600;font-size:12px;letter-spacing:.05em;text-transform:uppercase;color:var(--g600);margin-bottom:0;display:flex;align-items:center;gap:7px}
+.saytable .h i{font-size:15px}
+.saytable .h.ok i{color:#1E8E4E}.saytable .h.bad i{color:#C0392B}
+.saytable .say{color:#1E8E4E}.saytable .dont{color:#C0392B}
+.saytable .r.head{padding-top:0;border-bottom:1px solid var(--g200)}
+.saytable .trait{grid-column:1/-1;font-family:var(--head);font-weight:700;font-size:10.5px;letter-spacing:.09em;text-transform:uppercase;color:var(--navy);background:var(--g100);display:inline-flex;align-items:center;gap:6px;padding:3px 11px;border-radius:20px;width:max-content;max-width:100%;margin-bottom:8px}
+.saytable .trait i{font-size:13px;color:var(--navy)}
+.saytable .cl{display:none}
+
+/* assets */
+.assetgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+@media(max-width:820px){.assetgrid{grid-template-columns:1fr}}
+.asset{background:var(--g50);border:1px solid var(--g100);border-radius:14px;padding:20px}
+.asset .fmt{font-family:var(--head);font-weight:700;color:var(--navy);font-size:15px;margin-bottom:6px}
+.asset .fmt span{background:var(--blue);color:#fff;font-size:10px;padding:2px 7px;border-radius:20px;margin-left:6px;vertical-align:middle}
+.asset p{font-size:13px;color:var(--g600)}
+
+/* downloads */
+.dlgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+@media(max-width:820px){.dlgrid{grid-template-columns:1fr}}
+.dlcard{border:1px solid var(--g100);border-radius:16px;overflow:hidden;background:#fff;display:flex;flex-direction:column}
+.dlcard .prev{background:var(--g50);display:flex;align-items:center;justify-content:center;height:132px;padding:20px;border-bottom:1px solid var(--g100)}
+.dlcard .prev.navy{background:var(--navy);border-color:var(--navy)}
+.dlcard .prev svg{max-height:64px;max-width:82%;width:auto;height:auto}
+.dlcard .prev.icon svg{max-height:80px;max-width:90px}
+.dlcard .body{padding:18px;display:flex;flex-direction:column;gap:12px;flex:1}
+.dlcard .nm{font-family:var(--head);font-weight:600;color:var(--navy);font-size:15px}
+.dlcard .nm span{display:block;font-size:12px;color:var(--g600);font-weight:400;margin-top:2px}
+[data-lang="vi"] .dlcard .nm .en{display:none}
+[data-lang="en"] .dlcard .nm .vi{display:none}
+.dlrow{display:flex;gap:8px;flex-wrap:wrap}
+.dlbtn{display:inline-flex;align-items:center;gap:6px;font-size:12px;font-weight:600;font-family:var(--head);color:var(--navy);background:var(--g100);border-radius:9px;padding:8px 13px;text-decoration:none;transition:.15s}
+.dlbtn:hover{background:var(--blue);color:#fff}
+.dlbtn.primary{background:var(--navy);color:#fff}
+.dlbtn.primary:hover{background:var(--blue);color:#fff}
+.dlvar{margin-top:auto;padding-top:8px;border-top:1px dashed var(--g200)}
+.dlvar .vlabel{font-size:11px;color:var(--g400);font-family:var(--head);font-weight:600;letter-spacing:.04em;text-transform:uppercase;margin-bottom:7px}
+.dlvar .chips{display:flex;gap:6px;flex-wrap:wrap}
+.dlchip{font-size:11px;color:var(--g600);background:var(--g50);border:1px solid var(--g100);border-radius:20px;padding:4px 11px;text-decoration:none;font-weight:600;transition:.15s}
+.dlchip:hover{border-color:var(--blue);color:var(--navy);background:#fff}
+.dltabs{display:inline-flex;gap:4px;background:var(--g100);border-radius:12px;padding:4px;margin-bottom:26px;max-width:100%}
+.dltab{border:none;background:none;font-family:var(--head);font-weight:600;font-size:13px;color:var(--g600);padding:8px 16px;border-radius:9px;cursor:pointer;white-space:nowrap;transition:.15s}
+.dltab.active{background:#fff;color:var(--navy);box-shadow:0 2px 8px rgba(4,24,55,.12)}
+.dlcard .prev img.previmg{max-height:64px;max-width:82%;width:auto;height:auto;display:block}
+.dlcard .prev.icon img.previmg{max-height:80px;max-width:90px}
+
+/* icon pack */
+.ipk-group{margin-bottom:34px}
+.ipk-group h3{display:flex;align-items:center;gap:9px;margin-bottom:16px}
+.ipk-group h3 i{color:var(--blue);font-size:20px}
+.iconpack{display:grid;grid-template-columns:repeat(6,1fr);gap:14px}
+@media(max-width:820px){.iconpack{grid-template-columns:repeat(3,1fr)}}
+@media(max-width:480px){.iconpack{grid-template-columns:repeat(2,1fr)}}
+.ipk{background:var(--g50);border:1px solid var(--g100);border-radius:14px;padding:18px 8px;display:flex;flex-direction:column;align-items:center;gap:9px;text-align:center;transition:.15s}
+.ipk:hover{background:#fff;border-color:var(--blue);transform:translateY(-3px);box-shadow:0 10px 24px rgba(4,24,55,.08)}
+.ipk i{font-size:28px;color:var(--navy)}
+.ipk span{font-size:11px;color:var(--g600);font-family:var(--body);line-height:1.3;word-break:break-word}
+.weights{display:flex;gap:14px;flex-wrap:wrap;align-items:center;justify-content:center;background:var(--g50);border:1px solid var(--g100);border-radius:16px;padding:24px}
+.weights .w{display:flex;flex-direction:column;align-items:center;gap:10px}
+.weights .w i{font-size:34px;color:var(--navy);width:60px;height:60px;display:flex;align-items:center;justify-content:center;border-radius:14px;background:#fff;border:1px solid var(--g100)}
+.weights .w span{font-size:11px;font-family:var(--head);font-weight:600;color:var(--g600)}
+.weights .w.hl i{color:var(--sky);background:var(--navy);border-color:var(--navy)}
+
+/* ===== contrast checker ===== */
+.cc{background:var(--g50);border:1px solid var(--g100);border-radius:var(--radius);padding:26px}
+.cc-row{display:grid;grid-template-columns:1fr 44px 1fr;gap:18px;align-items:start}
+@media(max-width:680px){.cc-row{grid-template-columns:1fr;gap:16px}}
+/* min-width:0 — grid/flex items default to min-width:auto and so refuse to shrink
+   below the text input's intrinsic ~20-character width, overflowing on narrow phones */
+.cc-field{min-width:0}
+/* label box is a fixed 27px tall (18 line + 9 margin) so the swap button can line
+   up with the colour circles using that exact offset instead of a guessed margin */
+.cc-field>label{display:block;font-family:var(--head);font-weight:700;font-size:11px;line-height:18px;letter-spacing:.08em;text-transform:uppercase;color:var(--g600);margin-bottom:9px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.cc-in{display:flex;gap:10px;align-items:center;min-width:0}
+.cc-in input{min-width:0}
+/* circular colour wells — the swatch pseudo-elements must be rounded too, or the
+   native square swatch shows through the round border */
+.cc-in input[type=color]{width:44px;height:44px;padding:0;border:1px solid var(--g200);border-radius:50%;background:#fff;cursor:pointer;flex:none;overflow:hidden;-webkit-appearance:none;appearance:none}
+.cc-in input[type=color]::-webkit-color-swatch-wrapper{padding:0;border-radius:50%}
+.cc-in input[type=color]::-webkit-color-swatch{border:none;border-radius:50%}
+.cc-in input[type=color]::-moz-color-swatch{border:none;border-radius:50%}
+.cc-in input[type=color]:hover{box-shadow:0 5px 14px rgba(4,24,55,.18)}
+.cc-in input[type=color]:focus-visible{outline:2px solid var(--blue);outline-offset:2px}
+.cc-in input[type=text]{flex:1;min-width:0;height:44px;font-family:var(--body);font-size:14px;font-weight:600;color:var(--navy);padding:0 14px;border:1px solid var(--g200);border-radius:22px;background:#fff;letter-spacing:.05em;text-transform:uppercase}
+.cc-in input[type=text]:focus-visible{outline:2px solid var(--blue);outline-offset:1px}
+.cc-in input[type=text].bad{border-color:#C0392B;color:#A5301F}
+.cc-chips{display:flex;flex-wrap:wrap;gap:6px;margin-top:10px}
+.cc-chip{width:26px;height:26px;border-radius:50%;border:1px solid var(--g200);cursor:pointer;padding:0;transition:.14s}
+.cc-chip:hover{transform:translateY(-2px);box-shadow:0 5px 12px rgba(4,24,55,.16)}
+.cc-chip:focus-visible{outline:2px solid var(--blue);outline-offset:2px}
+/* align-self:start + the label's exact 27px height puts the swap button on the
+   same line as the two colour circles (align-self:center would centre it against
+   the full row height, chips included, which read as misaligned) */
+.cc-swap{align-self:start;justify-self:center;margin-top:27px;width:44px;height:44px;border-radius:50%;border:1px solid var(--g200);background:#fff;color:var(--navy);font-size:16px;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:.15s;flex:none}
+.cc-swap:hover{background:var(--blue);border-color:var(--blue);color:#fff}
+.cc-swap:focus-visible{outline:2px solid var(--blue);outline-offset:2px}
+@media(max-width:680px){.cc-swap{margin-top:0;justify-self:start}}
+/* score gets its own full-width line above the verdicts */
+.cc-out{margin-top:24px;padding-top:22px;border-top:1px solid var(--g200)}
+.cc-ratio{display:block;font-family:var(--head);font-weight:800;font-size:clamp(46px,9vw,72px);line-height:1;letter-spacing:-.02em;color:var(--navy);white-space:nowrap;margin-bottom:16px}
+.cc-ratio span:last-child{font-size:.32em;font-weight:600;color:var(--g400);margin-left:3px;letter-spacing:0}
+.cc-badges{display:flex;flex-wrap:wrap;gap:8px}
+.cc-badge{display:inline-flex;align-items:center;gap:7px;font-family:var(--head);font-weight:600;font-size:12px;padding:7px 12px;border-radius:9px;border:1px solid var(--g200);background:#fff;color:var(--g600)}
+.cc-badge i{font-size:14px}
+.cc-badge em{font-style:normal;font-weight:500;opacity:.75}
+.cc-badge.pass{border-color:#BFE3CD;background:#EAF6EE;color:#12673A}
+.cc-badge.fail{border-color:#F0CFCB;background:#FCEEEE;color:#9E2D1D}
+.cc-prev{margin-top:20px;border-radius:14px;border:1px solid var(--g200);padding:24px 26px}
+.cc-prev .p-lg{font-family:var(--head);font-weight:700;font-size:25px;line-height:1.2;margin-bottom:9px}
+.cc-prev .p-sm{font-size:15px;line-height:1.55}
+.cc-prev .p-xs{font-size:12px;margin-top:7px;opacity:.85}
+/* preset brand pairs */
+.ccpairs{display:grid;gap:8px;margin-top:14px}
+/* two columns once each one still has room for the full row (swatch + name +
+   ratio + verdict ≈ 380px) — below this they'd get cramped */
+@media(min-width:900px){.ccpairs{grid-template-columns:1fr 1fr;gap:10px}}
+.ccpair{display:grid;grid-template-columns:74px 1fr auto auto;gap:12px;align-items:center;width:100%;
+  background:#fff;border:1px solid var(--g100);border-radius:12px;padding:9px 13px;cursor:pointer;text-align:left;font:inherit;transition:.14s}
+.ccpair:hover{border-color:var(--blue);box-shadow:0 6px 16px rgba(4,24,55,.07)}
+.ccpair:focus-visible{outline:2px solid var(--blue);outline-offset:2px}
+.ccpair .sw{height:36px;border-radius:8px;display:flex;align-items:center;justify-content:center;font-family:var(--head);font-weight:700;font-size:13px;border:1px solid rgba(4,24,55,.1)}
+.ccpair .nm{font-family:var(--head);font-weight:600;font-size:13px;color:var(--navy)}
+.ccpair .rt{font-family:var(--head);font-weight:700;font-size:14px;color:var(--navy);white-space:nowrap}
+.ccpair .vd{font-family:var(--head);font-size:10.5px;font-weight:700;letter-spacing:.04em;padding:4px 9px;border-radius:20px;white-space:nowrap}
+.ccpair .vd.pass{background:#EAF6EE;color:#12673A}
+.ccpair .vd.fail{background:#FCEEEE;color:#9E2D1D}
+@media(max-width:560px){
+  .cc{padding:18px}
+  .cc-prev{padding:20px}
+  .ccpair{grid-template-columns:64px 1fr auto;row-gap:8px}
+  .ccpair .vd{grid-column:2/-1;justify-self:start}
+}
+@media(max-width:400px){
+  .cc{padding:14px}
+  .cc-in{gap:8px}
+}
+.cc-links{display:flex;flex-wrap:wrap;gap:10px;margin-top:16px}
+.cc-link{display:inline-flex;align-items:center;gap:8px;font-family:var(--head);font-weight:600;font-size:13px;color:var(--navy);
+  background:#fff;border:1px solid var(--g200);border-radius:10px;padding:10px 14px;text-decoration:none;transition:.15s}
+.cc-link:hover{border-color:var(--blue);box-shadow:0 6px 16px rgba(4,24,55,.08)}
+.cc-link i{font-size:15px;color:var(--g400)}
+.cc-link:hover i{color:var(--navy)}
+
+/* footer */
+.foot{background:var(--navy);color:rgba(255,255,255,.7);padding:60px 0;border:none}
+.foot .wrap{display:flex;justify-content:space-between;gap:24px;flex-wrap:wrap;align-items:center}
+.foot svg{height:34px;width:136px;display:block}
+.foot .r{font-size:13px;text-align:right}
+
+.copytoast{position:fixed;bottom:26px;left:50%;transform:translateX(-50%) translateY(20px);background:var(--navy);color:#fff;padding:11px 20px;border-radius:30px;font-size:13px;font-weight:600;font-family:var(--head);opacity:0;pointer-events:none;transition:.25s;z-index:99;box-shadow:0 10px 30px rgba(0,0,0,.25)}
+.copytoast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+.note{background:#fff;border-left:3px solid var(--blue);padding:14px 18px;border-radius:0 10px 10px 0;font-size:13.5px;color:var(--g600);margin-top:20px}
+ul.clean{list-style:none;margin-top:10px}
+ul.clean li{font-size:14px;color:var(--g600);padding:7px 0 7px 26px;position:relative}
+ul.clean li::before{content:"";position:absolute;left:0;top:14px;width:8px;height:8px;border-radius:50%;background:var(--grad)}
+
+/* ===== responsive / no horizontal scroll ===== */
+html,body{overflow-x:hidden;max-width:100%}
+img,svg{max-width:100%}
+.stage svg,.stage img,.dlcard .prev svg,.dlcard .prev img{max-width:100%}
+@media(max-width:680px){
+  .wrap{--wrappad:18px}
+  .topbar .wrap{gap:8px;padding-top:10px;padding-bottom:10px}
+  .brandmini svg{width:104px;height:26px}
+  .menu-btn{min-width:0;padding:8px 11px;gap:6px}
+  .menu-btn #menuLabel{max-width:32vw;font-size:12px}
+  .langtoggle button{padding:5px 9px;font-size:11px}
+  .menu-panel{width:min(300px,84vw)}
+  section{padding:56px 0}
+  .sec-num{flex-wrap:wrap;letter-spacing:.08em;font-size:11px;row-gap:6px}
+  h2{font-size:26px}
+  .hero{padding:64px 0}
+  .hero h1{font-size:clamp(30px,9vw,44px)}
+  .hero p.lead{font-size:15px}
+  /* --clh grows with the viewport up to the desktop 56px, so the diagram is as
+     large as will fit. frame outer width = 6 x --clh + 4px border. */
+  .clearbox{--clh:clamp(30px,calc(19vw - 14px),64px);padding:16px}
+  .specimen{padding:22px}
+  .specimen .big{font-size:38px}
+  .swatch .info .nm{font-size:13px}
+  .saytable .r{grid-template-columns:1fr;gap:12px}
+  .saytable .r.head{display:none}
+  .saytable .cl{display:block;font-family:var(--head);font-weight:700;font-size:10px;letter-spacing:.07em;text-transform:uppercase;margin-bottom:4px}
+  .saytable .say .cl{color:#1E8E4E}
+  .saytable .dont .cl{color:#C0392B}
+  .weights{gap:10px;padding:18px}
+  .weights .w i{width:52px;height:52px;font-size:28px}
+  /* keep the download style tabs on a single row */
+  .dltabs{display:grid;grid-template-columns:repeat(4,1fr);width:100%;gap:3px}
+  .dltab{padding:9px 6px;font-size:12px;text-align:center}
+}
+/* footer: stack and left-align once the two blocks can no longer sit side by side */
+@media(max-width:820px){
+  .foot .wrap{flex-direction:column;align-items:flex-start;gap:22px}
+  .foot .r{text-align:left}
+}
+/* phones: let the clear-space diagram go edge to edge, which is the only range
+   where the extra width actually buys a bigger logo (--clh caps out at 56px
+   around 415px viewport) */
+@media(max-width:420px){
+  .clearbox{padding:12px;margin-inline:calc(-1 * var(--wrappad));border-radius:0;border-left:0;border-right:0}
+}
+@media(max-width:400px){
+  .wrap{--wrappad:14px}
+  .iconpack{grid-template-columns:repeat(2,1fr)}
+}
+
+/* ================= AVIBI ADDITIONS ================= */
+.hero{position:relative;overflow:hidden;background:#041837;min-height:auto;padding:150px 0 110px}
+.hero::before{content:"";position:absolute;inset:0;background:
+  radial-gradient(60% 70% at 88% 18%,rgba(12,186,252,.30),transparent 60%),
+  radial-gradient(55% 60% at 70% 95%,rgba(0,89,252,.40),transparent 65%),
+  linear-gradient(180deg,#041837 0%,#06204A 100%);pointer-events:none}
+.hero .wrap{position:relative;z-index:1}
+.hero .bigA{position:absolute;right:-6%;top:50%;transform:translateY(-46%);width:min(56vw,640px);height:auto;opacity:.22;pointer-events:none}
+.hero .arcline{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;opacity:.5}
+.hero .herologo svg{height:56px;width:177px}
+.hero h1{max-width:760px;text-wrap:balance}
+.hero .tagline{font-family:var(--head);font-weight:600;font-size:15px;color:#fff;margin-top:26px;display:inline-flex;gap:10px;align-items:center;padding:8px 14px 8px 8px;border-radius:30px;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.14)}
+.hero .tagline b{font-size:11px;letter-spacing:.12em;text-transform:uppercase;background:var(--grad);padding:4px 10px;border-radius:20px}
+@media(max-width:680px){.hero{padding:110px 0 70px}.hero .bigA{width:90vw;right:-30%;opacity:.14}}
+h2,h3{text-wrap:balance}
+code,.mono{font-family:var(--mono);font-size:.92em}
+.note code{background:var(--g100);padding:1px 6px;border-radius:5px;color:var(--navy)}
+
+/* anatomy */
+.anat{display:grid;grid-template-columns:1.05fr 1fr;gap:20px;align-items:stretch}
+@media(max-width:820px){.anat{grid-template-columns:1fr}}
+.anat .fig{background:var(--g50);border:1px solid var(--g100);border-radius:var(--radius);padding:30px;display:flex;align-items:center;justify-content:center;min-width:0}
+.anat .fig svg{width:100%;max-width:420px;height:auto;display:block}
+.anat ol{list-style:none;display:flex;flex-direction:column;gap:12px;counter-reset:a}
+.anat li{display:grid;grid-template-columns:34px 1fr;gap:14px;align-items:start;background:#fff;border:1px solid var(--g100);border-radius:14px;padding:16px 18px}
+.anat li .k{width:34px;height:34px;border-radius:50%;background:var(--navy);color:#fff;font-family:var(--head);font-weight:700;font-size:14px;display:flex;align-items:center;justify-content:center}
+.anat li h4{font-family:var(--head);font-weight:700;font-size:15px;color:var(--navy);margin-bottom:2px}
+.anat li p{font-size:13.5px;color:var(--g600)}
+
+/* product lockup */
+.lockup{display:flex;align-items:center;gap:0}
+.lockup svg{height:44px;width:139px;flex:none}
+.lockup .bar{width:1.5px;height:34px;background:currentColor;opacity:.25;margin:0 18px}
+.lockup .pn{font-family:var(--head);font-weight:600;font-size:30px;letter-spacing:-.01em;line-height:1}
+.stage .lockup{color:var(--navy)}
+.stage.navy .lockup{color:#fff}
+@media(max-width:480px){.lockup svg{height:30px;width:95px}.lockup .pn{font-size:21px}.lockup .bar{margin:0 11px;height:24px}}
+.arch .product{background:#fff;border:1px solid var(--g200);border-radius:16px;padding:20px 30px;display:flex;flex-direction:column;align-items:center;gap:8px}
+.arch .product .lockup svg{height:34px;width:107px}
+.arch .product .lockup .pn{font-size:23px}
+.arch .product .role{font-size:12px;color:var(--g600);text-align:center}
+.child .cico{width:40px;height:40px;border-radius:11px;background:var(--g50);border:1px solid var(--g100);display:flex;align-items:center;justify-content:center;font-size:21px;color:var(--blue)}
+.arch .children.four .child{max-width:none;padding:18px 14px}
+@media(max-width:820px){.arch .children.four{flex-wrap:wrap}.arch .children.four .child{flex:1 1 40%}.arch .children.four .child::before,.arch .children.four .child::after{display:none}.arch .children.four{padding-top:18px}}
+@media(max-width:640px){.arch .children.four{flex-direction:row}.arch .children.four .child{max-width:none}}
+
+/* gradient spec */
+.gradspec{display:grid;grid-template-columns:1.4fr 1fr;gap:20px;margin:12px 0 40px}
+@media(max-width:820px){.gradspec{grid-template-columns:1fr}}
+.gradspec .bar{border-radius:var(--radius);background:var(--grad);min-height:170px;position:relative;display:flex;align-items:flex-end;padding:16px}
+.gradspec .stops{position:absolute;left:16px;right:16px;top:16px;display:flex;justify-content:space-between}
+.gradspec .stops span{font-family:var(--mono);font-size:11px;color:#fff;background:rgba(4,24,55,.35);padding:3px 8px;border-radius:20px}
+.gradspec .bar .ang{font-family:var(--head);font-weight:700;color:#fff;font-size:13px;display:flex;align-items:center;gap:6px}
+.gradspec pre{margin:0;background:var(--navy);color:#DCE6F5;border-radius:var(--radius);padding:20px 22px;font-family:var(--mono);font-size:12.5px;line-height:1.7;overflow-x:auto;min-width:0}
+.gradspec pre .c{color:#7F93B3}.gradspec pre .p{color:var(--sky)}
+
+/* code specimen */
+.codespec{margin-top:20px;background:var(--navy);border-radius:var(--radius);overflow:hidden}
+.codespec .hd{display:flex;justify-content:space-between;align-items:center;padding:14px 20px;border-bottom:1px solid rgba(255,255,255,.08);font-family:var(--head);font-size:12px;font-weight:600;color:rgba(255,255,255,.6);letter-spacing:.05em;text-transform:uppercase}
+.codespec .hd .dots{display:flex;gap:6px}.codespec .hd .dots i{width:9px;height:9px;border-radius:50%;background:rgba(255,255,255,.18);display:block}
+.codespec pre{margin:0;padding:22px 24px;font-family:var(--mono);font-size:13.5px;line-height:1.75;color:#DCE6F5;overflow-x:auto}
+.codespec .k{color:#7DB6FF}.codespec .s{color:#7FE0FF}.codespec .c{color:#7F93B3}.codespec .f{color:#fff;font-weight:600}
+.codespec .ft{display:flex;gap:24px;flex-wrap:wrap;padding:12px 20px;border-top:1px solid rgba(255,255,255,.08);font-size:12px;color:rgba(255,255,255,.55)}
+.codespec .ft b{color:#fff;font-family:var(--mono);font-weight:500}
+
+/* app icon stage */
+.stage.icononly svg{height:120px;width:150px;max-height:none}
+.appicons{display:flex;gap:22px;align-items:flex-end;justify-content:center;flex-wrap:wrap}
+.appicons figure{display:flex;flex-direction:column;align-items:center;gap:8px;margin:0}
+.appicons figcaption{font-size:11px;color:var(--g400);font-family:var(--mono)}
+.appicons svg{display:block}
+.stage>svg{width:min(78%,260px);height:auto;max-height:none}
+.dd .top>svg{width:min(80%,220px);height:auto;max-height:none}
+
+</style>
+</head>
+<body>
+
+<!-- ================= SVG SYMBOLS (vector hoá từ Logo/Logo.png & Logo Vuong.png) ================= -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs><linearGradient id="g-logo" gradientUnits="userSpaceOnUse" x1="0.0" y1="0.0" x2="596.4" y2="467.1"><stop offset="0" stop-color="#0059FC"/><stop offset=".5" stop-color="#0064F2"/><stop offset="1" stop-color="#0CBAFC"/></linearGradient><linearGradient id="g-bad" gradientUnits="userSpaceOnUse" x1="0.0" y1="0.0" x2="596.4" y2="467.1"><stop offset="0" stop-color="#FF7A00"/><stop offset="1" stop-color="#B300FF"/></linearGradient><linearGradient id="g-app" gradientUnits="userSpaceOnUse" x1="0.0" y1="0.0" x2="1655.7" y2="1296.7"><stop offset="0" stop-color="#0059FC"/><stop offset=".5" stop-color="#0064F2"/><stop offset="1" stop-color="#0CBAFC"/></linearGradient></defs><symbol id="s-avibi" viewBox="0 0 1498.2 474.2"><path fill="url(#g-logo)" fill-rule="evenodd" d="M102.7,469.2 77.7,469.9 55.7,469.4 36.7,468.2 8.7,465.3 0.7,463.3 0.0,462.0 11.3,439.0 124.4,220.0 200.2,74.0 221.0,35.0 226.0,29.0 232.7,22.5 244.7,13.6 257.7,6.9 263.7,4.5 273.7,1.7 280.7,0.6 291.7,0.0 305.7,0.6 316.7,2.6 323.7,4.6 335.7,9.7 349.7,18.7 357.8,26.0 367.0,37.0 376.0,51.0 406.0,106.0 474.3,235.0 509.9,301.0 524.1,328.0 525.1,332.0 510.7,323.4 495.7,316.8 471.7,309.7 462.7,307.7 448.7,305.6 405.7,303.7 381.7,304.7 350.7,309.6 331.7,314.7 307.7,323.7 283.7,335.6 269.7,343.8 254.7,353.7 233.7,369.8 208.7,392.4 191.1,411.0 175.3,430.0 157.8,454.0 151.7,461.4 149.7,462.4 132.7,465.3ZM193.8,317.0 221.7,302.7 238.7,295.6 258.7,288.7 280.7,282.7 306.7,277.6 323.7,275.7 355.7,273.6 374.7,273.7 376.3,273.0 310.0,147.0 303.1,135.0 299.7,130.6 292.7,128.7 287.7,128.8 285.6,130.0 281.5,136.0 267.2,164.0 198.2,305.0 192.7,317.0ZM566.7,467.0 537.7,467.8 503.7,467.3 480.7,465.3 475.7,464.2 472.7,462.6 470.2,459.0 416.4,354.0 395.8,312.0 396.7,311.1 401.7,310.9 428.7,312.6 452.7,316.6 471.7,321.6 488.7,327.9 504.7,335.7 519.7,344.9 530.7,353.3 541.9,365.0 551.8,380.0 579.1,431.0 594.2,462.0 592.7,463.2 587.7,464.4Z"/><path fill="#041837" fill-rule="evenodd" d="M1226.7,474.1 1196.7,474.2 1178.7,471.4 1164.7,467.3 1149.7,460.5 1135.7,451.4 1126.0,443.0 1114.7,430.6 1113.8,432.0 1113.8,469.0 1112.7,469.9 1049.7,469.9 1048.8,469.0 1048.8,24.0 1049.7,23.3 1115.7,23.3 1116.8,24.0 1116.8,209.0 1117.7,209.3 1124.7,201.8 1132.7,194.8 1142.7,187.8 1155.7,180.8 1172.7,174.5 1184.7,171.7 1204.7,169.5 1222.7,169.8 1242.7,172.7 1257.7,176.7 1270.7,181.8 1278.7,185.6 1294.7,195.7 1305.7,204.6 1316.1,215.0 1327.9,230.0 1336.8,245.0 1344.0,261.0 1348.1,273.0 1353.0,295.0 1354.9,315.0 1354.9,331.0 1353.1,351.0 1348.1,374.0 1341.9,391.0 1335.0,405.0 1326.0,419.0 1318.0,429.0 1307.7,439.4 1292.7,451.1 1276.7,460.4 1259.7,467.3 1244.7,471.4ZM935.7,130.0 925.7,129.5 917.7,127.4 909.7,123.5 902.7,118.4 896.3,111.0 893.2,106.0 889.5,97.0 888.2,91.0 888.1,81.0 889.3,73.0 893.3,63.0 898.2,56.0 903.7,50.5 910.7,45.6 919.7,41.6 929.7,39.7 937.7,39.7 947.7,41.8 956.7,45.7 963.7,50.7 968.1,55.0 975.0,65.0 978.1,73.0 979.4,82.0 979.0,92.0 977.2,99.0 973.0,108.0 966.7,116.0 961.7,120.5 953.7,125.5 942.7,129.2ZM1454.7,130.0 1444.7,129.5 1436.7,127.4 1428.7,123.5 1421.7,118.3 1416.1,112.0 1411.2,104.0 1408.6,97.0 1407.1,89.0 1407.3,78.0 1409.2,70.0 1411.3,65.0 1416.4,57.0 1422.7,50.5 1429.7,45.6 1438.7,41.6 1449.7,39.6 1456.7,39.7 1466.7,41.7 1475.7,45.7 1482.7,50.7 1488.9,57.0 1493.0,63.0 1496.1,70.0 1498.2,78.0 1498.1,92.0 1495.9,100.0 1493.2,106.0 1486.7,115.0 1480.7,120.6 1472.7,125.5 1461.7,129.2ZM732.7,469.9 668.7,469.9 667.8,469.0 557.4,192.0 550.7,173.9 621.7,173.7 622.7,174.2 695.4,372.0 700.7,384.9 777.6,174.0 850.0,174.0 846.1,185.0 738.0,458.0ZM966.7,469.8 900.7,469.8 899.4,469.0 899.4,175.0 899.7,173.9 900.7,173.7 966.7,173.7 967.2,175.0 967.2,468.0ZM1485.7,469.9 1419.7,469.9 1418.3,469.0 1418.3,176.0 1418.7,173.9 1485.7,173.7 1486.5,175.0 1486.5,468.0ZM1214.0,412.0 1223.7,410.1 1232.7,407.3 1246.7,400.4 1253.7,395.3 1260.8,389.0 1267.0,382.0 1271.9,375.0 1279.0,361.0 1282.0,352.0 1284.1,343.0 1285.7,322.0 1284.1,303.0 1279.1,285.0 1272.3,271.0 1266.1,262.0 1261.7,257.0 1256.7,252.0 1248.7,245.5 1236.7,238.6 1226.7,234.8 1218.7,232.7 1213.7,231.7 1202.7,230.8 1186.7,231.6 1176.7,233.7 1167.7,236.6 1153.7,243.9 1142.0,253.0 1135.3,260.0 1130.2,267.0 1126.3,273.0 1121.4,283.0 1116.4,299.0 1114.2,312.0 1113.8,324.0 1114.4,337.0 1116.5,348.0 1119.2,357.0 1125.6,371.0 1133.2,382.0 1139.7,389.1 1146.7,395.1 1154.7,400.6 1163.7,405.4 1177.7,410.2 1190.7,412.5 1202.7,412.8Z"/></symbol><symbol id="s-avibi-rev" viewBox="0 0 1498.2 474.2"><path fill="url(#g-logo)" fill-rule="evenodd" d="M102.7,469.2 77.7,469.9 55.7,469.4 36.7,468.2 8.7,465.3 0.7,463.3 0.0,462.0 11.3,439.0 124.4,220.0 200.2,74.0 221.0,35.0 226.0,29.0 232.7,22.5 244.7,13.6 257.7,6.9 263.7,4.5 273.7,1.7 280.7,0.6 291.7,0.0 305.7,0.6 316.7,2.6 323.7,4.6 335.7,9.7 349.7,18.7 357.8,26.0 367.0,37.0 376.0,51.0 406.0,106.0 474.3,235.0 509.9,301.0 524.1,328.0 525.1,332.0 510.7,323.4 495.7,316.8 471.7,309.7 462.7,307.7 448.7,305.6 405.7,303.7 381.7,304.7 350.7,309.6 331.7,314.7 307.7,323.7 283.7,335.6 269.7,343.8 254.7,353.7 233.7,369.8 208.7,392.4 191.1,411.0 175.3,430.0 157.8,454.0 151.7,461.4 149.7,462.4 132.7,465.3ZM193.8,317.0 221.7,302.7 238.7,295.6 258.7,288.7 280.7,282.7 306.7,277.6 323.7,275.7 355.7,273.6 374.7,273.7 376.3,273.0 310.0,147.0 303.1,135.0 299.7,130.6 292.7,128.7 287.7,128.8 285.6,130.0 281.5,136.0 267.2,164.0 198.2,305.0 192.7,317.0ZM566.7,467.0 537.7,467.8 503.7,467.3 480.7,465.3 475.7,464.2 472.7,462.6 470.2,459.0 416.4,354.0 395.8,312.0 396.7,311.1 401.7,310.9 428.7,312.6 452.7,316.6 471.7,321.6 488.7,327.9 504.7,335.7 519.7,344.9 530.7,353.3 541.9,365.0 551.8,380.0 579.1,431.0 594.2,462.0 592.7,463.2 587.7,464.4Z"/><path fill="#FFFFFF" fill-rule="evenodd" d="M1226.7,474.1 1196.7,474.2 1178.7,471.4 1164.7,467.3 1149.7,460.5 1135.7,451.4 1126.0,443.0 1114.7,430.6 1113.8,432.0 1113.8,469.0 1112.7,469.9 1049.7,469.9 1048.8,469.0 1048.8,24.0 1049.7,23.3 1115.7,23.3 1116.8,24.0 1116.8,209.0 1117.7,209.3 1124.7,201.8 1132.7,194.8 1142.7,187.8 1155.7,180.8 1172.7,174.5 1184.7,171.7 1204.7,169.5 1222.7,169.8 1242.7,172.7 1257.7,176.7 1270.7,181.8 1278.7,185.6 1294.7,195.7 1305.7,204.6 1316.1,215.0 1327.9,230.0 1336.8,245.0 1344.0,261.0 1348.1,273.0 1353.0,295.0 1354.9,315.0 1354.9,331.0 1353.1,351.0 1348.1,374.0 1341.9,391.0 1335.0,405.0 1326.0,419.0 1318.0,429.0 1307.7,439.4 1292.7,451.1 1276.7,460.4 1259.7,467.3 1244.7,471.4ZM935.7,130.0 925.7,129.5 917.7,127.4 909.7,123.5 902.7,118.4 896.3,111.0 893.2,106.0 889.5,97.0 888.2,91.0 888.1,81.0 889.3,73.0 893.3,63.0 898.2,56.0 903.7,50.5 910.7,45.6 919.7,41.6 929.7,39.7 937.7,39.7 947.7,41.8 956.7,45.7 963.7,50.7 968.1,55.0 975.0,65.0 978.1,73.0 979.4,82.0 979.0,92.0 977.2,99.0 973.0,108.0 966.7,116.0 961.7,120.5 953.7,125.5 942.7,129.2ZM1454.7,130.0 1444.7,129.5 1436.7,127.4 1428.7,123.5 1421.7,118.3 1416.1,112.0 1411.2,104.0 1408.6,97.0 1407.1,89.0 1407.3,78.0 1409.2,70.0 1411.3,65.0 1416.4,57.0 1422.7,50.5 1429.7,45.6 1438.7,41.6 1449.7,39.6 1456.7,39.7 1466.7,41.7 1475.7,45.7 1482.7,50.7 1488.9,57.0 1493.0,63.0 1496.1,70.0 1498.2,78.0 1498.1,92.0 1495.9,100.0 1493.2,106.0 1486.7,115.0 1480.7,120.6 1472.7,125.5 1461.7,129.2ZM732.7,469.9 668.7,469.9 667.8,469.0 557.4,192.0 550.7,173.9 621.7,173.7 622.7,174.2 695.4,372.0 700.7,384.9 777.6,174.0 850.0,174.0 846.1,185.0 738.0,458.0ZM966.7,469.8 900.7,469.8 899.4,469.0 899.4,175.0 899.7,173.9 900.7,173.7 966.7,173.7 967.2,175.0 967.2,468.0ZM1485.7,469.9 1419.7,469.9 1418.3,469.0 1418.3,176.0 1418.7,173.9 1485.7,173.7 1486.5,175.0 1486.5,468.0ZM1214.0,412.0 1223.7,410.1 1232.7,407.3 1246.7,400.4 1253.7,395.3 1260.8,389.0 1267.0,382.0 1271.9,375.0 1279.0,361.0 1282.0,352.0 1284.1,343.0 1285.7,322.0 1284.1,303.0 1279.1,285.0 1272.3,271.0 1266.1,262.0 1261.7,257.0 1256.7,252.0 1248.7,245.5 1236.7,238.6 1226.7,234.8 1218.7,232.7 1213.7,231.7 1202.7,230.8 1186.7,231.6 1176.7,233.7 1167.7,236.6 1153.7,243.9 1142.0,253.0 1135.3,260.0 1130.2,267.0 1126.3,273.0 1121.4,283.0 1116.4,299.0 1114.2,312.0 1113.8,324.0 1114.4,337.0 1116.5,348.0 1119.2,357.0 1125.6,371.0 1133.2,382.0 1139.7,389.1 1146.7,395.1 1154.7,400.6 1163.7,405.4 1177.7,410.2 1190.7,412.5 1202.7,412.8Z"/></symbol><symbol id="s-avibi-white" viewBox="0 0 1498.2 474.2"><path fill="#FFFFFF" fill-rule="evenodd" d="M102.7,469.2 77.7,469.9 55.7,469.4 36.7,468.2 8.7,465.3 0.7,463.3 0.0,462.0 11.3,439.0 124.4,220.0 200.2,74.0 221.0,35.0 226.0,29.0 232.7,22.5 244.7,13.6 257.7,6.9 263.7,4.5 273.7,1.7 280.7,0.6 291.7,0.0 305.7,0.6 316.7,2.6 323.7,4.6 335.7,9.7 349.7,18.7 357.8,26.0 367.0,37.0 376.0,51.0 406.0,106.0 474.3,235.0 509.9,301.0 524.1,328.0 525.1,332.0 510.7,323.4 495.7,316.8 471.7,309.7 462.7,307.7 448.7,305.6 405.7,303.7 381.7,304.7 350.7,309.6 331.7,314.7 307.7,323.7 283.7,335.6 269.7,343.8 254.7,353.7 233.7,369.8 208.7,392.4 191.1,411.0 175.3,430.0 157.8,454.0 151.7,461.4 149.7,462.4 132.7,465.3ZM193.8,317.0 221.7,302.7 238.7,295.6 258.7,288.7 280.7,282.7 306.7,277.6 323.7,275.7 355.7,273.6 374.7,273.7 376.3,273.0 310.0,147.0 303.1,135.0 299.7,130.6 292.7,128.7 287.7,128.8 285.6,130.0 281.5,136.0 267.2,164.0 198.2,305.0 192.7,317.0ZM566.7,467.0 537.7,467.8 503.7,467.3 480.7,465.3 475.7,464.2 472.7,462.6 470.2,459.0 416.4,354.0 395.8,312.0 396.7,311.1 401.7,310.9 428.7,312.6 452.7,316.6 471.7,321.6 488.7,327.9 504.7,335.7 519.7,344.9 530.7,353.3 541.9,365.0 551.8,380.0 579.1,431.0 594.2,462.0 592.7,463.2 587.7,464.4Z"/><path fill="#FFFFFF" fill-rule="evenodd" d="M1226.7,474.1 1196.7,474.2 1178.7,471.4 1164.7,467.3 1149.7,460.5 1135.7,451.4 1126.0,443.0 1114.7,430.6 1113.8,432.0 1113.8,469.0 1112.7,469.9 1049.7,469.9 1048.8,469.0 1048.8,24.0 1049.7,23.3 1115.7,23.3 1116.8,24.0 1116.8,209.0 1117.7,209.3 1124.7,201.8 1132.7,194.8 1142.7,187.8 1155.7,180.8 1172.7,174.5 1184.7,171.7 1204.7,169.5 1222.7,169.8 1242.7,172.7 1257.7,176.7 1270.7,181.8 1278.7,185.6 1294.7,195.7 1305.7,204.6 1316.1,215.0 1327.9,230.0 1336.8,245.0 1344.0,261.0 1348.1,273.0 1353.0,295.0 1354.9,315.0 1354.9,331.0 1353.1,351.0 1348.1,374.0 1341.9,391.0 1335.0,405.0 1326.0,419.0 1318.0,429.0 1307.7,439.4 1292.7,451.1 1276.7,460.4 1259.7,467.3 1244.7,471.4ZM935.7,130.0 925.7,129.5 917.7,127.4 909.7,123.5 902.7,118.4 896.3,111.0 893.2,106.0 889.5,97.0 888.2,91.0 888.1,81.0 889.3,73.0 893.3,63.0 898.2,56.0 903.7,50.5 910.7,45.6 919.7,41.6 929.7,39.7 937.7,39.7 947.7,41.8 956.7,45.7 963.7,50.7 968.1,55.0 975.0,65.0 978.1,73.0 979.4,82.0 979.0,92.0 977.2,99.0 973.0,108.0 966.7,116.0 961.7,120.5 953.7,125.5 942.7,129.2ZM1454.7,130.0 1444.7,129.5 1436.7,127.4 1428.7,123.5 1421.7,118.3 1416.1,112.0 1411.2,104.0 1408.6,97.0 1407.1,89.0 1407.3,78.0 1409.2,70.0 1411.3,65.0 1416.4,57.0 1422.7,50.5 1429.7,45.6 1438.7,41.6 1449.7,39.6 1456.7,39.7 1466.7,41.7 1475.7,45.7 1482.7,50.7 1488.9,57.0 1493.0,63.0 1496.1,70.0 1498.2,78.0 1498.1,92.0 1495.9,100.0 1493.2,106.0 1486.7,115.0 1480.7,120.6 1472.7,125.5 1461.7,129.2ZM732.7,469.9 668.7,469.9 667.8,469.0 557.4,192.0 550.7,173.9 621.7,173.7 622.7,174.2 695.4,372.0 700.7,384.9 777.6,174.0 850.0,174.0 846.1,185.0 738.0,458.0ZM966.7,469.8 900.7,469.8 899.4,469.0 899.4,175.0 899.7,173.9 900.7,173.7 966.7,173.7 967.2,175.0 967.2,468.0ZM1485.7,469.9 1419.7,469.9 1418.3,469.0 1418.3,176.0 1418.7,173.9 1485.7,173.7 1486.5,175.0 1486.5,468.0ZM1214.0,412.0 1223.7,410.1 1232.7,407.3 1246.7,400.4 1253.7,395.3 1260.8,389.0 1267.0,382.0 1271.9,375.0 1279.0,361.0 1282.0,352.0 1284.1,343.0 1285.7,322.0 1284.1,303.0 1279.1,285.0 1272.3,271.0 1266.1,262.0 1261.7,257.0 1256.7,252.0 1248.7,245.5 1236.7,238.6 1226.7,234.8 1218.7,232.7 1213.7,231.7 1202.7,230.8 1186.7,231.6 1176.7,233.7 1167.7,236.6 1153.7,243.9 1142.0,253.0 1135.3,260.0 1130.2,267.0 1126.3,273.0 1121.4,283.0 1116.4,299.0 1114.2,312.0 1113.8,324.0 1114.4,337.0 1116.5,348.0 1119.2,357.0 1125.6,371.0 1133.2,382.0 1139.7,389.1 1146.7,395.1 1154.7,400.6 1163.7,405.4 1177.7,410.2 1190.7,412.5 1202.7,412.8Z"/></symbol><symbol id="s-avibi-navy" viewBox="0 0 1498.2 474.2"><path fill="#041837" fill-rule="evenodd" d="M102.7,469.2 77.7,469.9 55.7,469.4 36.7,468.2 8.7,465.3 0.7,463.3 0.0,462.0 11.3,439.0 124.4,220.0 200.2,74.0 221.0,35.0 226.0,29.0 232.7,22.5 244.7,13.6 257.7,6.9 263.7,4.5 273.7,1.7 280.7,0.6 291.7,0.0 305.7,0.6 316.7,2.6 323.7,4.6 335.7,9.7 349.7,18.7 357.8,26.0 367.0,37.0 376.0,51.0 406.0,106.0 474.3,235.0 509.9,301.0 524.1,328.0 525.1,332.0 510.7,323.4 495.7,316.8 471.7,309.7 462.7,307.7 448.7,305.6 405.7,303.7 381.7,304.7 350.7,309.6 331.7,314.7 307.7,323.7 283.7,335.6 269.7,343.8 254.7,353.7 233.7,369.8 208.7,392.4 191.1,411.0 175.3,430.0 157.8,454.0 151.7,461.4 149.7,462.4 132.7,465.3ZM193.8,317.0 221.7,302.7 238.7,295.6 258.7,288.7 280.7,282.7 306.7,277.6 323.7,275.7 355.7,273.6 374.7,273.7 376.3,273.0 310.0,147.0 303.1,135.0 299.7,130.6 292.7,128.7 287.7,128.8 285.6,130.0 281.5,136.0 267.2,164.0 198.2,305.0 192.7,317.0ZM566.7,467.0 537.7,467.8 503.7,467.3 480.7,465.3 475.7,464.2 472.7,462.6 470.2,459.0 416.4,354.0 395.8,312.0 396.7,311.1 401.7,310.9 428.7,312.6 452.7,316.6 471.7,321.6 488.7,327.9 504.7,335.7 519.7,344.9 530.7,353.3 541.9,365.0 551.8,380.0 579.1,431.0 594.2,462.0 592.7,463.2 587.7,464.4Z"/><path fill="#041837" fill-rule="evenodd" d="M1226.7,474.1 1196.7,474.2 1178.7,471.4 1164.7,467.3 1149.7,460.5 1135.7,451.4 1126.0,443.0 1114.7,430.6 1113.8,432.0 1113.8,469.0 1112.7,469.9 1049.7,469.9 1048.8,469.0 1048.8,24.0 1049.7,23.3 1115.7,23.3 1116.8,24.0 1116.8,209.0 1117.7,209.3 1124.7,201.8 1132.7,194.8 1142.7,187.8 1155.7,180.8 1172.7,174.5 1184.7,171.7 1204.7,169.5 1222.7,169.8 1242.7,172.7 1257.7,176.7 1270.7,181.8 1278.7,185.6 1294.7,195.7 1305.7,204.6 1316.1,215.0 1327.9,230.0 1336.8,245.0 1344.0,261.0 1348.1,273.0 1353.0,295.0 1354.9,315.0 1354.9,331.0 1353.1,351.0 1348.1,374.0 1341.9,391.0 1335.0,405.0 1326.0,419.0 1318.0,429.0 1307.7,439.4 1292.7,451.1 1276.7,460.4 1259.7,467.3 1244.7,471.4ZM935.7,130.0 925.7,129.5 917.7,127.4 909.7,123.5 902.7,118.4 896.3,111.0 893.2,106.0 889.5,97.0 888.2,91.0 888.1,81.0 889.3,73.0 893.3,63.0 898.2,56.0 903.7,50.5 910.7,45.6 919.7,41.6 929.7,39.7 937.7,39.7 947.7,41.8 956.7,45.7 963.7,50.7 968.1,55.0 975.0,65.0 978.1,73.0 979.4,82.0 979.0,92.0 977.2,99.0 973.0,108.0 966.7,116.0 961.7,120.5 953.7,125.5 942.7,129.2ZM1454.7,130.0 1444.7,129.5 1436.7,127.4 1428.7,123.5 1421.7,118.3 1416.1,112.0 1411.2,104.0 1408.6,97.0 1407.1,89.0 1407.3,78.0 1409.2,70.0 1411.3,65.0 1416.4,57.0 1422.7,50.5 1429.7,45.6 1438.7,41.6 1449.7,39.6 1456.7,39.7 1466.7,41.7 1475.7,45.7 1482.7,50.7 1488.9,57.0 1493.0,63.0 1496.1,70.0 1498.2,78.0 1498.1,92.0 1495.9,100.0 1493.2,106.0 1486.7,115.0 1480.7,120.6 1472.7,125.5 1461.7,129.2ZM732.7,469.9 668.7,469.9 667.8,469.0 557.4,192.0 550.7,173.9 621.7,173.7 622.7,174.2 695.4,372.0 700.7,384.9 777.6,174.0 850.0,174.0 846.1,185.0 738.0,458.0ZM966.7,469.8 900.7,469.8 899.4,469.0 899.4,175.0 899.7,173.9 900.7,173.7 966.7,173.7 967.2,175.0 967.2,468.0ZM1485.7,469.9 1419.7,469.9 1418.3,469.0 1418.3,176.0 1418.7,173.9 1485.7,173.7 1486.5,175.0 1486.5,468.0ZM1214.0,412.0 1223.7,410.1 1232.7,407.3 1246.7,400.4 1253.7,395.3 1260.8,389.0 1267.0,382.0 1271.9,375.0 1279.0,361.0 1282.0,352.0 1284.1,343.0 1285.7,322.0 1284.1,303.0 1279.1,285.0 1272.3,271.0 1266.1,262.0 1261.7,257.0 1256.7,252.0 1248.7,245.5 1236.7,238.6 1226.7,234.8 1218.7,232.7 1213.7,231.7 1202.7,230.8 1186.7,231.6 1176.7,233.7 1167.7,236.6 1153.7,243.9 1142.0,253.0 1135.3,260.0 1130.2,267.0 1126.3,273.0 1121.4,283.0 1116.4,299.0 1114.2,312.0 1113.8,324.0 1114.4,337.0 1116.5,348.0 1119.2,357.0 1125.6,371.0 1133.2,382.0 1139.7,389.1 1146.7,395.1 1154.7,400.6 1163.7,405.4 1177.7,410.2 1190.7,412.5 1202.7,412.8Z"/></symbol><symbol id="s-avibi-bad" viewBox="0 0 1498.2 474.2"><path fill="url(#g-bad)" fill-rule="evenodd" d="M102.7,469.2 77.7,469.9 55.7,469.4 36.7,468.2 8.7,465.3 0.7,463.3 0.0,462.0 11.3,439.0 124.4,220.0 200.2,74.0 221.0,35.0 226.0,29.0 232.7,22.5 244.7,13.6 257.7,6.9 263.7,4.5 273.7,1.7 280.7,0.6 291.7,0.0 305.7,0.6 316.7,2.6 323.7,4.6 335.7,9.7 349.7,18.7 357.8,26.0 367.0,37.0 376.0,51.0 406.0,106.0 474.3,235.0 509.9,301.0 524.1,328.0 525.1,332.0 510.7,323.4 495.7,316.8 471.7,309.7 462.7,307.7 448.7,305.6 405.7,303.7 381.7,304.7 350.7,309.6 331.7,314.7 307.7,323.7 283.7,335.6 269.7,343.8 254.7,353.7 233.7,369.8 208.7,392.4 191.1,411.0 175.3,430.0 157.8,454.0 151.7,461.4 149.7,462.4 132.7,465.3ZM193.8,317.0 221.7,302.7 238.7,295.6 258.7,288.7 280.7,282.7 306.7,277.6 323.7,275.7 355.7,273.6 374.7,273.7 376.3,273.0 310.0,147.0 303.1,135.0 299.7,130.6 292.7,128.7 287.7,128.8 285.6,130.0 281.5,136.0 267.2,164.0 198.2,305.0 192.7,317.0ZM566.7,467.0 537.7,467.8 503.7,467.3 480.7,465.3 475.7,464.2 472.7,462.6 470.2,459.0 416.4,354.0 395.8,312.0 396.7,311.1 401.7,310.9 428.7,312.6 452.7,316.6 471.7,321.6 488.7,327.9 504.7,335.7 519.7,344.9 530.7,353.3 541.9,365.0 551.8,380.0 579.1,431.0 594.2,462.0 592.7,463.2 587.7,464.4Z"/><path fill="#041837" fill-rule="evenodd" d="M1226.7,474.1 1196.7,474.2 1178.7,471.4 1164.7,467.3 1149.7,460.5 1135.7,451.4 1126.0,443.0 1114.7,430.6 1113.8,432.0 1113.8,469.0 1112.7,469.9 1049.7,469.9 1048.8,469.0 1048.8,24.0 1049.7,23.3 1115.7,23.3 1116.8,24.0 1116.8,209.0 1117.7,209.3 1124.7,201.8 1132.7,194.8 1142.7,187.8 1155.7,180.8 1172.7,174.5 1184.7,171.7 1204.7,169.5 1222.7,169.8 1242.7,172.7 1257.7,176.7 1270.7,181.8 1278.7,185.6 1294.7,195.7 1305.7,204.6 1316.1,215.0 1327.9,230.0 1336.8,245.0 1344.0,261.0 1348.1,273.0 1353.0,295.0 1354.9,315.0 1354.9,331.0 1353.1,351.0 1348.1,374.0 1341.9,391.0 1335.0,405.0 1326.0,419.0 1318.0,429.0 1307.7,439.4 1292.7,451.1 1276.7,460.4 1259.7,467.3 1244.7,471.4ZM935.7,130.0 925.7,129.5 917.7,127.4 909.7,123.5 902.7,118.4 896.3,111.0 893.2,106.0 889.5,97.0 888.2,91.0 888.1,81.0 889.3,73.0 893.3,63.0 898.2,56.0 903.7,50.5 910.7,45.6 919.7,41.6 929.7,39.7 937.7,39.7 947.7,41.8 956.7,45.7 963.7,50.7 968.1,55.0 975.0,65.0 978.1,73.0 979.4,82.0 979.0,92.0 977.2,99.0 973.0,108.0 966.7,116.0 961.7,120.5 953.7,125.5 942.7,129.2ZM1454.7,130.0 1444.7,129.5 1436.7,127.4 1428.7,123.5 1421.7,118.3 1416.1,112.0 1411.2,104.0 1408.6,97.0 1407.1,89.0 1407.3,78.0 1409.2,70.0 1411.3,65.0 1416.4,57.0 1422.7,50.5 1429.7,45.6 1438.7,41.6 1449.7,39.6 1456.7,39.7 1466.7,41.7 1475.7,45.7 1482.7,50.7 1488.9,57.0 1493.0,63.0 1496.1,70.0 1498.2,78.0 1498.1,92.0 1495.9,100.0 1493.2,106.0 1486.7,115.0 1480.7,120.6 1472.7,125.5 1461.7,129.2ZM732.7,469.9 668.7,469.9 667.8,469.0 557.4,192.0 550.7,173.9 621.7,173.7 622.7,174.2 695.4,372.0 700.7,384.9 777.6,174.0 850.0,174.0 846.1,185.0 738.0,458.0ZM966.7,469.8 900.7,469.8 899.4,469.0 899.4,175.0 899.7,173.9 900.7,173.7 966.7,173.7 967.2,175.0 967.2,468.0ZM1485.7,469.9 1419.7,469.9 1418.3,469.0 1418.3,176.0 1418.7,173.9 1485.7,173.7 1486.5,175.0 1486.5,468.0ZM1214.0,412.0 1223.7,410.1 1232.7,407.3 1246.7,400.4 1253.7,395.3 1260.8,389.0 1267.0,382.0 1271.9,375.0 1279.0,361.0 1282.0,352.0 1284.1,343.0 1285.7,322.0 1284.1,303.0 1279.1,285.0 1272.3,271.0 1266.1,262.0 1261.7,257.0 1256.7,252.0 1248.7,245.5 1236.7,238.6 1226.7,234.8 1218.7,232.7 1213.7,231.7 1202.7,230.8 1186.7,231.6 1176.7,233.7 1167.7,236.6 1153.7,243.9 1142.0,253.0 1135.3,260.0 1130.2,267.0 1126.3,273.0 1121.4,283.0 1116.4,299.0 1114.2,312.0 1113.8,324.0 1114.4,337.0 1116.5,348.0 1119.2,357.0 1125.6,371.0 1133.2,382.0 1139.7,389.1 1146.7,395.1 1154.7,400.6 1163.7,405.4 1177.7,410.2 1190.7,412.5 1202.7,412.8Z"/></symbol><symbol id="s-sym" viewBox="0.0 0.0 594.2 469.9"><path fill="url(#g-logo)" fill-rule="evenodd" d="M102.7,469.2 77.7,469.9 55.7,469.4 36.7,468.2 8.7,465.3 0.7,463.3 0.0,462.0 11.3,439.0 124.4,220.0 200.2,74.0 221.0,35.0 226.0,29.0 232.7,22.5 244.7,13.6 257.7,6.9 263.7,4.5 273.7,1.7 280.7,0.6 291.7,0.0 305.7,0.6 316.7,2.6 323.7,4.6 335.7,9.7 349.7,18.7 357.8,26.0 367.0,37.0 376.0,51.0 406.0,106.0 474.3,235.0 509.9,301.0 524.1,328.0 525.1,332.0 510.7,323.4 495.7,316.8 471.7,309.7 462.7,307.7 448.7,305.6 405.7,303.7 381.7,304.7 350.7,309.6 331.7,314.7 307.7,323.7 283.7,335.6 269.7,343.8 254.7,353.7 233.7,369.8 208.7,392.4 191.1,411.0 175.3,430.0 157.8,454.0 151.7,461.4 149.7,462.4 132.7,465.3ZM193.8,317.0 221.7,302.7 238.7,295.6 258.7,288.7 280.7,282.7 306.7,277.6 323.7,275.7 355.7,273.6 374.7,273.7 376.3,273.0 310.0,147.0 303.1,135.0 299.7,130.6 292.7,128.7 287.7,128.8 285.6,130.0 281.5,136.0 267.2,164.0 198.2,305.0 192.7,317.0ZM566.7,467.0 537.7,467.8 503.7,467.3 480.7,465.3 475.7,464.2 472.7,462.6 470.2,459.0 416.4,354.0 395.8,312.0 396.7,311.1 401.7,310.9 428.7,312.6 452.7,316.6 471.7,321.6 488.7,327.9 504.7,335.7 519.7,344.9 530.7,353.3 541.9,365.0 551.8,380.0 579.1,431.0 594.2,462.0 592.7,463.2 587.7,464.4Z"/></symbol><symbol id="s-sym-white" viewBox="0.0 0.0 594.2 469.9"><path fill="#FFFFFF" fill-rule="evenodd" d="M102.7,469.2 77.7,469.9 55.7,469.4 36.7,468.2 8.7,465.3 0.7,463.3 0.0,462.0 11.3,439.0 124.4,220.0 200.2,74.0 221.0,35.0 226.0,29.0 232.7,22.5 244.7,13.6 257.7,6.9 263.7,4.5 273.7,1.7 280.7,0.6 291.7,0.0 305.7,0.6 316.7,2.6 323.7,4.6 335.7,9.7 349.7,18.7 357.8,26.0 367.0,37.0 376.0,51.0 406.0,106.0 474.3,235.0 509.9,301.0 524.1,328.0 525.1,332.0 510.7,323.4 495.7,316.8 471.7,309.7 462.7,307.7 448.7,305.6 405.7,303.7 381.7,304.7 350.7,309.6 331.7,314.7 307.7,323.7 283.7,335.6 269.7,343.8 254.7,353.7 233.7,369.8 208.7,392.4 191.1,411.0 175.3,430.0 157.8,454.0 151.7,461.4 149.7,462.4 132.7,465.3ZM193.8,317.0 221.7,302.7 238.7,295.6 258.7,288.7 280.7,282.7 306.7,277.6 323.7,275.7 355.7,273.6 374.7,273.7 376.3,273.0 310.0,147.0 303.1,135.0 299.7,130.6 292.7,128.7 287.7,128.8 285.6,130.0 281.5,136.0 267.2,164.0 198.2,305.0 192.7,317.0ZM566.7,467.0 537.7,467.8 503.7,467.3 480.7,465.3 475.7,464.2 472.7,462.6 470.2,459.0 416.4,354.0 395.8,312.0 396.7,311.1 401.7,310.9 428.7,312.6 452.7,316.6 471.7,321.6 488.7,327.9 504.7,335.7 519.7,344.9 530.7,353.3 541.9,365.0 551.8,380.0 579.1,431.0 594.2,462.0 592.7,463.2 587.7,464.4Z"/></symbol><symbol id="s-sym-navy" viewBox="0.0 0.0 594.2 469.9"><path fill="#041837" fill-rule="evenodd" d="M102.7,469.2 77.7,469.9 55.7,469.4 36.7,468.2 8.7,465.3 0.7,463.3 0.0,462.0 11.3,439.0 124.4,220.0 200.2,74.0 221.0,35.0 226.0,29.0 232.7,22.5 244.7,13.6 257.7,6.9 263.7,4.5 273.7,1.7 280.7,0.6 291.7,0.0 305.7,0.6 316.7,2.6 323.7,4.6 335.7,9.7 349.7,18.7 357.8,26.0 367.0,37.0 376.0,51.0 406.0,106.0 474.3,235.0 509.9,301.0 524.1,328.0 525.1,332.0 510.7,323.4 495.7,316.8 471.7,309.7 462.7,307.7 448.7,305.6 405.7,303.7 381.7,304.7 350.7,309.6 331.7,314.7 307.7,323.7 283.7,335.6 269.7,343.8 254.7,353.7 233.7,369.8 208.7,392.4 191.1,411.0 175.3,430.0 157.8,454.0 151.7,461.4 149.7,462.4 132.7,465.3ZM193.8,317.0 221.7,302.7 238.7,295.6 258.7,288.7 280.7,282.7 306.7,277.6 323.7,275.7 355.7,273.6 374.7,273.7 376.3,273.0 310.0,147.0 303.1,135.0 299.7,130.6 292.7,128.7 287.7,128.8 285.6,130.0 281.5,136.0 267.2,164.0 198.2,305.0 192.7,317.0ZM566.7,467.0 537.7,467.8 503.7,467.3 480.7,465.3 475.7,464.2 472.7,462.6 470.2,459.0 416.4,354.0 395.8,312.0 396.7,311.1 401.7,310.9 428.7,312.6 452.7,316.6 471.7,321.6 488.7,327.9 504.7,335.7 519.7,344.9 530.7,353.3 541.9,365.0 551.8,380.0 579.1,431.0 594.2,462.0 592.7,463.2 587.7,464.4Z"/></symbol><symbol id="s-v" viewBox="550.7 173.7 299.3 296.2"><path fill="#041837" fill-rule="evenodd" d="M732.7,469.9 668.7,469.9 667.8,469.0 557.4,192.0 550.7,173.9 621.7,173.7 622.7,174.2 695.4,372.0 700.7,384.9 777.6,174.0 850.0,174.0 846.1,185.0 738.0,458.0Z"/></symbol><symbol id="s-app" viewBox="0 0 1498 1498"><rect x="3" y="3" width="1492" height="1492" rx="322" fill="url(#g-app)"/><path fill="#FFFFFF" fill-rule="evenodd" d="M355.0,1219.1 305.0,1219.3 261.0,1217.3 231.0,1215.2 212.0,1213.3 184.0,1209.3 174.0,1206.4 172.0,1205.1 171.6,1204.0 255.9,1034.0 481.7,583.0 583.0,382.0 598.9,351.0 601.7,347.0 613.0,333.3 624.0,322.5 636.0,312.6 646.0,305.7 661.0,296.9 672.0,291.6 684.0,286.7 701.0,281.7 717.0,278.9 730.0,277.6 752.0,277.6 764.0,278.8 781.0,281.7 796.0,285.7 810.0,290.9 823.0,297.0 833.0,302.7 846.0,311.7 857.0,320.7 866.5,330.0 881.4,348.0 892.1,364.0 902.2,381.0 918.5,411.0 990.2,549.0 1079.6,724.0 1174.2,906.0 1192.2,943.0 1191.0,943.6 1190.0,943.2 1171.0,930.6 1155.0,921.8 1128.0,910.7 1110.0,904.8 1076.0,895.9 1060.0,892.7 1038.0,889.6 1009.0,887.9 966.0,886.6 937.0,886.6 920.0,887.8 896.0,890.6 861.0,896.6 842.0,900.8 812.0,909.8 783.0,920.7 758.0,931.8 740.0,940.8 720.0,951.8 702.0,962.6 679.0,977.7 652.0,997.5 627.0,1017.7 600.0,1041.7 583.2,1058.0 567.7,1074.0 547.7,1096.0 515.8,1135.0 496.6,1161.0 477.3,1189.0 465.8,1203.0 462.0,1204.3 435.0,1209.3 403.0,1214.2 367.0,1218.3ZM548.3,913.0 590.0,890.6 625.0,874.5 664.0,859.8 696.0,849.9 719.0,843.8 742.0,838.8 764.0,834.8 807.0,829.8 871.0,825.9 888.0,825.7 898.0,826.5 902.3,826.0 902.4,825.0 872.2,765.0 779.5,584.0 761.2,550.0 755.2,541.0 753.0,539.0 747.0,536.8 740.0,535.8 732.0,535.8 728.0,536.6 722.8,543.0 716.9,553.0 695.5,596.0 606.1,786.0 551.6,900.0 545.8,913.0 546.0,913.6 547.0,913.7ZM1245.0,1215.1 1182.0,1215.3 1136.0,1213.3 1113.0,1211.2 1100.0,1209.3 1093.0,1207.2 1089.5,1205.0 1084.6,1198.0 1066.3,1160.0 977.6,982.0 945.8,916.0 940.9,905.0 940.0,901.7 942.0,900.9 949.0,900.7 972.0,901.7 1015.0,905.8 1048.0,911.8 1068.0,916.7 1085.0,921.7 1108.0,929.9 1124.0,936.6 1143.0,945.9 1154.0,952.0 1170.0,961.8 1186.0,972.9 1197.0,981.6 1209.5,993.0 1219.3,1004.0 1226.3,1013.0 1240.4,1035.0 1255.3,1063.0 1296.2,1143.0 1318.3,1188.0 1325.2,1204.0 1324.0,1205.4 1321.0,1206.3 1308.0,1209.2 1295.0,1211.3 1276.0,1213.4Z"/></symbol></svg>
+
+<!-- ================= TOP BAR ================= -->
+<div class="topbar">
+  <div class="wrap">
+    <a class="brandmini" href="#top" aria-label="Avibi"><svg class="logo-white" viewBox="0 0 1498.2 474.2" style="width:95px;height:30px"><use href="#s-avibi-rev"></use></svg><svg class="logo-color" viewBox="0 0 1498.2 474.2" style="width:95px;height:30px"><use href="#s-avibi"></use></svg></a>
+    <div class="topbar-right">
+      <div class="menu-wrap">
+        <button class="menu-btn" id="menuBtn"><span id="menuLabel">01 · Giới thiệu</span><span class="caret">▾</span></button>
+        <div class="menu-panel" id="menuPanel">
+          <a href="#intro"><b>01</b><span class="vi">Giới thiệu</span><span class="en">Intro</span></a>
+          <a href="#logo"><b>02</b><span class="vi">Logo</span><span class="en">Logo</span></a>
+          <a href="#clearspace"><b>03</b><span class="vi">Khoảng trống</span><span class="en">Clear space</span></a>
+          <a href="#misuse"><b>04</b><span class="vi">Dùng sai</span><span class="en">Misuse</span></a>
+          <a href="#products"><b>05</b><span class="vi">Sản phẩm</span><span class="en">Products</span></a>
+          <a href="#color"><b>06</b><span class="vi">Màu sắc</span><span class="en">Color</span></a>
+          <a href="#type"><b>07</b><span class="vi">Kiểu chữ</span><span class="en">Typography</span></a>
+          <a href="#icons"><b>08</b><span class="vi">Bộ Icon</span><span class="en">Icon Pack</span></a>
+          <a href="#voice"><b>09</b><span class="vi">Giọng văn</span><span class="en">Voice</span></a>
+          <a href="#assets"><b>10</b><span class="vi">Tải xuống</span><span class="en">Download</span></a>
+          <a href="#contrast"><b>11</b><span class="vi">Tương phản</span><span class="en">Contrast</span></a>
+        </div>
+      </div>
+      <div class="langtoggle" id="langtoggle">
+        <button data-l="vi" class="active">VI</button>
+        <button data-l="en">EN</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ================= HERO ================= -->
+<header class="hero" id="top">
+  <svg class="bigA" viewBox="0.0 0.0 594.2 469.9" aria-hidden="true"><use href="#s-sym"></use></svg>
+  <div class="wrap">
+    <div class="herologo"><svg viewBox="0 0 1498.2 474.2" aria-label="Avibi"><use href="#s-avibi-rev"></use></svg></div>
+    <span class="kicker">Brand Guideline Playbook · 2026</span>
+    <h1><span class="vi">Sổ tay Thương hiệu Avibi</span><span class="en">Avibi Brand Guideline Playbook</span></h1>
+    <p class="lead">
+      <span class="vi">Tài liệu chuẩn hoá cách dùng logo, màu sắc, kiểu chữ, icon và giọng văn của Avibi — để website, tài liệu API, dashboard và mọi ấn phẩm truyền thông luôn nhất quán, đáng tin cậy và dễ nhận diện.</span>
+      <span class="en">The single source of truth for how Avibi looks, sounds and behaves — keeping the website, API docs, dashboard and every piece of communication consistent, trustworthy and instantly recognizable.</span>
+    </p>
+    <div class="tagline"><b>Tagline</b><span class="vi inline">Một kết nối · Vô hạn tiềm năng AI</span><span class="en inline">One API for every AI model</span></div>
+    <div class="meta">
+      <div><b>v1.0</b><span class="vi inline">Phiên bản</span><span class="en inline">Version</span></div>
+      <div><b>10 / 2026</b><span class="vi inline">Cập nhật</span><span class="en inline">Updated</span></div>
+      <div><b>Avibi · Avibi Gateway</b><span class="vi inline">Phạm vi áp dụng</span><span class="en inline">Applies to</span></div>
+    </div>
+  </div>
+</header>
+
+<!-- ================= INTRO ================= -->
+<section id="intro">
+  <div class="wrap">
+    <div class="sec-num"><span class="num">01</span><span class="dash">—</span><span class="vi inline">Giới thiệu</span><span class="en inline">Introduction</span></div>
+    <h2><span class="vi">Thương hiệu Avibi</span><span class="en">The Avibi brand</span></h2>
+    <p class="sub">
+      <span class="vi">Avibi là nền tảng tích hợp mô hình AI: một API duy nhất để truy cập các model ngôn ngữ, giọng nói, hình ảnh và video từ nhiều nhà cung cấp. Bộ nhận diện kể đúng câu chuyện đó — chữ A có thanh ngang là một nhịp cầu, gradient xanh chuyển từ chiều sâu hạ tầng (Blue) sang sự rộng mở của tiềm năng AI (Sky), đặt trên nền navy vững chãi.</span>
+      <span class="en">Avibi is an AI model integration platform: one API to reach language, voice, image and video models from many providers. The identity tells that story — an A whose crossbar is a bridge, a gradient that moves from the depth of infrastructure (Blue) to the openness of AI potential (Sky), grounded by a steady navy.</span>
+    </p>
+    <div class="grid g3">
+      <div class="card">
+        <div class="cardico"><i class="ph-bold ph-plugs-connected"></i></div>
+        <h3><span class="vi">Kết nối</span><span class="en">Connected</span></h3>
+        <p><span class="vi">Một điểm truy cập cho cả hệ sinh thái model — thể hiện qua đường cong cầu nối trong chữ A.</span><span class="en">One access point for the whole model ecosystem — expressed by the bridge arc inside the A.</span></p>
+      </div>
+      <div class="card">
+        <div class="cardico"><i class="ph-bold ph-shield-check"></i></div>
+        <h3><span class="vi">Tin cậy</span><span class="en">Reliable</span></h3>
+        <p><span class="vi">Lớp API ổn định, minh bạch về giá và giới hạn — thể hiện qua sắc navy sâu của wordmark.</span><span class="en">A stable API layer, transparent on pricing and limits — expressed through the deep navy wordmark.</span></p>
+      </div>
+      <div class="card">
+        <div class="cardico"><i class="ph-bold ph-arrows-out"></i></div>
+        <h3><span class="vi">Mở rộng</span><span class="en">Scalable</span></h3>
+        <p><span class="vi">Từ một request đến hàng trăm triệu token mỗi ngày — gradient Blue → Sky tượng trưng cho tiềm năng không giới hạn.</span><span class="en">From one request to hundreds of millions of tokens a day — the Blue → Sky gradient stands for open-ended potential.</span></p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= LOGO ================= -->
+<section id="logo">
+  <div class="wrap">
+    <div class="sec-num"><span class="num">02</span><span class="dash">—</span><span class="vi inline">Hệ thống Logo</span><span class="en inline">Logo System</span></div>
+    <h2><span class="vi">Logo chính</span><span class="en">Master logo</span></h2>
+    <p class="sub">
+      <span class="vi">Logo Avibi gồm hai thành phần: <b>biểu tượng chữ A</b> gradient (đồng thời là chữ cái đầu của tên) và phần chữ <b>vibi</b> màu navy. Hai phần ghép thành một từ "Avibi" — luôn dùng nguyên khối, không tách rời, không giãn khoảng cách hay vẽ lại.</span>
+      <span class="en">The Avibi logo has two parts: the gradient <b>A symbol</b> (which is also the first letter of the name) and the navy <b>vibi</b> wordmark. Together they read as one word, "Avibi" — always use it as one unit; never separate, re-space or redraw it.</span>
+    </p>
+    <div class="stage" style="padding:70px 32px"><svg viewBox="0 0 1498.2 474.2" style="max-height:120px;width:380px"><use href="#s-avibi"></use></svg></div>
+
+    <h3 style="margin-top:56px"><span class="vi">Cấu trúc biểu tượng</span><span class="en">Symbol anatomy</span></h3>
+    <p class="sub"><span class="vi">Ba chi tiết làm nên chữ A của Avibi. Khi diễn giải thương hiệu trong slide, website hay video giới thiệu, hãy dùng đúng ba ý này.</span><span class="en">Three details make the Avibi A. Use these three ideas whenever you explain the brand in slides, on the website or in a brand video.</span></p>
+    <div class="anat">
+      <div class="fig"><svg viewBox="-70 -70 760 600" role="img" aria-label="Avibi A symbol anatomy"><use href="#s-sym" x="0.0" y="0.0" width="594.1656102003642" height="469.85176396139843"/><line x1="262" y1="18" x2="90" y2="-30" stroke="#041837" stroke-width="2.5" stroke-dasharray="6 5"/><circle cx="262" cy="18" r="9" fill="#fff" stroke="#041837" stroke-width="4"/><circle cx="90" cy="-30" r="26" fill="#041837"/><text x="90" y="-21" text-anchor="middle" font-family="Plus Jakarta Sans,Arial,sans-serif" font-weight="700" font-size="26" fill="#fff">1</text><line x1="300" y1="310" x2="70" y2="420" stroke="#041837" stroke-width="2.5" stroke-dasharray="6 5"/><circle cx="300" cy="310" r="9" fill="#fff" stroke="#041837" stroke-width="4"/><circle cx="70" cy="420" r="26" fill="#041837"/><text x="70" y="429" text-anchor="middle" font-family="Plus Jakarta Sans,Arial,sans-serif" font-weight="700" font-size="26" fill="#fff">2</text><line x1="560" y1="452" x2="660" y2="330" stroke="#041837" stroke-width="2.5" stroke-dasharray="6 5"/><circle cx="560" cy="452" r="9" fill="#fff" stroke="#041837" stroke-width="4"/><circle cx="660" cy="330" r="26" fill="#041837"/><text x="660" y="339" text-anchor="middle" font-family="Plus Jakarta Sans,Arial,sans-serif" font-weight="700" font-size="26" fill="#fff">3</text></svg></div>
+      <ol>
+        <li><span class="k">1</span><div><h4><span class="vi">Đỉnh A bo tròn</span><span class="en">Rounded apex</span></h4><p><span class="vi">Chữ cái đầu của Avibi và của "AI". Đỉnh bo mềm giúp biểu tượng thân thiện, không sắc cạnh như một ký hiệu kỹ thuật.</span><span class="en">The first letter of Avibi and of "AI". The soft apex keeps the mark friendly rather than sharp and technical.</span></p></div></li>
+        <li><span class="k">2</span><div><h4><span class="vi">Thanh ngang là nhịp cầu</span><span class="en">The crossbar is a bridge</span></h4><p><span class="vi">Đường cong vắt qua hai chân chữ A, nối một bên (ứng dụng của bạn) với bên kia (mọi model AI) — đúng tinh thần "Một kết nối".</span><span class="en">An arc spans both legs of the A, linking one side (your app) with the other (every AI model) — the "one connection" idea.</span></p></div></li>
+        <li><span class="k">3</span><div><h4><span class="vi">Gradient Blue → Sky</span><span class="en">Blue → Sky gradient</span></h4><p><span class="vi">Chảy theo hướng 128° từ góc trên trái xuống chân phải: từ hạ tầng vững chắc tới tiềm năng rộng mở. Không đảo chiều, không đổi màu.</span><span class="en">Runs at 128° from the top-left to the right foot: from solid infrastructure to open potential. Never reverse or recolour it.</span></p></div></li>
+      </ol>
+    </div>
+
+    <h3 style="margin-top:56px"><span class="vi">Phiên bản logo</span><span class="en">Logo variants</span></h3>
+    <p class="sub"><span class="vi">Chọn phiên bản phù hợp với nền để đảm bảo độ tương phản và dễ đọc.</span><span class="en">Choose the version that fits the background to guarantee contrast and legibility.</span></p>
+    <div class="grid g4">
+      <div class="stage-wrap"><div class="stage"><svg viewBox="0 0 1498.2 474.2"><use href="#s-avibi"></use></svg></div><div class="label"><span class="vi">Full color / nền sáng</span><span class="en">Full color / light bg</span></div></div>
+      <div class="stage-wrap"><div class="stage navy"><svg viewBox="0 0 1498.2 474.2"><use href="#s-avibi-rev"></use></svg></div><div class="label"><span class="vi">Reversed / nền tối<span class="tag pri">Ưu tiên</span></span><span class="en">Reversed / dark bg<span class="tag pri">Preferred</span></span></div></div>
+      <div class="stage-wrap"><div class="stage navy"><svg viewBox="0 0 1498.2 474.2"><use href="#s-avibi-white"></use></svg></div><div class="label"><span class="vi">White / nền tối<span class="tag alt">Dự phòng</span></span><span class="en">White / dark bg<span class="tag alt">Fallback</span></span></div></div>
+      <div class="stage-wrap"><div class="stage blue"><svg viewBox="0 0 1498.2 474.2"><use href="#s-avibi-white"></use></svg></div><div class="label"><span class="vi">White / nền Avibi Blue</span><span class="en">White / Avibi Blue bg</span></div></div>
+    </div>
+
+    <h3 style="margin-top:56px"><span class="vi">Nền tối: dùng logo Reversed hay logo trắng?</span><span class="en">On dark backgrounds: Reversed or white logo?</span></h3>
+    <p class="sub"><span class="vi">Trên nền tối, <b>ưu tiên logo Reversed</b> (chữ A gradient + chữ "vibi" trắng) — giữ được màu thương hiệu. Chuyển sang <b>logo trắng</b> khi chữ A gradient không còn đủ tương phản với nền, hoặc khi bối cảnh cần một dấu hiệu trung tính.</span><span class="en">On dark backgrounds, <b>default to the Reversed logo</b> (gradient A + white "vibi") — it keeps the brand colour. Switch to the <b>white logo</b> when the gradient A loses contrast against the background, or when the context needs a neutral mark.</span></p>
+
+    <div class="subh"><i class="ph-fill ph-check-circle"></i><span class="vi inline">Mặc định — logo Reversed trên nền navy / gần đen</span><span class="en inline">Default — Reversed logo on navy / near-black</span></div>
+    <div class="grid g2">
+      <div class="stage-wrap"><div class="stage navy"><svg viewBox="0 0 1498.2 474.2"><use href="#s-avibi-rev"></use></svg></div><div class="label"><span class="vi">Navy #041837 — chữ 17.6:1 · biểu tượng ≥ 3.2:1</span><span class="en">Navy #041837 — wordmark 17.6:1 · symbol ≥ 3.2:1</span></div></div>
+      <div class="stage-wrap"><div class="stage" style="background:#05070C;border-color:#05070C"><svg viewBox="0 0 1498.2 474.2"><use href="#s-avibi-rev"></use></svg></div><div class="label"><span class="vi">Gần đen #05070C — chữ 20.1:1 · biểu tượng ≥ 3.6:1</span><span class="en">Near-black #05070C — wordmark 20.1:1 · symbol ≥ 3.6:1</span></div></div>
+    </div>
+    <div class="note" style="background:var(--g50)"><span class="vi"><b>Ví dụ áp dụng:</b> slide mở đầu nền navy, footer website, header tài liệu API chế độ tối, banner sự kiện, ảnh bìa social nền đậm, màn hình chờ webinar, áo thun / merchandise màu tối.</span><span class="en"><b>Where this applies:</b> navy title slides, website footers, dark-mode API docs headers, event banners, dark social covers, webinar holding screens, dark apparel and merchandise.</span></div>
+
+    <div class="subh"><i class="ph-fill ph-warning-circle"></i><span class="vi inline">Ngoại lệ 1 — nền xanh dương hoặc xám đậm</span><span class="en inline">Exception 1 — blue or dark-grey backgrounds</span></div>
+    <div class="grid g2">
+      <div class="dd no"><div class="top" style="background:#0B3FA8"><svg viewBox="0 0 1498.2 474.2"><use href="#s-avibi-rev"></use></svg></div><div class="cap"><span class="mk"><i class="ph-fill ph-x-circle"></i></span><span class="tx vi">Nền xanh hoàng gia #0B3FA8 — chữ A gradient chỉ đạt <b>1.6:1</b>, chìm vào nền cùng sắc.</span><span class="tx en">Royal blue #0B3FA8 — the gradient A only reaches <b>1.6:1</b> and sinks into the same-hue background.</span></div></div>
+      <div class="dd yes"><div class="top" style="background:#0B3FA8"><svg viewBox="0 0 1498.2 474.2"><use href="#s-avibi-white"></use></svg></div><div class="cap"><span class="mk"><i class="ph-fill ph-check-circle"></i></span><span class="tx vi">Cùng nền đó, logo trắng đạt <b>9.1:1</b> — rõ ràng và tách bạch.</span><span class="tx en">On the same background the white logo reaches <b>9.1:1</b> — clean and legible.</span></div></div>
+    </div>
+
+    <div class="subh"><i class="ph-fill ph-warning-circle"></i><span class="vi inline">Ngoại lệ 2 &amp; 3 — ảnh nhiều chi tiết và hàng logo đối tác</span><span class="en inline">Exceptions 2 &amp; 3 — busy imagery and partner logo rows</span></div>
+    <div class="grid g2">
+      <div class="stage-wrap">
+        <div class="stage" style="background:linear-gradient(115deg,#0b1d3f,#1d4f8f 38%,#3a2c6e 70%,#0e6a86);border:none;position:relative">
+          <div style="position:absolute;inset:0;background:radial-gradient(circle at 68% 32%,rgba(140,220,255,.30),transparent 55%),radial-gradient(circle at 20% 80%,rgba(255,255,255,.12),transparent 40%);border-radius:inherit"></div>
+          <svg viewBox="0 0 1498.2 474.2" style="position:relative"><use href="#s-avibi-white"></use></svg>
+        </div>
+        <div class="label"><span class="vi">Ảnh nhiều chi tiết / màu lẫn lộn → logo trắng</span><span class="en">Busy, multi-coloured imagery → white logo</span></div>
+      </div>
+      <div class="stage-wrap">
+        <div class="stage navy" style="gap:0">
+          <svg viewBox="0 0 1498.2 474.2" style="max-width:34%"><use href="#s-avibi-white"></use></svg>
+          <span style="width:1px;height:42px;background:rgba(255,255,255,.28);margin:0 26px"></span>
+          <span style="font-family:var(--head);font-weight:700;font-size:20px;color:#fff;letter-spacing:.08em;opacity:.9">PARTNER</span>
+        </div>
+        <div class="label"><span class="vi">Hàng logo đối tác / nhà cung cấp model → logo trắng cho đồng bộ</span><span class="en">Partner / model-provider rows → white for consistency</span></div>
+      </div>
+    </div>
+
+    <ul class="clean" style="margin-top:22px">
+      <li><span class="vi"><b>Mặc định nền tối = logo Reversed.</b> Nền navy, đen hoặc gần đen trung tính — luôn chọn bản Reversed trước.</span><span class="en"><b>Dark background = Reversed logo by default.</b> Navy, black or neutral near-black — reach for Reversed first.</span></li>
+      <li><span class="vi">Dùng <b>logo trắng</b> khi: nền mang sắc xanh dương, xanh cyan hoặc tím ở mức trung bình (chữ A gradient tụt dưới 3:1); nền xám đậm (#2E3440 chỉ cho A đạt 2.2:1); nền là gradient thương hiệu; ảnh nhiều chi tiết hoặc độ sáng không đều; logo đứng trong hàng logo đối tác / nhà cung cấp model; in một màu (dập nổi, khắc laser, in lụa).</span><span class="en">Use the <b>white logo</b> when: the background has a mid-tone blue, cyan or violet cast (the gradient A drops below 3:1); the background is dark grey (#2E3440 gives the A only 2.2:1); the background is the brand gradient; the image is busy or unevenly lit; the logo sits in a partner / model-provider row; or it is printed in one colour (embossing, laser engraving, screen print).</span></li>
+      <li><span class="vi">Ngưỡng tối thiểu: phần chữ <b>4.5:1</b> với nền; biểu tượng A (thành phần đồ hoạ) <b>3:1</b>, đo tại điểm xanh đậm nhất #0059FC. Nếu không chắc, đặt thử cả hai bản và chọn bản dễ đọc hơn ở kích thước nhỏ nhất sẽ dùng.</span><span class="en">Minimums: wordmark <b>4.5:1</b> against the background; A symbol (a graphic element) <b>3:1</b>, measured at its darkest blue #0059FC. When in doubt, try both versions and pick whichever reads better at the smallest size you'll use.</span></li>
+      <li><span class="vi">Trên nền gradient thương hiệu, đặt logo trắng ở nửa xanh đậm (Blue). Chữ trắng trên phần Sky chỉ đạt 2.2:1.</span><span class="en">On the brand gradient, place the white logo over the deep Blue half. White on the Sky end only reaches 2.2:1.</span></li>
+    </ul>
+
+    <h3 style="margin-top:56px"><span class="vi">Biểu tượng rời &amp; App icon</span><span class="en">Standalone symbol &amp; app icon</span></h3>
+    <p class="sub"><span class="vi">Khi không gian hẹp (favicon, avatar mạng xã hội, app icon, tab trình duyệt), dùng riêng biểu tượng A hoặc app icon. Không tự cắt từ logo — dùng file biểu tượng chuẩn ở mục 10.</span><span class="en">In tight spaces (favicon, social avatar, app icon, browser tab) use the A symbol or the app icon alone. Don't crop it from the logo — use the dedicated files in section 10.</span></p>
+    <div class="grid g3">
+      <div class="stage-wrap"><div class="stage icononly"><svg viewBox="0.0 0.0 594.2 469.9"><use href="#s-sym"></use></svg></div><div class="label"><span class="vi">Biểu tượng A — gradient</span><span class="en">A symbol — gradient</span></div></div>
+      <div class="stage-wrap"><div class="stage icononly cloud"><svg viewBox="0 0 1498 1498" style="filter:drop-shadow(0 10px 18px rgba(0,89,252,.22))"><use href="#s-app"></use></svg></div><div class="label"><span class="vi">App icon — nền gradient, A trắng</span><span class="en">App icon — gradient tile, white A</span></div></div>
+      <div class="stage-wrap"><div class="stage icononly navy"><svg viewBox="0.0 0.0 594.2 469.9"><use href="#s-sym-white"></use></svg></div><div class="label"><span class="vi">Trên nền tối / nền màu — A trắng</span><span class="en">On dark / coloured bg — white A</span></div></div>
+    </div>
+    <div class="note"><span class="vi"><b>Lưu ý:</b> App icon bo góc theo tỉ lệ 21.5% cạnh ô vuông. Trên các nền tảng tự cắt hình tròn (avatar Facebook, Zalo, LinkedIn), tải bản app icon vuông — nền tảng sẽ tự bo. Bộ tài sản còn có bản app icon nền navy, nền trắng và bản biểu tượng navy một màu cho in ấn.</span><span class="en"><b>Note:</b> The app icon's corner radius is 21.5% of the tile. On platforms that crop to a circle (Facebook, Zalo, LinkedIn avatars), upload the square app icon and let the platform round it. The pack also includes navy-tile and white-tile app icons and a one-colour navy symbol for print.</span></div>
+
+    <h3 style="margin-top:56px"><span class="vi">Logo trên nền ảnh</span><span class="en">Logo on photo backgrounds</span></h3>
+    <p class="sub"><span class="vi">Trên ảnh, logo full-color dễ bị nhiễu và mất tương phản. Quy tắc: <b>dùng logo một màu</b> — trắng hoặc navy — chọn theo độ sáng của vùng đặt logo. Bản Reversed chỉ dùng khi vùng ảnh đó tối, phẳng và trung tính (không ngả xanh).</span><span class="en">On photos the full-colour logo gets noisy and loses contrast. Rule: <b>use a single-colour logo</b> — white or navy — chosen for the brightness of the area behind it. Use Reversed only when that area is dark, flat and neutral (not blue-tinted).</span></p>
+    <div class="grid g2">
+      <div class="stage-wrap">
+        <div class="stage" style="background:linear-gradient(135deg,#0a1a33,#18406e 45%,#2b6aa3);border:none;position:relative">
+          <div style="position:absolute;inset:0;background:radial-gradient(circle at 72% 28%,rgba(255,255,255,.20),transparent 55%);border-radius:inherit"></div>
+          <svg viewBox="0 0 1498.2 474.2" style="position:relative"><use href="#s-avibi-white"></use></svg>
+        </div>
+        <div class="label"><span class="vi">✓ Ảnh tối → logo mono trắng</span><span class="en">✓ Dark image → white mono logo</span></div>
+      </div>
+      <div class="stage-wrap">
+        <div class="stage" style="background:linear-gradient(135deg,#eef4fb,#cfe2f6 50%,#b7d6f2);border:none;position:relative">
+          <div style="position:absolute;inset:0;background:radial-gradient(circle at 30% 70%,rgba(255,255,255,.55),transparent 50%);border-radius:inherit"></div>
+          <svg viewBox="0 0 1498.2 474.2" style="position:relative"><use href="#s-avibi-navy"></use></svg>
+        </div>
+        <div class="label"><span class="vi">✓ Ảnh sáng → logo mono navy</span><span class="en">✓ Light image → navy mono logo</span></div>
+      </div>
+    </div>
+    <ul class="clean" style="margin-top:16px">
+      <li><span class="vi">Ảnh tối, vùng đặt logo phẳng và trung tính → có thể dùng <b>logo Reversed</b>.</span><span class="en">Dark image with a flat, neutral area → the <b>Reversed logo</b> is fine.</span></li>
+      <li><span class="vi">Ảnh tối nhiều chi tiết, nhiều màu hoặc ngả xanh dương → dùng logo <b>mono trắng</b>.</span><span class="en">Dark images that are busy, multi-coloured or blue-tinted → use the <b>white mono</b> logo.</span></li>
+      <li><span class="vi">Ảnh sáng → dùng logo <b>mono navy</b>.</span><span class="en">Light images → use the <b>navy mono</b> logo.</span></li>
+      <li><span class="vi">Đặt logo lên vùng ảnh ít chi tiết; nếu cần, thêm lớp phủ navy hoặc trắng nhẹ (overlay) để tăng tương phản.</span><span class="en">Place the logo over a low-detail area; if needed, add a subtle navy or white overlay to boost contrast.</span></li>
+      <li><span class="vi">Không đặt logo full-color (A gradient + chữ navy) trực tiếp lên ảnh.</span><span class="en">Never place the full-colour logo (gradient A + navy wordmark) directly on a photo.</span></li>
+    </ul>
+  </div>
+</section>
+
+<!-- ================= CLEAR SPACE ================= -->
+<section id="clearspace">
+  <div class="wrap">
+    <div class="sec-num"><span class="num">03</span><span class="dash">—</span><span class="vi inline">Khoảng trống &amp; Kích thước</span><span class="en inline">Clear Space &amp; Sizing</span></div>
+    <h2><span class="vi">Không gian bảo vệ logo</span><span class="en">Clear space &amp; minimum size</span></h2>
+    <p class="sub"><span class="vi">Luôn giữ một khoảng trống tối thiểu quanh logo để nó "thở". Đơn vị đo (ký hiệu <b>X</b>) là <b>chiều cao chữ "v"</b> trong logo (≈ 62% chiều cao logo) — chính là các chữ "v" mờ ở 4 cạnh trong hình. Không đặt chữ, hình ảnh hay viền trong vùng này.</span><span class="en">Always keep a minimum clear zone around the logo so it can breathe. The unit (marked <b>X</b>) is the <b>height of the "v"</b> in the logo (≈ 62% of the logo height) — the faded "v" on each side shows it. Keep text, imagery and edges out of this zone.</span></p>
+    <div class="grid g2" style="align-items:center">
+      <div class="clearbox">
+        <div class="clearframe">
+          <svg class="cl-logo" viewBox="0 0 1498.2 474.2"><use href="#s-avibi"></use></svg>
+          <svg class="tick t-top" viewBox="0 0 299.3 296.2"><use href="#s-v"></use></svg>
+          <svg class="tick t-left" viewBox="0 0 299.3 296.2"><use href="#s-v"></use></svg>
+          <svg class="tick t-right" viewBox="0 0 299.3 296.2"><use href="#s-v"></use></svg>
+          <svg class="tick t-bot" viewBox="0 0 299.3 296.2"><use href="#s-v"></use></svg>
+        </div>
+      </div>
+      <div>
+        <h3><span class="vi">Quy tắc</span><span class="en">Rules</span></h3>
+        <ul class="clean">
+          <li><span class="vi">Khoảng trống tối thiểu quanh logo = <b>X</b> (chiều cao chữ "v"), minh hoạ bằng các chữ "v" mờ ở 4 cạnh.</span><span class="en">Minimum clear space around the logo = <b>X</b> (the height of the "v"), shown by the faded "v" on all four sides.</span></li>
+          <li><span class="vi">Kích thước tối thiểu logo đầy đủ: <b>96px</b> chiều rộng (số) / <b>22mm</b> (in).</span><span class="en">Minimum full-logo size: <b>96px</b> wide (digital) / <b>22mm</b> (print).</span></li>
+          <li><span class="vi">Biểu tượng A / app icon tối thiểu: <b>16px</b> (favicon). Dưới 24px, ưu tiên app icon nền gradient thay vì biểu tượng A trần để giữ độ rõ.</span><span class="en">A symbol / app icon minimum: <b>16px</b> (favicon). Below 24px, prefer the gradient app icon over the bare A to keep it legible.</span></li>
+          <li><span class="vi">Khoảng trống quanh app icon = <b>12.5%</b> cạnh ô vuông.</span><span class="en">Clear space around the app icon = <b>12.5%</b> of the tile edge.</span></li>
+          <li><span class="vi">Ưu tiên file SVG cho web/app để logo luôn sắc nét ở mọi độ phân giải.</span><span class="en">Prefer SVG for web/app so the logo stays sharp at any resolution.</span></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= MISUSE ================= -->
+<section id="misuse">
+  <div class="wrap">
+    <div class="sec-num"><span class="num">04</span><span class="dash">—</span><span class="vi inline">Sử dụng sai</span><span class="en inline">Misuse</span></div>
+    <h2><span class="vi">Những điều không được làm</span><span class="en">What not to do</span></h2>
+    <p class="sub"><span class="vi">Giữ logo nguyên vẹn. Dưới đây là các lỗi phổ biến cần tránh để bảo vệ tính nhất quán của thương hiệu.</span><span class="en">Keep the logo intact. Below are common mistakes to avoid in order to protect brand consistency.</span></p>
+    <div class="grid g3">
+      <div class="dd no"><div class="top"><svg viewBox="0 0 1498.2 474.2" style="transform:scaleX(1.5)"><use href="#s-avibi"></use></svg></div><div class="cap"><span class="mk"><i class="ph-fill ph-x-circle"></i></span><span class="tx vi">Không kéo giãn, bóp méo tỉ lệ.</span><span class="tx en">Don't stretch or distort the proportions.</span></div></div>
+      <div class="dd no"><div class="top"><svg viewBox="0 0 1498.2 474.2"><use href="#s-avibi-bad"></use></svg></div><div class="cap"><span class="mk"><i class="ph-fill ph-x-circle"></i></span><span class="tx vi">Không đổi gradient sang màu ngoài bảng màu, không đảo chiều gradient.</span><span class="tx en">Don't recolour or reverse the gradient.</span></div></div>
+      <div class="dd no"><div class="top" style="background:#0B3FA8"><svg viewBox="0 0 1498.2 474.2"><use href="#s-avibi"></use></svg></div><div class="cap"><span class="mk"><i class="ph-fill ph-x-circle"></i></span><span class="tx vi">Không đặt logo lên nền thiếu tương phản.</span><span class="tx en">Don't place the logo on low-contrast backgrounds.</span></div></div>
+      <div class="dd no"><div class="top"><svg viewBox="0 0 1498.2 474.2" style="transform:rotate(-12deg)"><use href="#s-avibi"></use></svg></div><div class="cap"><span class="mk"><i class="ph-fill ph-x-circle"></i></span><span class="tx vi">Không xoay nghiêng logo.</span><span class="tx en">Don't rotate or tilt the logo.</span></div></div>
+      <div class="dd no"><div class="top"><svg viewBox="0 0 1498.2 474.2" style="filter:drop-shadow(4px 5px 3px rgba(0,0,0,.45))"><use href="#s-avibi"></use></svg></div><div class="cap"><span class="mk"><i class="ph-fill ph-x-circle"></i></span><span class="tx vi">Không thêm đổ bóng, viền, phát sáng hay hiệu ứng 3D.</span><span class="tx en">Don't add shadows, outlines, glows or 3D effects.</span></div></div>
+      <div class="dd no"><div class="top"><svg viewBox="0.0 0.0 594.2 469.9" style="height:46px;width:58px"><use href="#s-sym"></use></svg><span style="font-family:Georgia,'Times New Roman',serif;font-weight:700;font-size:40px;color:var(--navy);margin-left:4px;line-height:1">vibi</span></div><div class="cap"><span class="mk"><i class="ph-fill ph-x-circle"></i></span><span class="tx vi">Không gõ lại chữ "vibi" hay ghép font khác vào logo.</span><span class="tx en">Don't retype "vibi" or swap in another font.</span></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= PRODUCTS ================= -->
+<section id="products">
+  <div class="wrap">
+    <div class="sec-num"><span class="num">05</span><span class="dash">—</span><span class="vi inline">Kiến trúc thương hiệu</span><span class="en inline">Brand Architecture</span></div>
+    <h2><span class="vi">Sản phẩm &amp; dòng model</span><span class="en">Products &amp; model lines</span></h2>
+    <p class="sub"><span class="vi">Avibi là thương hiệu mẹ. Sản phẩm dùng cấu trúc <b>"Avibi + tên sản phẩm"</b> và dùng chung logo, bảng màu — không tạo biểu tượng riêng. Bên dưới sản phẩm là các <b>dòng model</b>: đây là nhóm chức năng để điều hướng, không phải thương hiệu con.</span><span class="en">Avibi is the parent brand. Products follow the <b>"Avibi + product name"</b> structure and share the master logo and palette — no separate symbols. Below the product sit the <b>model lines</b>: functional groupings for navigation, not sub-brands.</span></p>
+
+    <div class="arch">
+      <div class="master"><svg viewBox="0 0 1498.2 474.2"><use href="#s-avibi-rev"></use></svg></div>
+      <div class="stem"></div>
+      <div class="product">
+        <div class="lockup"><svg viewBox="0 0 1498.2 474.2"><use href="#s-avibi"></use></svg><span class="bar"></span><span class="pn">Gateway</span></div>
+        <div class="role"><span class="vi">One API for every AI model — một API cho mọi model AI</span><span class="en">One API for every AI model</span></div>
+      </div>
+      <div class="stem"></div>
+      <div class="children four">
+        <div class="child"><span class="cico"><i class="ph-bold ph-chat-centered-text"></i></span><div class="role"><b><span class="vi inline">Ngôn ngữ</span><span class="en inline">Language</span></b>LLM</div></div>
+        <div class="child"><span class="cico"><i class="ph-bold ph-waveform"></i></span><div class="role"><b><span class="vi inline">Giọng nói</span><span class="en inline">Voice</span></b>TTS · ASR</div></div>
+        <div class="child"><span class="cico"><i class="ph-bold ph-image"></i></span><div class="role"><b><span class="vi inline">Hình ảnh</span><span class="en inline">Image</span></b><span class="vi inline">Tạo ảnh</span><span class="en inline">Image generation</span></div></div>
+        <div class="child"><span class="cico"><i class="ph-bold ph-film-strip"></i></span><div class="role"><b>Video</b><span class="vi inline">Tạo video</span><span class="en inline">Video generation</span></div></div>
+      </div>
+    </div>
+
+    <h3 style="margin-top:56px"><span class="vi">Lockup sản phẩm</span><span class="en">Product lockup</span></h3>
+    <p class="sub"><span class="vi">Tên sản phẩm đặt sau logo, ngăn bằng một vạch đứng mảnh. Tên dùng Plus Jakarta Sans SemiBold, cao bằng chiều cao chữ "b"; màu theo phần chữ của logo (navy hoặc trắng).</span><span class="en">The product name follows the logo, separated by a thin vertical rule. Set it in Plus Jakarta Sans SemiBold at the height of the "b", coloured like the wordmark (navy or white).</span></p>
+    <div class="grid g2">
+      <div class="stage-wrap"><div class="stage"><div class="lockup"><svg viewBox="0 0 1498.2 474.2"><use href="#s-avibi"></use></svg><span class="bar"></span><span class="pn">Gateway</span></div></div><div class="label"><span class="vi">Avibi Gateway — nền sáng</span><span class="en">Avibi Gateway — light</span></div></div>
+      <div class="stage-wrap"><div class="stage navy"><div class="lockup"><svg viewBox="0 0 1498.2 474.2"><use href="#s-avibi-rev"></use></svg><span class="bar"></span><span class="pn">Gateway</span></div></div><div class="label"><span class="vi">Avibi Gateway — reversed trên nền tối</span><span class="en">Avibi Gateway — reversed on dark</span></div></div>
+    </div>
+    <div class="note"><span class="vi"><b>Khi nào được gọi tắt "Gateway":</b> bên trong dashboard, tài liệu API hoặc khi logo Avibi đã hiện diện trên cùng trang. Ở lần nhắc đầu tiên, trên tài liệu đối ngoại hay quảng cáo, luôn viết đầy đủ "Avibi Gateway".</span><span class="en"><b>When "Gateway" alone is fine:</b> inside the dashboard, in API docs, or when the Avibi logo is already on the page. On first mention, in external materials and in ads, always write "Avibi Gateway" in full.</span></div>
+    <div class="note"><span class="vi"><b>Nguyên tắc đặt tên:</b> viết "Avibi" — chỉ viết hoa chữ A đầu (không viết AVIBI, AviBi, avibi trong câu văn; ngoại lệ là tên miền avibi.ai). Model của nhà cung cấp <b>giữ nguyên tên gốc</b> (GPT, Qwen, GLM, Seedream, Seedance…) — không gắn thêm tiền tố Avibi. Chỉ model do Avibi phát triển mới mang tên "Avibi + chức năng", ví dụ Avibi TTS, Avibi ASR. Không tạo tên sản phẩm mới với cấu trúc khác khi chưa được duyệt.</span><span class="en"><b>Naming rule:</b> write "Avibi" — capital A only (not AVIBI, AviBi or avibi in running text; the domain avibi.ai is the exception). Provider models <b>keep their original names</b> (GPT, Qwen, GLM, Seedream, Seedance…) — never prefix them with Avibi. Only models Avibi builds itself carry "Avibi + function", e.g. Avibi TTS, Avibi ASR. Don't create new product names with a different structure without approval.</span></div>
+  </div>
+</section>
+
+<!-- ================= COLOR ================= -->
+<section id="color">
+  <div class="wrap">
+    <div class="sec-num"><span class="num">06</span><span class="dash">—</span><span class="vi inline">Màu sắc</span><span class="en inline">Color</span></div>
+    <p class="note" style="margin:0 0 22px"><span class="vi">Cần kiểm tra một cặp màu có đủ tương phản để đọc? Dùng <a href="#contrast" style="color:var(--blue);font-weight:700">công cụ kiểm tra tương phản ở mục 11</a>.</span><span class="en">Need to check whether a colour pair is readable? Use the <a href="#contrast" style="color:var(--blue);font-weight:700">contrast checker in section 11</a>.</span></p>
+    <h2><span class="vi">Bảng màu thương hiệu</span><span class="en">Brand palette</span></h2>
+    <p class="sub"><span class="vi">Ba màu lõi lấy trực tiếp từ logo: Navy của phần chữ, Blue và Sky là hai đầu gradient của chữ A. Nhấp vào ô màu bất kỳ để sao chép mã HEX.</span><span class="en">Three core colours sampled straight from the logo: the wordmark's Navy, and Blue and Sky at either end of the A's gradient. Click any swatch to copy its HEX code.</span></p>
+
+    <h3><span class="vi">Màu chính</span><span class="en">Primary colors</span></h3>
+    <div class="swatches" style="margin:12px 0 40px">
+      <div class="swatch" data-hex="#041837"><div class="chip" style="background:#041837"><span><span class="vi">Nhấn để copy</span><span class="en">Click to copy</span></span></div><div class="info"><div class="nm">Avibi Navy</div><div class="hx">#041837</div><div class="rgb">RGB 4 · 24 · 55</div></div></div>
+      <div class="swatch" data-hex="#0059FC"><div class="chip" style="background:#0059FC"><span><span class="vi">Nhấn để copy</span><span class="en">Click to copy</span></span></div><div class="info"><div class="nm">Avibi Blue</div><div class="hx">#0059FC</div><div class="rgb">RGB 0 · 89 · 252</div></div></div>
+      <div class="swatch" data-hex="#0CBAFC"><div class="chip" style="background:#0CBAFC"><span><span class="vi">Nhấn để copy</span><span class="en">Click to copy</span></span></div><div class="info"><div class="nm">Avibi Sky</div><div class="hx">#0CBAFC</div><div class="rgb">RGB 12 · 186 · 252</div></div></div>
+    </div>
+
+    <h3><span class="vi">Gradient thương hiệu</span><span class="en">Brand gradient</span></h3>
+    <p class="sub"><span class="vi">Gradient của chữ A — "Avibi Flow". Dùng cho biểu tượng, app icon, mảng nhấn lớn (hero, ảnh bìa) và đường kẻ nhấn mảnh. Không dùng làm nền cho đoạn văn dài, không dùng cho chữ nhỏ.</span><span class="en">The A's gradient — "Avibi Flow". Use it for the symbol, the app icon, large accent areas (hero, covers) and thin accent rules. Never as a background for long text, never on small text.</span></p>
+    <div class="gradspec">
+      <div class="bar"><div class="stops"><span>0% #0059FC</span><span>50% #0064F2</span><span>100% #0CBAFC</span></div><div class="ang"><i class="ph-bold ph-arrow-down-right"></i>128°</div></div>
+<pre><span class="c">/* CSS */</span>
+<span class="p">background</span>: linear-gradient(128deg,
+  #0059FC 0%,
+  #0064F2 50%,
+  #0CBAFC 100%);
+
+<span class="c">/* Figma: Linear · 3 stops · góc 128° */</span></pre>
+    </div>
+
+    <h3><span class="vi">Màu trung tính</span><span class="en">Neutrals / UI</span></h3>
+    <p class="sub"><span class="vi">Dùng cho nền, đường kẻ, chữ phụ trong giao diện, tài liệu API và ấn phẩm. Các sắc xám đều pha nhẹ xanh navy để đồng điệu với logo.</span><span class="en">For backgrounds, dividers and secondary text in UI, API docs and print. Every grey carries a slight navy tint to sit well with the logo.</span></p>
+    <div class="swatches" style="margin:12px 0 40px">
+      <div class="swatch" data-hex="#FFFFFF"><div class="chip" style="background:#FFFFFF;border-bottom:1px solid var(--g100)"><span><span class="vi">Nhấn để copy</span><span class="en">Click to copy</span></span></div><div class="info"><div class="nm">White</div><div class="hx">#FFFFFF</div></div></div>
+      <div class="swatch" data-hex="#F4F7FC"><div class="chip" style="background:#F4F7FC"><span><span class="vi">Nhấn để copy</span><span class="en">Click to copy</span></span></div><div class="info"><div class="nm">Cloud</div><div class="hx">#F4F7FC</div></div></div>
+      <div class="swatch" data-hex="#5A6B85"><div class="chip" style="background:#5A6B85"><span><span class="vi">Nhấn để copy</span><span class="en">Click to copy</span></span></div><div class="info"><div class="nm">Slate</div><div class="hx">#5A6B85</div></div></div>
+    </div>
+
+    <h3><span class="vi">Sắc độ mở rộng</span><span class="en">Extended tints &amp; shades</span></h3>
+    <p class="sub"><span class="vi">Dùng cho biểu đồ, trạng thái, nền phụ — luôn bắt nguồn từ ba màu lõi.</span><span class="en">For charts, states and secondary surfaces — always derived from the three core colours.</span></p>
+    <div class="tintbar">
+      <div style="background:#020D1F;color:#fff">900</div>
+      <div style="background:#041837;color:#fff">Navy</div>
+      <div style="background:#1B2F52;color:#fff">700</div>
+      <div style="background:#3A4D70;color:#fff">600</div>
+      <div style="background:#98A6BC;color:#041837">300</div>
+      <div style="background:#E8EDF5;color:#041837">100</div>
+    </div>
+    <div class="tintbar" style="margin-top:10px">
+      <div style="background:#0039A6;color:#fff">800</div>
+      <div style="background:#0047CC;color:#fff">700</div>
+      <div style="background:#0059FC;color:#fff">Blue</div>
+      <div style="background:#5C93FF;color:#041837">300</div>
+      <div style="background:#B8D2FF;color:#041837">200</div>
+      <div style="background:#E8F0FF;color:#041837">100</div>
+    </div>
+    <div class="tintbar" style="margin-top:10px">
+      <div style="background:#0079A8;color:#fff">800</div>
+      <div style="background:#0598D4;color:#fff">600</div>
+      <div style="background:#0CBAFC;color:#041837">Sky</div>
+      <div style="background:#6FD6FD;color:#041837">300</div>
+      <div style="background:#B5EAFE;color:#041837">200</div>
+      <div style="background:#E3F7FF;color:#041837">100</div>
+    </div>
+    <div class="note"><span class="vi"><b>Tỉ lệ dùng màu (60·30·10):</b> ~60% trắng / Cloud làm nền, ~30% Navy cho chữ và mảng chính, ~10% Blue hoặc gradient để nhấn và kêu gọi hành động. Nút chính dùng Blue đặc (chữ trắng 5.4:1), không dùng gradient. Sky chỉ là màu nhấn trên nền tối — không dùng Sky cho chữ trên nền trắng (2.2:1).</span><span class="en"><b>Colour ratio (60·30·10):</b> ~60% white / Cloud base, ~30% Navy for text and key blocks, ~10% Blue or the gradient for accents and calls to action. Primary buttons use solid Blue (white text 5.4:1), not the gradient. Sky is an accent on dark backgrounds only — never Sky text on white (2.2:1).</span></div>
+  </div>
+</section>
+
+<!-- ================= TYPOGRAPHY ================= -->
+<section id="type">
+  <div class="wrap">
+    <div class="sec-num"><span class="num">07</span><span class="dash">—</span><span class="vi inline">Kiểu chữ</span><span class="en inline">Typography</span></div>
+    <h2><span class="vi">Hệ thống chữ</span><span class="en">Type system</span></h2>
+    <p class="sub"><span class="vi">Phần chữ "vibi" là sans-serif hình học, nét đều. Hệ thống chữ đề xuất: <b>Plus Jakarta Sans</b> cho tiêu đề, <b>Inter</b> cho nội dung và <b>JetBrains Mono</b> cho code, tên model, endpoint. Cả ba đều miễn phí trên Google Fonts và <b>hỗ trợ tiếng Việt đầy đủ</b>.</span><span class="en">The "vibi" wordmark is a geometric sans with even strokes. The recommended system pairs <b>Plus Jakarta Sans</b> for headings, <b>Inter</b> for body copy and <b>JetBrains Mono</b> for code, model names and endpoints. All three are free on Google Fonts and <b>fully Vietnamese-ready</b>.</span></p>
+    <div class="grid g2">
+      <div class="specimen">
+        <div style="font-family:var(--head);font-weight:600;font-size:13px;color:var(--g600);letter-spacing:.05em;text-transform:uppercase">Heading · Plus Jakarta Sans</div>
+        <div class="big">Aa Avibi</div>
+        <div class="glyphset">Ă Â ă â Ê ê Ơ ư đ 1 2 3</div>
+        <div style="margin-top:auto;padding-top:24px">
+          <div class="row"><div class="scale" style="font-size:30px;font-weight:800">Display / 800</div><div class="meta">H1</div></div>
+          <div class="row"><div class="scale" style="font-size:22px;font-weight:700">Heading / 700</div><div class="meta">H2</div></div>
+          <div class="row"><div class="scale" style="font-size:16px;font-weight:600">Subheading / 600</div><div class="meta">H3</div></div>
+        </div>
+      </div>
+      <div class="specimen">
+        <div style="font-family:var(--head);font-weight:600;font-size:13px;color:var(--g600);letter-spacing:.05em;text-transform:uppercase">Body · Inter</div>
+        <div style="font-family:var(--body);font-weight:700;font-size:44px;color:var(--navy);line-height:1;margin-top:6px">Aa Avibi</div>
+        <div style="font-family:var(--body);font-size:22px;color:var(--navy);margin-top:14px">A Ă Â a ă â Ê ê Ô Ơ ư đ 0 1 2 3</div>
+        <div style="margin-top:auto;padding-top:24px">
+          <div class="row"><div style="font-family:var(--body);font-size:16px;color:var(--navy)">Body text / Regular 400</div><div class="meta">16/1.6</div></div>
+          <div class="row"><div style="font-family:var(--body);font-size:16px;font-weight:600;color:var(--navy)">Emphasis / Semibold 600</div><div class="meta">16</div></div>
+          <div class="row"><div style="font-family:var(--body);font-size:13px;color:var(--g600)">Caption / small 13</div><div class="meta">13</div></div>
+        </div>
+      </div>
+    </div>
+    <div class="codespec">
+      <div class="hd"><span>Code · JetBrains Mono</span><span class="dots"><i></i><i></i><i></i></span></div>
+<pre><span class="c"># <span class="vi inline">Tài liệu API: tên model, tham số và endpoint luôn để ở font mono</span><span class="en inline">API docs: model names, parameters and endpoints always in mono</span></span>
+<span class="k">from</span> openai <span class="k">import</span> OpenAI
+
+client = <span class="f">OpenAI</span>(base_url=AVIBI_BASE_URL, api_key=<span class="s">"AVIBI_API_KEY"</span>)
+reply = client.chat.completions.<span class="f">create</span>(model=<span class="s">"qwen-…"</span>, messages=[…])</pre>
+      <div class="ft"><span>Code / Regular 400 · <b>13.5/1.75</b></span><span>Inline code · <b>0.92em</b></span><span><span class="vi inline">Số liệu, giá</span><span class="en inline">Figures, prices</span> · <b>tabular-nums</b></span></div>
+    </div>
+    <div class="note"><span class="vi"><b>Thay thế hệ thống:</b> khi không có Plus Jakarta Sans / Inter (email, tài liệu Office), dùng <b>Arial</b> hoặc font hệ thống; thay JetBrains Mono bằng <b>Consolas</b>. Không dùng font serif hay font trang trí cho nội dung thương hiệu. Bảng giá và số liệu dùng chữ số đều nhau (tabular) để các cột thẳng hàng.</span><span class="en"><b>System fallback:</b> where Plus Jakarta Sans / Inter aren't available (email, Office docs), use <b>Arial</b> or a system font; swap JetBrains Mono for <b>Consolas</b>. Avoid serif or decorative fonts for brand content. Pricing tables and figures use tabular digits so columns line up.</span></div>
+  </div>
+</section>
+
+<!-- ================= ICON PACK ================= -->
+<section id="icons">
+  <div class="wrap">
+    <div class="sec-num"><span class="num">08</span><span class="dash">—</span><span class="vi inline">Bộ Icon</span><span class="en inline">Icon Pack</span></div>
+    <h2><span class="vi">Bộ icon — Phosphor Icons</span><span class="en">Iconography — Phosphor Icons</span></h2>
+    <p class="sub"><span class="vi">Avibi dùng <b>Phosphor Icons</b> — bộ icon mã nguồn mở, hình học và thân thiện, nét bo tròn đồng điệu với đỉnh chữ A. Tải miễn phí tại <a href="https://phosphoricons.com/" target="_blank" style="color:var(--blue);font-weight:600">phosphoricons.com</a>. Dùng nhất quán một trọng lượng (ưu tiên <b>Bold</b> cho nhấn, <b>Regular</b> cho nội dung), màu navy, trắng hoặc Avibi Blue.</span><span class="en">Avibi uses <b>Phosphor Icons</b> — an open-source, geometric and friendly set whose rounded strokes echo the apex of the A. Free at <a href="https://phosphoricons.com/" target="_blank" style="color:var(--blue);font-weight:600">phosphoricons.com</a>. Keep one weight consistent (prefer <b>Bold</b> for accents, <b>Regular</b> for content), coloured navy, white or Avibi Blue.</span></p>
+
+    <h3 style="margin-bottom:14px"><span class="vi">Trọng lượng</span><span class="en">Weights</span></h3>
+    <div class="weights">
+      <div class="w"><i class="ph-thin ph-plugs-connected"></i><span>Thin</span></div>
+      <div class="w"><i class="ph-light ph-plugs-connected"></i><span>Light</span></div>
+      <div class="w"><i class="ph ph-plugs-connected"></i><span>Regular</span></div>
+      <div class="w hl"><i class="ph-bold ph-plugs-connected"></i><span>Bold ★</span></div>
+      <div class="w"><i class="ph-fill ph-plugs-connected"></i><span>Fill</span></div>
+      <div class="w"><i class="ph-duotone ph-plugs-connected"></i><span>Duotone</span></div>
+    </div>
+
+    <div class="ipk-group" style="margin-top:44px">
+      <h3><i class="ph-fill ph-sparkle"></i><span class="vi">Model &amp; năng lực AI</span><span class="en">Models &amp; AI capabilities</span></h3>
+      <div class="iconpack">
+        <div class="ipk"><i class="ph-bold ph-brain"></i><span>brain</span></div>
+        <div class="ipk"><i class="ph-bold ph-sparkle"></i><span>sparkle</span></div>
+        <div class="ipk"><i class="ph-bold ph-chat-centered-text"></i><span>chat-centered-text</span></div>
+        <div class="ipk"><i class="ph-bold ph-waveform"></i><span>waveform</span></div>
+        <div class="ipk"><i class="ph-bold ph-microphone"></i><span>microphone</span></div>
+        <div class="ipk"><i class="ph-bold ph-speaker-high"></i><span>speaker-high</span></div>
+        <div class="ipk"><i class="ph-bold ph-image"></i><span>image</span></div>
+        <div class="ipk"><i class="ph-bold ph-film-strip"></i><span>film-strip</span></div>
+        <div class="ipk"><i class="ph-bold ph-translate"></i><span>translate</span></div>
+        <div class="ipk"><i class="ph-bold ph-robot"></i><span>robot</span></div>
+        <div class="ipk"><i class="ph-bold ph-cpu"></i><span>cpu</span></div>
+        <div class="ipk"><i class="ph-bold ph-stack"></i><span>stack</span></div>
+      </div>
+    </div>
+
+    <div class="ipk-group">
+      <h3><i class="ph-fill ph-code"></i><span class="vi">Developer &amp; API</span><span class="en">Developer &amp; API</span></h3>
+      <div class="iconpack">
+        <div class="ipk"><i class="ph-bold ph-plugs-connected"></i><span>plugs-connected</span></div>
+        <div class="ipk"><i class="ph-bold ph-key"></i><span>key</span></div>
+        <div class="ipk"><i class="ph-bold ph-code"></i><span>code</span></div>
+        <div class="ipk"><i class="ph-bold ph-terminal-window"></i><span>terminal-window</span></div>
+        <div class="ipk"><i class="ph-bold ph-webhooks-logo"></i><span>webhooks-logo</span></div>
+        <div class="ipk"><i class="ph-bold ph-book-open-text"></i><span>book-open-text</span></div>
+        <div class="ipk"><i class="ph-bold ph-cloud"></i><span>cloud</span></div>
+        <div class="ipk"><i class="ph-bold ph-lightning"></i><span>lightning</span></div>
+        <div class="ipk"><i class="ph-bold ph-gauge"></i><span>gauge</span></div>
+        <div class="ipk"><i class="ph-bold ph-shield-check"></i><span>shield-check</span></div>
+        <div class="ipk"><i class="ph-bold ph-chart-line-up"></i><span>chart-line-up</span></div>
+        <div class="ipk"><i class="ph-bold ph-coins"></i><span>coins</span></div>
+      </div>
+    </div>
+
+    <div class="ipk-group">
+      <h3><i class="ph-fill ph-cursor-click"></i><span class="vi">Hành động &amp; Trạng thái</span><span class="en">Actions &amp; Status</span></h3>
+      <div class="iconpack">
+        <div class="ipk"><i class="ph-bold ph-download-simple"></i><span>download-simple</span></div>
+        <div class="ipk"><i class="ph-bold ph-upload-simple"></i><span>upload-simple</span></div>
+        <div class="ipk"><i class="ph-bold ph-check-circle"></i><span>check-circle</span></div>
+        <div class="ipk"><i class="ph-bold ph-warning-circle"></i><span>warning-circle</span></div>
+        <div class="ipk"><i class="ph-bold ph-info"></i><span>info</span></div>
+        <div class="ipk"><i class="ph-bold ph-arrow-right"></i><span>arrow-right</span></div>
+        <div class="ipk"><i class="ph-bold ph-magnifying-glass"></i><span>magnifying-glass</span></div>
+        <div class="ipk"><i class="ph-bold ph-gear-six"></i><span>gear-six</span></div>
+        <div class="ipk"><i class="ph-bold ph-plus-circle"></i><span>plus-circle</span></div>
+        <div class="ipk"><i class="ph-bold ph-trash"></i><span>trash</span></div>
+        <div class="ipk"><i class="ph-bold ph-copy"></i><span>copy</span></div>
+        <div class="ipk"><i class="ph-bold ph-share-network"></i><span>share-network</span></div>
+      </div>
+    </div>
+
+    <div class="grid g2">
+      <div class="card">
+        <div class="cardico"><i class="ph-bold ph-check-circle"></i></div>
+        <h3><span class="vi">Nên</span><span class="en">Do</span></h3>
+        <ul class="clean">
+          <li><span class="vi">Dùng một trọng lượng thống nhất trong cùng giao diện.</span><span class="en">Use one consistent weight within a screen.</span></li>
+          <li><span class="vi">Tô màu navy, trắng hoặc Avibi Blue (khi nhấn).</span><span class="en">Colour them navy, white, or Avibi Blue (for accent).</span></li>
+          <li><span class="vi">Căn icon theo lưới, cùng cỡ với chữ đi kèm.</span><span class="en">Align to the grid, matching the size of adjacent text.</span></li>
+        </ul>
+      </div>
+      <div class="card">
+        <div class="cardico" style="background:#C0392B;color:#fff"><i class="ph-bold ph-x-circle"></i></div>
+        <h3><span class="vi">Không nên</span><span class="en">Don't</span></h3>
+        <ul class="clean">
+          <li><span class="vi">Trộn nhiều trọng lượng (Bold + Thin) lộn xộn.</span><span class="en">Mix multiple weights (Bold + Thin) randomly.</span></li>
+          <li><span class="vi">Dùng icon từ bộ khác, phá vỡ tính nhất quán.</span><span class="en">Use icons from other sets, breaking consistency.</span></li>
+          <li><span class="vi">Tô gradient Avibi Flow hay đổ bóng lên icon — gradient dành riêng cho biểu tượng A.</span><span class="en">Apply the Avibi Flow gradient or drop shadows to icons — the gradient belongs to the A.</span></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="note"><span class="vi"><b>Cách dùng:</b> Nhúng web font <code>@phosphor-icons/web</code> rồi gọi <code>&lt;i class="ph-bold ph-plugs-connected"&gt;&lt;/i&gt;</code>, hoặc tải SVG từng icon trực tiếp trên phosphoricons.com. Logo nhà cung cấp model (OpenAI, Qwen…) không thuộc bộ icon — dùng logo chính thức của họ theo hướng dẫn thương hiệu riêng.</span><span class="en"><b>How to use:</b> Embed the <code>@phosphor-icons/web</code> font then call <code>&lt;i class="ph-bold ph-plugs-connected"&gt;&lt;/i&gt;</code>, or download each SVG from phosphoricons.com. Model-provider logos (OpenAI, Qwen…) are not part of the icon set — use their official marks under their own brand guidelines.</span></div>
+  </div>
+</section>
+
+<!-- ================= VOICE ================= -->
+<section id="voice">
+  <div class="wrap">
+    <div class="sec-num"><span class="num">09</span><span class="dash">—</span><span class="vi inline">Giọng văn thương hiệu</span><span class="en inline">Tone of Voice</span></div>
+    <h2><span class="vi">Cách Avibi giao tiếp</span><span class="en">How Avibi speaks</span></h2>
+    <p class="sub"><span class="vi">Người đọc của Avibi phần lớn là developer và đội sản phẩm — họ cần câu trả lời nhanh và chính xác. Avibi nói chuyện như một kỹ sư giàu kinh nghiệm đang giúp đồng nghiệp: rõ ràng, chính xác, tự tin, gần gũi và thực tế.</span><span class="en">Most Avibi readers are developers and product teams — they want fast, exact answers. Avibi sounds like a seasoned engineer helping a colleague: clear, precise, confident, human and practical.</span></p>
+    <div style="margin:8px 0 34px">
+      <span class="pill y"><i class="ph-bold ph-eye"></i><span class="vi inline">Rõ ràng</span><span class="en inline">Clear</span></span>
+      <span class="pill"><i class="ph-bold ph-target"></i><span class="vi inline">Chính xác</span><span class="en inline">Precise</span></span>
+      <span class="pill"><i class="ph-bold ph-seal-check"></i><span class="vi inline">Tự tin</span><span class="en inline">Confident</span></span>
+      <span class="pill"><i class="ph-bold ph-hand-heart"></i><span class="vi inline">Gần gũi</span><span class="en inline">Human</span></span>
+      <span class="pill"><i class="ph-bold ph-wrench"></i><span class="vi inline">Thực tế</span><span class="en inline">Practical</span></span>
+    </div>
+    <div class="specimen saytable">
+      <div class="r head">
+        <div class="h ok"><i class="ph-fill ph-check-circle"></i><span class="vi inline">Nên nói</span><span class="en inline">Say this</span></div>
+        <div class="h bad"><i class="ph-fill ph-x-circle"></i><span class="vi inline">Tránh</span><span class="en inline">Not this</span></div>
+      </div>
+      <div class="r">
+        <div class="trait"><i class="ph-bold ph-eye"></i><span class="vi inline">Rõ ràng</span><span class="en inline">Clear</span></div>
+        <div class="say"><div class="cl"><span class="vi inline">Nên nói</span><span class="en inline">Say this</span></div><span class="vi">"Một API key. Gọi được hàng trăm model."</span><span class="en">"One API key. Hundreds of models."</span></div>
+        <div class="dont"><div class="cl"><span class="vi inline">Tránh</span><span class="en inline">Not this</span></div><span class="vi">"Giải pháp hợp nhất đa tầng tối ưu hoá hạ tầng inference cho doanh nghiệp."</span><span class="en">"A multi-layer unified solution optimising enterprise inference infrastructure."</span></div>
+      </div>
+      <div class="r">
+        <div class="trait"><i class="ph-bold ph-target"></i><span class="vi inline">Chính xác</span><span class="en inline">Precise</span></div>
+        <div class="say"><div class="cl"><span class="vi inline">Nên nói</span><span class="en inline">Say this</span></div><span class="vi">"Giá tính theo token, hiển thị bằng VND và USD trên trang Pricing."</span><span class="en">"Pricing is per token, shown in VND and USD on the Pricing page."</span></div>
+        <div class="dont"><div class="cl"><span class="vi inline">Tránh</span><span class="en inline">Not this</span></div><span class="vi">"Chi phí cực kỳ cạnh tranh, rẻ nhất thị trường."</span><span class="en">"Extremely competitive — the cheapest on the market."</span></div>
+      </div>
+      <div class="r">
+        <div class="trait"><i class="ph-bold ph-seal-check"></i><span class="vi inline">Tự tin</span><span class="en inline">Confident</span></div>
+        <div class="say"><div class="cl"><span class="vi inline">Nên nói</span><span class="en inline">Say this</span></div><span class="vi">"Đổi model bằng một dòng: thay tên model trong request."</span><span class="en">"Switch models in one line: change the model name in your request."</span></div>
+        <div class="dont"><div class="cl"><span class="vi inline">Tránh</span><span class="en inline">Not this</span></div><span class="vi">"Có thể bạn sẽ cần chỉnh sửa một số phần để chuyển sang model khác."</span><span class="en">"You may need to adjust a few things to move to another model."</span></div>
+      </div>
+      <div class="r">
+        <div class="trait"><i class="ph-bold ph-hand-heart"></i><span class="vi inline">Gần gũi</span><span class="en inline">Human</span></div>
+        <div class="say"><div class="cl"><span class="vi inline">Nên nói</span><span class="en inline">Say this</span></div><span class="vi">"Kẹt ở bước tích hợp? Nhắn đội Avibi, chúng tôi xem cùng bạn."</span><span class="en">"Stuck on integration? Message the Avibi team and we'll look at it with you."</span></div>
+        <div class="dont"><div class="cl"><span class="vi inline">Tránh</span><span class="en inline">Not this</span></div><span class="vi">"Vui lòng gửi ticket tới bộ phận hỗ trợ để được xử lý theo quy trình."</span><span class="en">"Kindly submit a ticket to the support department for processing."</span></div>
+      </div>
+      <div class="r">
+        <div class="trait"><i class="ph-bold ph-wrench"></i><span class="vi inline">Thực tế</span><span class="en inline">Practical</span></div>
+        <div class="say"><div class="cl"><span class="vi inline">Nên nói</span><span class="en inline">Say this</span></div><span class="vi">"Dùng được SDK OpenAI bạn đang có — chỉ cần đổi base_url và API key."</span><span class="en">"Keep the OpenAI SDK you already use — just change base_url and the API key."</span></div>
+        <div class="dont"><div class="cl"><span class="vi inline">Tránh</span><span class="en inline">Not this</span></div><span class="vi">"Nền tảng tiên phong kiến tạo kỷ nguyên AI thế hệ mới."</span><span class="en">"The pioneering platform shaping the next-generation AI era."</span></div>
+      </div>
+
+    </div>
+    <div class="note"><span class="vi"><b>Nguyên tắc chung:</b> mỗi câu một ý; ưu tiên động từ chủ động và lợi ích cụ thể; với developer, đưa ví dụ code trước rồi mới giải thích. Số liệu công khai (số model, số nhà cung cấp, lượng token, giá) phải khớp với website tại thời điểm đăng. Không so sánh hạ thấp đối thủ hay nhà cung cấp model.</span><span class="en"><b>Rule of thumb:</b> one idea per sentence; lead with active verbs and a concrete benefit; for developers, show the code first, then explain. Public figures (model count, providers, token volume, prices) must match the website at the time of publishing. Never run down competitors or model providers.</span></div>
+  </div>
+</section>
+
+<!-- ================= ASSETS & DOWNLOAD ================= -->
+<section id="assets">
+  <div class="wrap">
+    <div class="sec-num"><span class="num">10</span><span class="dash">—</span><span class="vi inline">Tải xuống</span><span class="en inline">Download</span></div>
+    <h2><span class="vi">Tải bộ logo</span><span class="en">Download the logo pack</span></h2>
+    <p class="sub"><span class="vi">Chọn <b>style</b> ở tab bên dưới (Default / Reversed / White / Navy) — bản xem trước và nút tải sẽ đổi theo. Mỗi file có hai định dạng: <b>SVG</b> (vector, ưu tiên) và <b>PNG nền trong suốt</b> (logo 2000px, biểu tượng &amp; app icon 1024px).</span><span class="en">Pick a <b>style</b> from the tabs below (Default / Reversed / White / Navy) — the preview and download buttons update accordingly. Each file comes in two formats: <b>SVG</b> (vector, preferred) and <b>transparent PNG</b> (logo 2000px, symbol &amp; app icon 1024px).</span></p>
+
+    <div class="dltabs" id="dltabs">
+      <button class="dltab active" data-style="default">Default</button>
+      <button class="dltab" data-style="reversed">Reversed</button>
+      <button class="dltab" data-style="white">White</button>
+      <button class="dltab" data-style="navy">Navy</button>
+    </div>
+
+    <div class="dlgrid" id="dlgrid">
+      <div class="dlcard" data-base="Avibi">
+        <div class="prev"><img class="previmg" src="Avibi.svg" alt="Avibi logo"></div>
+        <div class="body">
+          <div class="nm">Avibi<span class="vi">Logo chính</span><span class="en">Master logo</span></div>
+          <div class="dlrow">
+            <a class="dlbtn primary btn-svg" href="Avibi.svg" download=""><i class="ph-bold ph-download-simple"></i>SVG</a>
+            <a class="dlbtn btn-png" href="Avibi.png" download=""><i class="ph-bold ph-download-simple"></i>PNG</a>
+          </div>
+        </div>
+      </div>
+      <div class="dlcard" data-base="Avibi-Symbol">
+        <div class="prev icon"><img class="previmg" src="Avibi-Symbol.svg" alt="Avibi A symbol"></div>
+        <div class="body">
+          <div class="nm">Avibi A<span class="vi">Biểu tượng — favicon, watermark</span><span class="en">Symbol — favicon, watermark</span></div>
+          <div class="dlrow">
+            <a class="dlbtn primary btn-svg" href="Avibi-Symbol.svg" download=""><i class="ph-bold ph-download-simple"></i>SVG</a>
+            <a class="dlbtn btn-png" href="Avibi-Symbol.png" download=""><i class="ph-bold ph-download-simple"></i>PNG</a>
+          </div>
+        </div>
+      </div>
+      <div class="dlcard" data-base="Avibi-AppIcon" data-light="1">
+        <div class="prev icon"><img class="previmg" src="Avibi-AppIcon.svg" alt="Avibi app icon"></div>
+        <div class="body">
+          <div class="nm">App icon<span class="vi">Avatar mạng xã hội, ứng dụng</span><span class="en">Social avatars, apps</span></div>
+          <div class="dlrow">
+            <a class="dlbtn primary btn-svg" href="Avibi-AppIcon.svg" download=""><i class="ph-bold ph-download-simple"></i>SVG</a>
+            <a class="dlbtn btn-png" href="Avibi-AppIcon.png" download=""><i class="ph-bold ph-download-simple"></i>PNG</a>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="note"><span class="vi"><b>Mẹo:</b> Nếu nút tải mở file thay vì tải về, nhấp chuột phải → "Lưu liên kết thành…". Tất cả file nằm cùng thư mục với trang này. Ưu tiên SVG cho mọi trường hợp; chỉ dùng PNG khi nền tảng không hỗ trợ vector.</span><span class="en"><b>Tip:</b> If a button opens the file instead of downloading, right-click → "Save link as…". All files sit in the same folder as this page. Prefer SVG everywhere; use PNG only where the platform doesn't support vectors.</span></div>
+  </div>
+</section>
+
+<!-- ================= CONTRAST CHECKER ================= -->
+<section id="contrast">
+  <div class="wrap">
+    <div class="sec-num"><span class="num">11</span><span class="dash">—</span><span class="vi inline">Kiểm tra tương phản</span><span class="en inline">Contrast Checker</span></div>
+    <h2><span class="vi">Công cụ kiểm tra tương phản màu</span><span class="en">Colour contrast checker</span></h2>
+    <p class="sub">
+      <span class="vi">Mọi cặp màu chữ / nền đều phải đủ tương phản để đọc được. Nhập hoặc chọn hai màu bên dưới — công cụ tính tỉ lệ tương phản theo chuẩn <b>WCAG 2.1</b> và cho biết đạt hay không đạt. Các ô màu thương hiệu đã có sẵn để bấm nhanh.</span>
+      <span class="en">Every text / background pair must have enough contrast to be readable. Pick or type two colours below — the tool computes the <b>WCAG 2.1</b> contrast ratio and tells you whether it passes. Brand colour chips are there for one-click testing.</span>
+    </p>
+
+    <div class="cc">
+      <div class="cc-row">
+        <div class="cc-field">
+          <label for="ccFgHex"><span class="vi inline">Màu chữ / Foreground</span><span class="en inline">Text colour / Foreground</span></label>
+          <div class="cc-in">
+            <input type="color" id="ccFg" value="#FFFFFF" aria-label="Chọn màu chữ / Pick text colour">
+            <input type="text" id="ccFgHex" value="#FFFFFF" spellcheck="false" maxlength="7" inputmode="text" aria-describedby="ccHint">
+          </div>
+          <div class="cc-chips" data-target="fg"></div>
+        </div>
+        <button class="cc-swap" id="ccSwap" title="Đổi chỗ hai màu / Swap colours" aria-label="Đổi chỗ hai màu / Swap colours"><i class="ph-bold ph-arrows-left-right"></i></button>
+        <div class="cc-field">
+          <label for="ccBgHex"><span class="vi inline">Màu nền / Background</span><span class="en inline">Background colour</span></label>
+          <div class="cc-in">
+            <input type="color" id="ccBg" value="#0059FC" aria-label="Chọn màu nền / Pick background colour">
+            <input type="text" id="ccBgHex" value="#0059FC" spellcheck="false" maxlength="7" inputmode="text" aria-describedby="ccHint">
+          </div>
+          <div class="cc-chips" data-target="bg"></div>
+        </div>
+      </div>
+      <p id="ccHint" class="label" style="text-align:left;margin-top:12px"><span class="vi">Nhập mã hex 3 hoặc 6 ký tự, ví dụ #041837.</span><span class="en">Enter a 3- or 6-digit hex code, e.g. #041837.</span></p>
+      <div class="cc-out" aria-live="polite">
+        <div class="cc-ratio"><span id="ccRatio">—</span><span>:1</span></div>
+        <div class="cc-badges" id="ccBadges"></div>
+      </div>
+      <div class="cc-prev" id="ccPrev">
+        <p class="p-lg"><span class="vi">Một kết nối · Vô hạn tiềm năng AI</span><span class="en">One API for every AI model</span></p>
+        <p class="p-sm"><span class="vi">Đây là đoạn văn bản cỡ thường (15px) để bạn thấy cặp màu này đọc có dễ không.</span><span class="en">This is body text at a normal size (15px) so you can judge how the pair actually reads.</span></p>
+        <p class="p-xs"><span class="vi">Chữ nhỏ 12px — thường là trường hợp khó nhất.</span><span class="en">Small 12px text — usually the hardest case.</span></p>
+      </div>
+    </div>
+
+    <h3 style="margin-top:52px"><span class="vi">Các cặp màu thương hiệu</span><span class="en">Brand colour pairs</span></h3>
+    <p class="sub"><span class="vi">Tỉ lệ dưới đây được tính trực tiếp khi bạn mở trang, nên luôn chính xác. Bấm vào một dòng để nạp cặp màu đó vào công cụ ở trên.</span><span class="en">These ratios are computed live when the page loads, so they are always accurate. Click any row to load that pair into the checker above.</span></p>
+    <div class="ccpairs" id="ccPairs"></div>
+
+    <div class="note"><span class="vi"><b>Ngưỡng cần nhớ:</b> chữ thường cần <b>4.5:1</b> (AA) — chữ lớn (từ 24px, hoặc 18.66px in đậm) chỉ cần <b>3:1</b>. Icon, đường viền, biểu đồ, biểu tượng logo và thành phần giao diện cần <b>3:1</b>. Mức <b>AAA</b> (7:1) dành cho tài liệu cần khả năng đọc cao nhất.</span><span class="en"><b>Thresholds to remember:</b> normal text needs <b>4.5:1</b> (AA) — large text (24px+, or 18.66px bold) only needs <b>3:1</b>. Icons, borders, charts, the logo symbol and UI components need <b>3:1</b>. <b>AAA</b> (7:1) is for content that must be maximally readable.</span></div>
+
+    <h3 style="margin-top:44px"><span class="vi">Công cụ ngoài</span><span class="en">External tools</span></h3>
+    <p class="sub"><span class="vi">Khi cần kiểm tra cả một trang web, ảnh hoặc file thiết kế, dùng thêm các công cụ chuyên dụng sau (bên thứ ba).</span><span class="en">To check a whole web page, an image or a design file, use these dedicated third-party tools as well.</span></p>
+    <div class="cc-links">
+      <a class="cc-link" href="https://userway.org/contrast/" target="_blank" rel="noopener noreferrer">UserWay Contrast Checker<i class="ph-bold ph-arrow-square-out"></i></a>
+      <a class="cc-link" href="https://webaim.org/resources/contrastchecker/" target="_blank" rel="noopener noreferrer">WebAIM Contrast Checker<i class="ph-bold ph-arrow-square-out"></i></a>
+      <a class="cc-link" href="https://www.tpgi.com/color-contrast-checker/" target="_blank" rel="noopener noreferrer">TPGi Colour Contrast Analyser<i class="ph-bold ph-arrow-square-out"></i></a>
+    </div>
+  </div>
+</section>
+
+<!-- ================= FOOTER ================= -->
+<footer class="foot">
+  <div class="wrap">
+    <div><svg viewBox="0 0 1498.2 474.2" style="height:36px;width:114px"><use href="#s-avibi-rev"></use></svg><div style="margin-top:14px;font-size:13px">Brand Guideline Playbook · v1.0 · 2026</div></div>
+    <div class="r">
+      <span class="vi">Tài liệu nội bộ. Mọi thắc mắc về sử dụng thương hiệu, vui lòng liên hệ đội ngũ Marketing của avibi.ai.</span>
+      <span class="en">Internal document. For brand usage questions, contact the avibi.ai Marketing team.</span>
+    </div>
+  </div>
+</footer>
+
+<nav class="railnav" id="railnav" aria-label="Mục lục nhanh / Quick section navigation"></nav>
+<div class="copytoast" id="toast">Đã copy!</div>
+
+<script>
+
+  // transparent header at top, white on scroll
+  const topbar = document.querySelector('.topbar');
+  function onScrollTop(){
+    topbar.classList.toggle('scrolled', window.scrollY > 30);
+    // rail stays hidden over the dark hero, fades in once you start reading
+    const r = document.getElementById('railnav');
+    const hero = document.querySelector('.hero');
+    if(r) r.classList.toggle('show', window.scrollY > (hero ? hero.offsetHeight * .6 : 400));
+  }
+  window.addEventListener('scroll', onScrollTop, {passive:true});
+
+  // language toggle
+  const lt = document.getElementById('langtoggle');
+  lt.addEventListener('click', e=>{
+    const b = e.target.closest('button'); if(!b) return;
+    document.documentElement.setAttribute('data-lang', b.dataset.l);
+    [...lt.children].forEach(x=>x.classList.toggle('active', x===b));
+    document.documentElement.lang = b.dataset.l==='en'?'en':'vi';
+    renderLabel();
+  });
+
+  // scroll-spy: header shows current section name
+  const SECTIONS = [
+    {id:'intro',n:'01',vi:'Giới thiệu',en:'Introduction'},
+    {id:'logo',n:'02',vi:'Logo',en:'Logo'},
+    {id:'clearspace',n:'03',vi:'Khoảng trống',en:'Clear space'},
+    {id:'misuse',n:'04',vi:'Dùng sai',en:'Misuse'},
+    {id:'products',n:'05',vi:'Sản phẩm',en:'Products'},
+    {id:'color',n:'06',vi:'Màu sắc',en:'Color'},
+    {id:'type',n:'07',vi:'Kiểu chữ',en:'Typography'},
+    {id:'icons',n:'08',vi:'Bộ Icon',en:'Icon Pack'},
+    {id:'voice',n:'09',vi:'Giọng văn',en:'Voice'},
+    {id:'assets',n:'10',vi:'Tải xuống',en:'Download'},
+    {id:'contrast',n:'11',vi:'Tương phản',en:'Contrast'}
+  ];
+  let activeId = 'intro';
+  const menuLabel = document.getElementById('menuLabel');
+
+  // right-side rail: built from SECTIONS so it can never drift from the menu
+  const rail = document.getElementById('railnav');
+  SECTIONS.forEach(s=>{
+    const a = document.createElement('a');
+    a.href = '#' + s.id;
+    a.dataset.id = s.id;
+    a.innerHTML = '<span class="rn-label"></span><span class="rn-dot"></span>';
+    rail.appendChild(a);
+  });
+  const railLinks = [...rail.children];
+
+  function renderLabel(){
+    const s = SECTIONS.find(x=>x.id===activeId) || SECTIONS[0];
+    const lang = document.documentElement.getAttribute('data-lang');
+    const name = x => lang==='en' ? x.en : x.vi;
+    menuLabel.textContent = s.n + ' · ' + name(s);
+    // keep the rail's labels and active dot in sync (language + scroll position)
+    railLinks.forEach((a,i)=>{
+      const sec = SECTIONS[i], on = sec.id === activeId;
+      a.querySelector('.rn-label').textContent = sec.n + ' · ' + name(sec);
+      a.setAttribute('aria-label', sec.n + ' — ' + name(sec));
+      a.classList.toggle('active', on);
+      if(on) a.setAttribute('aria-current','true'); else a.removeAttribute('aria-current');
+    });
+  }
+  // Which section are we in? Computed straight from scroll position: the last one
+  // whose top has passed the reading line. Deterministic at both ends of the page,
+  // and unlike an IntersectionObserver band it can't be left stale or be decided by
+  // whichever entry happened to arrive last in a batch.
+  // Section tops are cached, so scrolling costs only arithmetic — no layout reads
+  // per scroll event, and the update is synchronous (no rAF) so the highlight can
+  // never lag behind the viewport. Re-measured whenever layout can have changed.
+  let tops = [];
+  function measureSections(){
+    tops = SECTIONS.map(s=>{
+      const el = document.getElementById(s.id);
+      return {id:s.id, top: el ? el.getBoundingClientRect().top + window.scrollY : Infinity};
+    });
+  }
+  function computeActive(){
+    const line = window.scrollY + window.innerHeight * 0.35;
+    let cur = tops.length ? tops[0].id : SECTIONS[0].id;
+    for(const t of tops){ if(t.top <= line) cur = t.id; }
+    return cur;
+  }
+  function onScrollSpy(){
+    const next = computeActive();
+    if(next !== activeId){ activeId = next; renderLabel(); }
+  }
+  function remeasure(){ measureSections(); onScrollSpy(); }
+  window.addEventListener('scroll', onScrollSpy, {passive:true});
+  window.addEventListener('resize', remeasure, {passive:true});
+  window.addEventListener('load', remeasure);            // hero image settles the layout
+  if(document.fonts && document.fonts.ready) document.fonts.ready.then(remeasure);
+  measureSections();
+  activeId = computeActive();
+  renderLabel();
+  onScrollTop(); // set topbar + rail state now, in case the page loads already scrolled
+
+  // inject an icon into each section header
+  const SECICONS = {intro:'ph-hand-waving',logo:'ph-shapes',clearspace:'ph-frame-corners',misuse:'ph-prohibit',products:'ph-tree-structure',color:'ph-palette',type:'ph-text-aa',voice:'ph-chat-teardrop-text',assets:'ph-download-simple',icons:'ph-squares-four',contrast:'ph-circle-half'};
+  Object.entries(SECICONS).forEach(([id,ic])=>{
+    const sec = document.getElementById(id); if(!sec) return;
+    const sn = sec.querySelector('.sec-num'); if(!sn) return;
+    const chip = document.createElement('span'); chip.className = 'secico';
+    chip.innerHTML = '<i class="ph-bold '+ic+'"></i>';
+    sn.insertBefore(chip, sn.firstChild);
+  });
+  // contents menu
+  const menuBtn = document.getElementById('menuBtn');
+  const menuPanel = document.getElementById('menuPanel');
+  menuBtn.addEventListener('click', e=>{
+    e.stopPropagation();
+    menuPanel.classList.toggle('open');
+    menuBtn.classList.toggle('open');
+  });
+  menuPanel.addEventListener('click', ()=>{ menuPanel.classList.remove('open'); menuBtn.classList.remove('open'); });
+  document.addEventListener('click', e=>{
+    if(!menuPanel.contains(e.target) && e.target!==menuBtn){ menuPanel.classList.remove('open'); menuBtn.classList.remove('open'); }
+  });
+  // download style tabs (Default / Reversed / White / Navy)
+  const dltabs = document.getElementById('dltabs');
+  if(dltabs){
+    const SUFFIX = {default:'', reversed:'_Reversed', white:'_White', navy:'_Navy'};
+    const DARK = {reversed:true, white:true};
+    function applyStyle(style){
+      const suf = SUFFIX[style] ?? '';
+      document.querySelectorAll('.dlgrid .dlcard').forEach(card=>{
+        const base = card.dataset.base;
+        const img = card.querySelector('.previmg');
+        const bs = card.querySelector('.btn-svg');
+        const bp = card.querySelector('.btn-png');
+        const prev = card.querySelector('.prev');
+        if(img) img.src = base + suf + '.svg';
+        if(bs) bs.href = base + suf + '.svg';
+        if(bp) bp.href = base + suf + '.png';
+        if(prev) prev.classList.toggle('navy', !!DARK[style] && !card.dataset.light);
+      });
+    }
+    dltabs.addEventListener('click', e=>{
+      const b = e.target.closest('.dltab'); if(!b) return;
+      [...dltabs.children].forEach(x=>x.classList.toggle('active', x===b));
+      applyStyle(b.dataset.style);
+    });
+  }
+
+  // ===== contrast checker (WCAG 2.1 relative luminance) =====
+  (function(){
+    const fg = document.getElementById('ccFg'), fgHex = document.getElementById('ccFgHex');
+    const bg = document.getElementById('ccBg'), bgHex = document.getElementById('ccBgHex');
+    if(!fg || !bg) return;
+    const ratioEl = document.getElementById('ccRatio'), badgesEl = document.getElementById('ccBadges');
+    const prev = document.getElementById('ccPrev'), pairsEl = document.getElementById('ccPairs');
+
+    // brand palette available as one-click chips
+    const PALETTE = [
+      ['#041837','Avibi Navy'], ['#0059FC','Avibi Blue'], ['#0CBAFC','Avibi Sky'], ['#FFFFFF','White'],
+      ['#05070C','Near-black'], ['#1B2F52','Navy 700'], ['#3A4D70','Navy 600'], ['#0047CC','Blue 700'],
+      ['#E8F0FF','Blue 100'], ['#F4F7FC','Cloud'], ['#E8EDF5','Mist'], ['#98A6BC','Steel'], ['#5A6B85','Slate']
+    ];
+    // pairs that actually occur in the brand — ratios computed live, never hardcoded
+    const PAIRS = [
+      ['#041837','#FFFFFF','Navy trên trắng','Navy on white'],
+      ['#FFFFFF','#041837','Trắng trên navy','White on navy'],
+      ['#FFFFFF','#0059FC','Trắng trên Blue (nút chính)','White on Blue (primary button)'],
+      ['#0059FC','#FFFFFF','Blue trên trắng (link)','Blue on white (links)'],
+      ['#0CBAFC','#041837','Sky trên navy','Sky on navy'],
+      ['#041837','#0CBAFC','Navy trên Sky','Navy on Sky'],
+      ['#041837','#F4F7FC','Navy trên Cloud','Navy on Cloud'],
+      ['#5A6B85','#FFFFFF','Slate trên trắng','Slate on white'],
+      ['#0059FC','#041837','Blue trên navy','Blue on navy'],
+      ['#98A6BC','#FFFFFF','Steel trên trắng','Steel on white'],
+      ['#0CBAFC','#FFFFFF','Sky trên trắng','Sky on white'],
+      ['#FFFFFF','#0CBAFC','Trắng trên Sky','White on Sky']
+    ];
+
+    const clean = v => String(v||'').trim().replace(/^#/,'').toUpperCase();
+    function parseHex(v){
+      const s = clean(v);
+      if(/^[0-9A-F]{3}$/.test(s)) return '#' + s.split('').map(c=>c+c).join('');
+      if(/^[0-9A-F]{6}$/.test(s)) return '#' + s;
+      return null;
+    }
+    const chan = c => { c /= 255; return c <= 0.03928 ? c/12.92 : Math.pow((c+0.055)/1.055, 2.4); };
+    function lum(hex){
+      const n = parseInt(hex.slice(1), 16);
+      return 0.2126*chan((n>>16)&255) + 0.7152*chan((n>>8)&255) + 0.0722*chan(n&255);
+    }
+    function ratio(a, b){
+      const la = lum(a), lb = lum(b);
+      const hi = Math.max(la, lb), lo = Math.min(la, lb);
+      return (hi + 0.05) / (lo + 0.05);
+    }
+    // one decimal, floored — never round 4.48 up into a "passing" 4.5
+    const fmt = r => (Math.floor(r*10)/10).toFixed(1);
+
+    const LEVELS = [
+      {k:'AA',  need:4.5, vi:'Chữ thường',  en:'Normal text'},
+      {k:'AA',  need:3,   vi:'Chữ lớn',     en:'Large text'},
+      {k:'AAA', need:7,   vi:'Chữ thường',  en:'Normal text'},
+      {k:'AAA', need:4.5, vi:'Chữ lớn',     en:'Large text'},
+      {k:'UI',  need:3,   vi:'Icon / viền', en:'Icons / borders'}
+    ];
+
+    function lang(){ return document.documentElement.getAttribute('data-lang') === 'en' ? 'en' : 'vi'; }
+
+    function render(){
+      const f = parseHex(fgHex.value), b = parseHex(bgHex.value);
+      fgHex.classList.toggle('bad', !f);
+      bgHex.classList.toggle('bad', !b);
+      if(!f || !b){ ratioEl.textContent = '—'; badgesEl.innerHTML = ''; return; }
+      const r = ratio(f, b), L = lang();
+      ratioEl.textContent = fmt(r);
+      badgesEl.innerHTML = LEVELS.map(lv=>{
+        const ok = r >= lv.need;
+        return '<span class="cc-badge ' + (ok?'pass':'fail') + '">' +
+          '<i class="ph-fill ' + (ok?'ph-check-circle':'ph-x-circle') + '"></i>' +
+          lv.k + ' <em>' + (L==='en'?lv.en:lv.vi) + ' · ' + lv.need + ':1</em></span>';
+      }).join('');
+      prev.style.background = b;
+      prev.style.color = f;
+      prev.style.borderColor = ratio(b, '#D7DFEB') < 1.12 ? '#9A9AB0' : 'var(--g200)';
+    }
+
+    // keep the colour picker and the hex field in step
+    function setPair(f, b){
+      if(f){ fg.value = f; fgHex.value = f; }
+      if(b){ bg.value = b; bgHex.value = b; }
+      render();
+    }
+    fg.addEventListener('input', ()=>{ fgHex.value = fg.value.toUpperCase(); render(); });
+    bg.addEventListener('input', ()=>{ bgHex.value = bg.value.toUpperCase(); render(); });
+    [fgHex, bgHex].forEach(inp=>{
+      inp.addEventListener('input', ()=>{
+        const v = parseHex(inp.value);
+        if(v) (inp === fgHex ? fg : bg).value = v;
+        render();
+      });
+      // tidy the field up once the user is done typing
+      inp.addEventListener('blur', ()=>{ const v = parseHex(inp.value); if(v) inp.value = v; render(); });
+    });
+    document.getElementById('ccSwap').addEventListener('click', ()=>{
+      const f = parseHex(fgHex.value), b = parseHex(bgHex.value);
+      if(f && b) setPair(b, f);
+    });
+
+    // swatch chips for both fields
+    document.querySelectorAll('.cc-chips').forEach(box=>{
+      const which = box.dataset.target;
+      box.innerHTML = PALETTE.map(([hex,name])=>
+        '<button type="button" class="cc-chip" style="background:' + hex + '" data-hex="' + hex +
+        '" title="' + name + ' ' + hex + '" aria-label="' + name + ' ' + hex + '"></button>').join('');
+      box.addEventListener('click', e=>{
+        const btn = e.target.closest('.cc-chip'); if(!btn) return;
+        which === 'fg' ? setPair(btn.dataset.hex, null) : setPair(null, btn.dataset.hex);
+      });
+    });
+
+    // preset brand pairs, ratios computed at runtime
+    function renderPairs(){
+      const L = lang();
+      pairsEl.innerHTML = PAIRS.map(([f,b,vi,en])=>{
+        const r = ratio(f,b), ok = r >= 4.5;
+        const verdict = ok ? 'AA' : (r >= 3 ? (L==='en'?'Large text only':'Chỉ chữ lớn') : (L==='en'?'Fails':'Không đạt'));
+        return '<button type="button" class="ccpair" data-fg="' + f + '" data-bg="' + b + '">' +
+          '<span class="sw" style="background:' + b + ';color:' + f + '">Aa</span>' +
+          '<span class="nm">' + (L==='en'?en:vi) + '</span>' +
+          '<span class="rt">' + fmt(r) + ':1</span>' +
+          '<span class="vd ' + (ok?'pass':'fail') + '">' + verdict + '</span></button>';
+      }).join('');
+    }
+    pairsEl.addEventListener('click', e=>{
+      const row = e.target.closest('.ccpair'); if(!row) return;
+      setPair(row.dataset.fg, row.dataset.bg);
+      document.getElementById('contrast').scrollIntoView({block:'start'});
+    });
+
+    // re-render text when the language is switched
+    document.getElementById('langtoggle').addEventListener('click', ()=>{
+      setTimeout(()=>{ render(); renderPairs(); }, 0);
+    });
+
+    renderPairs();
+    render();
+    window.ccRatioOf = ratio; // exposed for testing
+  })();
+
+  // copy swatches
+  const toast = document.getElementById('toast');
+  let toastT;
+  document.querySelectorAll('.swatch').forEach(s=>{
+    s.addEventListener('click', ()=>{
+      const hex = s.dataset.hex;
+      navigator.clipboard?.writeText(hex);
+      toast.textContent = hex + (document.documentElement.getAttribute('data-lang')==='en' ? ' — copied' : ' — đã copy');
+      toast.classList.add('show');
+      clearTimeout(toastT);
+      toastT = setTimeout(()=>toast.classList.remove('show'), 1400);
+    });
+  });
+
+</script>
+</body>
+</html>
