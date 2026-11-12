@@ -1,0 +1,731 @@
+{
+ "name": "Avibi",
+ "version": 1,
+ "color": {
+  "themes": [
+   {
+    "id": "light",
+    "name": "Sáng"
+   },
+   {
+    "id": "dark",
+    "name": "Tối (Navy)"
+   }
+  ],
+  "tokens": [
+   {
+    "name": "surface",
+    "value": {
+     "light": "#FFFFFF",
+     "dark": "#041837"
+    },
+    "usage": "Nền trang. Sáng: trắng; tối: Avibi Navy (như footer, slide mở đầu, tài liệu API chế độ tối)."
+   },
+   {
+    "name": "surface-card",
+    "value": {
+     "light": "#F4F7FC",
+     "dark": "#0B1D3F"
+    },
+    "usage": "Nền card, specimen, khối nội dung phụ đặt trên `surface` (Cloud ở chế độ sáng)."
+   },
+   {
+    "name": "surface-raised",
+    "value": {
+     "light": "#FFFFFF",
+     "dark": "#1B2F52"
+    },
+    "usage": "Menu, popover, ô nhập liệu, nút trong segmented control đang chọn — phần nổi lên trên `surface-card`."
+   },
+   {
+    "name": "surface-muted",
+    "value": {
+     "light": "#E8EDF5",
+     "dark": "#1B2F52"
+    },
+    "usage": "Nút phụ, rãnh segmented control, chip trung tính (Mist ở chế độ sáng)."
+   },
+   {
+    "name": "surface-muted-hover",
+    "value": {
+     "light": "#D7DFEB",
+     "dark": "#3A4D70"
+    },
+    "usage": "Trạng thái hover của `surface-muted`."
+   },
+   {
+    "name": "line",
+    "value": {
+     "light": "#E8EDF5",
+     "dark": "#1B2F52"
+    },
+    "usage": "Đường kẻ mảnh: viền card, phân cách section, hàng bảng."
+   },
+   {
+    "name": "line-strong",
+    "value": {
+     "light": "#D7DFEB",
+     "dark": "#3A4D70"
+    },
+    "usage": "Viền ô nhập, stage logo, đường nối sơ đồ. Lưu ý: ở chế độ sáng chỉ đạt ~1.3:1 với trắng — đúng như Brand Guideline, nên trạng thái focus luôn phải có `focus-ring`."
+   },
+   {
+    "name": "ink",
+    "value": {
+     "light": "#041837",
+     "dark": "#FFFFFF"
+    },
+    "usage": "Chữ chính, tiêu đề, icon — trên `surface`, `surface-card`, `surface-raised`, `surface-muted`."
+   },
+   {
+    "name": "ink-muted",
+    "value": {
+     "light": "#5A6B85",
+     "dark": "#98A6BC"
+    },
+    "usage": "Chữ phụ, mô tả, caption (Slate / Steel) — trên `surface`, `surface-card` và `surface-raised`; đạt ≥ 4.5:1 ở cả hai theme."
+   },
+   {
+    "name": "ink-subtle",
+    "value": {
+     "light": "#98A6BC",
+     "dark": "#5A6B85"
+    },
+    "usage": "Placeholder, nhãn phụ rất nhỏ, dấu gạch ngăn. KHÔNG dùng cho nội dung cần đọc: chỉ ~2.4:1 trên trắng (Steel trên trắng, đúng như cặp màu trong Brand Guideline)."
+   },
+   {
+    "name": "primary",
+    "value": {
+     "light": "#0157FF",
+     "dark": "#0157FF"
+    },
+    "usage": "Avibi Blue đặc — nút chính, CTA, trạng thái đang chọn. Nút chính KHÔNG dùng gradient."
+   },
+   {
+    "name": "primary-hover",
+    "value": {
+     "light": "#0247CD",
+     "dark": "#0247CD"
+    },
+    "usage": "Hover / pressed của `primary` (Blue 700)."
+   },
+   {
+    "name": "on-primary",
+    "value": {
+     "light": "#FFFFFF",
+     "dark": "#FFFFFF"
+    },
+    "usage": "Chữ và icon trên nền `primary` (trắng trên Blue 5.5:1)."
+   },
+   {
+    "name": "primary-soft",
+    "value": {
+     "light": "#E6EEFF",
+     "dark": "#1B2F52"
+    },
+    "usage": "Nền nhạt phía sau chữ `link` / `primary`: hàng đang chọn, badge thông tin."
+   },
+   {
+    "name": "link",
+    "value": {
+     "light": "#0157FF",
+     "dark": "#0FCDFF"
+    },
+    "usage": "Link và chữ nhấn. Sáng: Avibi Blue trên `surface`/`surface-card`; tối: Avibi Sky trên Navy (Blue trên Navy chỉ ~3.2:1, không đủ cho chữ)."
+   },
+   {
+    "name": "accent",
+    "value": {
+     "light": "#0FCDFF",
+     "dark": "#0FCDFF"
+    },
+    "usage": "Avibi Sky — màu nhấn CHỈ trên nền tối (kicker hero, icon trong ô navy, số liệu nổi bật). Không dùng làm chữ trên nền trắng (1.8:1)."
+   },
+   {
+    "name": "on-accent",
+    "value": {
+     "light": "#041837",
+     "dark": "#041837"
+    },
+    "usage": "Chữ trên nền Sky (Navy trên Sky ~9.4:1)."
+   },
+   {
+    "name": "inverse-surface",
+    "value": {
+     "light": "#041837",
+     "dark": "#FFFFFF"
+    },
+    "usage": "Khối đảo màu: ô icon navy, tooltip, toast, nút `dark`."
+   },
+   {
+    "name": "on-inverse",
+    "value": {
+     "light": "#FFFFFF",
+     "dark": "#041837"
+    },
+    "usage": "Chữ trên `inverse-surface`."
+   },
+   {
+    "name": "focus-ring",
+    "value": {
+     "light": "#0157FF",
+     "dark": "#0FCDFF"
+    },
+    "usage": "Viền focus 2px liền, offset 2px. Blue trên nền sáng; Sky trên nền tối (Sky trên Navy ~9.4:1, rõ hơn Blue ~3.2:1)."
+   },
+   {
+    "name": "success",
+    "value": {
+     "light": "#1E8E4E",
+     "dark": "#4CC38A"
+    },
+    "usage": "Icon và dấu ✓ cho trạng thái đạt / Nên dùng. Luôn kèm chữ hoặc icon — không phân biệt chỉ bằng màu."
+   },
+   {
+    "name": "success-ink",
+    "value": {
+     "light": "#12673A",
+     "dark": "#7FD6A4"
+    },
+    "usage": "Chữ trạng thái đạt, trên `success-soft`, `surface` và `surface-card`."
+   },
+   {
+    "name": "success-soft",
+    "value": {
+     "light": "#EAF6EE",
+     "dark": "#0E3A26"
+    },
+    "usage": "Nền badge đạt, chú thích ô Nên."
+   },
+   {
+    "name": "success-line",
+    "value": {
+     "light": "#BFE3CD",
+     "dark": "#1E5C3C"
+    },
+    "usage": "Viền badge đạt."
+   },
+   {
+    "name": "danger",
+    "value": {
+     "light": "#C0392B",
+     "dark": "#E5675A"
+    },
+    "usage": "Icon ✕ cho lỗi / Không nên, viền ô nhập sai. Luôn kèm chữ hoặc icon."
+   },
+   {
+    "name": "danger-ink",
+    "value": {
+     "light": "#9E2D1D",
+     "dark": "#F4A397"
+    },
+    "usage": "Chữ lỗi / không đạt, trên `danger-soft`, `surface` và `surface-card`."
+   },
+   {
+    "name": "danger-soft",
+    "value": {
+     "light": "#FCEEEE",
+     "dark": "#3D1612"
+    },
+    "usage": "Nền badge lỗi, chú thích ô Không nên."
+   },
+   {
+    "name": "danger-line",
+    "value": {
+     "light": "#F0CFCB",
+     "dark": "#6B2A22"
+    },
+    "usage": "Viền badge lỗi."
+   },
+   {
+    "name": "code-surface",
+    "value": {
+     "light": "#041837",
+     "dark": "#020D1F"
+    },
+    "usage": "Nền khối code và đoạn CSS mẫu — luôn tối, ở cả hai theme."
+   },
+   {
+    "name": "code-ink",
+    "value": {
+     "light": "#DCE6F5",
+     "dark": "#DCE6F5"
+    },
+    "usage": "Chữ code mặc định trên `code-surface`."
+   },
+   {
+    "name": "code-comment",
+    "value": {
+     "light": "#7F93B3",
+     "dark": "#7F93B3"
+    },
+    "usage": "Comment trong code, trên `code-surface`."
+   },
+   {
+    "name": "code-keyword",
+    "value": {
+     "light": "#7DB6FF",
+     "dark": "#7DB6FF"
+    },
+    "usage": "Từ khoá (from, import…) trên `code-surface`."
+   },
+   {
+    "name": "code-string",
+    "value": {
+     "light": "#7FE0FF",
+     "dark": "#7FE0FF"
+    },
+    "usage": "Chuỗi và thuộc tính nhấn trên `code-surface`."
+   },
+   {
+    "name": "navy",
+    "value": "#041837",
+    "usage": "Avibi Navy — màu của chữ “vibi”. ~30% diện tích: chữ, mảng chính, nền tối."
+   },
+   {
+    "name": "blue",
+    "value": "#0157FF",
+    "usage": "Avibi Blue (theo Figma) — đầu gradient, nút chính, link. ~10% diện tích cùng gradient."
+   },
+   {
+    "name": "sky",
+    "value": "#0FCDFF",
+    "usage": "Avibi Sky (theo Figma) — cuối gradient. Chỉ là màu nhấn trên nền tối."
+   },
+   {
+    "name": "blue-mid",
+    "value": "#0065F2",
+    "usage": "Điểm giữa (50%) của gradient Avibi Flow. Không dùng riêng."
+   },
+   {
+    "name": "white",
+    "value": "#FFFFFF",
+    "usage": "Nền chính (~60% cùng Cloud)."
+   },
+   {
+    "name": "cloud",
+    "value": "#F4F7FC",
+    "usage": "Cloud — nền phụ, card."
+   },
+   {
+    "name": "mist",
+    "value": "#E8EDF5",
+    "usage": "Mist — đường kẻ mảnh, nền nút phụ."
+   },
+   {
+    "name": "steel",
+    "value": "#98A6BC",
+    "usage": "Steel — chữ phụ trên nền tối, placeholder trên nền sáng."
+   },
+   {
+    "name": "slate",
+    "value": "#5A6B85",
+    "usage": "Slate — chữ phụ trên nền sáng (5.5:1 trên trắng)."
+   },
+   {
+    "name": "near-black",
+    "value": "#05070C",
+    "usage": "Gần đen — nền tối trung tính; logo Reversed vẫn đạt 20.1:1."
+   },
+   {
+    "name": "navy-900",
+    "value": "#020D1F",
+    "usage": "Navy 900 — nền tối sâu nhất, biểu đồ."
+   },
+   {
+    "name": "navy-700",
+    "value": "#1B2F52",
+    "usage": "Navy 700 — biểu đồ, nền phụ trên Navy."
+   },
+   {
+    "name": "navy-600",
+    "value": "#3A4D70",
+    "usage": "Navy 600 — biểu đồ, viền trên nền tối."
+   },
+   {
+    "name": "navy-300",
+    "value": "#98A6BC",
+    "usage": "Navy 300 (= Steel) — biểu đồ."
+   },
+   {
+    "name": "navy-100",
+    "value": "#E8EDF5",
+    "usage": "Navy 100 (= Mist) — nền phụ."
+   },
+   {
+    "name": "blue-800",
+    "value": "#023BA5",
+    "usage": "Blue 800 — biểu đồ, trạng thái đậm."
+   },
+   {
+    "name": "blue-700",
+    "value": "#0247CD",
+    "usage": "Blue 700 — hover của nút chính."
+   },
+   {
+    "name": "blue-300",
+    "value": "#679AFF",
+    "usage": "Blue 300 — biểu đồ; chữ Navy trên nền này."
+   },
+   {
+    "name": "blue-200",
+    "value": "#B8D0FF",
+    "usage": "Blue 200 — biểu đồ, nền nhạt."
+   },
+   {
+    "name": "blue-100",
+    "value": "#E6EEFF",
+    "usage": "Blue 100 — nền nhạt sau chữ Blue / Navy."
+   },
+   {
+    "name": "sky-800",
+    "value": "#0B85AF",
+    "usage": "Sky 800 — biểu đồ."
+   },
+   {
+    "name": "sky-600",
+    "value": "#0DA9D7",
+    "usage": "Sky 600 — biểu đồ; chữ Navy trên nền này."
+   },
+   {
+    "name": "sky-300",
+    "value": "#7BE4FF",
+    "usage": "Sky 300 — biểu đồ; chữ Navy trên nền này."
+   },
+   {
+    "name": "sky-200",
+    "value": "#BCF1FF",
+    "usage": "Sky 200 — biểu đồ, nền nhạt."
+   },
+   {
+    "name": "sky-100",
+    "value": "#E7FAFF",
+    "usage": "Sky 100 — nền nhạt."
+   }
+  ]
+ },
+ "type": {
+  "fonts": [],
+  "families": {
+   "logo": "Urbanist, \"Plus Jakarta Sans\", Arial, system-ui, sans-serif",
+   "head": "\"Plus Jakarta Sans\", Arial, system-ui, sans-serif",
+   "body": "Inter, Arial, system-ui, sans-serif",
+   "mono": "\"JetBrains Mono\", Consolas, ui-monospace, monospace"
+  },
+  "groups": [
+   {
+    "name": "Logo & Display · Urbanist",
+    "family": "logo",
+    "styles": [
+     {
+      "name": "brand-display",
+      "fontSize": "76px",
+      "lineHeight": 0.95,
+      "fontWeight": 700,
+      "letterSpacing": "-0.01em",
+      "sample": "Avibi Gateway",
+      "usage": "Tên sản phẩm cỡ lớn, headline tiếng Anh, số liệu lớn (300+ model). clamp(44px, 7vw, 76px). Chỉ chữ KHÔNG dấu — Urbanist không có chữ tiếng Việt dấu chồng."
+     },
+     {
+      "name": "brand-lockup",
+      "fontSize": "30px",
+      "lineHeight": 1,
+      "fontWeight": 600,
+      "letterSpacing": "-0.01em",
+      "sample": "AiBox",
+      "usage": "Tên sản phẩm khi viết bằng chữ (SemiBold 600). Trong logo sản phẩm dùng file gốc: chữ hoa cao bằng chữ A, chữ thường cao bằng “vibi”."
+     },
+     {
+      "name": "brand-tagline",
+      "fontSize": "22px",
+      "lineHeight": 1.6,
+      "fontWeight": 400,
+      "letterSpacing": "0.04em",
+      "sample": "One API for every AI model",
+      "usage": "Nhãn tiếng Anh, con số trên ấn phẩm (Regular 400). Không dùng cho slogan — slogan dùng style `slogan` hoặc file logo kèm slogan."
+     },
+     {
+      "name": "brand-kicker",
+      "fontSize": "12px",
+      "lineHeight": 1.6,
+      "fontWeight": 600,
+      "letterSpacing": "0.22em",
+      "sample": "BRAND GUIDELINE PLAYBOOK · V1.0",
+      "usage": "Kicker hero, số section, nhãn tab — chỉ khi nội dung không dấu. Nội dung tiếng Việt dùng `eyebrow`."
+     }
+    ]
+   },
+   {
+    "name": "Tiêu đề tiếng Việt · Plus Jakarta Sans",
+    "family": "head",
+    "styles": [
+     {
+      "name": "display",
+      "fontSize": "68px",
+      "lineHeight": 1.05,
+      "fontWeight": 800,
+      "letterSpacing": "-0.02em",
+      "sample": "Một kết nối – Vô vàn mô hình AI",
+      "usage": "Tiêu đề hero, ảnh bìa. Co theo màn hình: clamp(38px, 6vw, 68px)."
+     },
+     {
+      "name": "slogan",
+      "fontSize": "22px",
+      "lineHeight": 1.3,
+      "fontWeight": 500,
+      "letterSpacing": "0.01em",
+      "sample": "Global AI – Local Life",
+      "usage": "Slogan công ty và slogan sản phẩm (Plus Jakarta Sans Medium 500), một màu navy hoặc trắng. Trong logo, slogan đã là nét vẽ trong file — không gõ lại."
+     },
+     {
+      "name": "h2",
+      "fontSize": "38px",
+      "lineHeight": 1.12,
+      "fontWeight": 700,
+      "letterSpacing": "-0.015em",
+      "sample": "Một API cho mọi mô hình AI",
+      "usage": "Tiêu đề section. clamp(26px, 3.4vw, 38px)."
+     },
+     {
+      "name": "h3",
+      "fontSize": "19px",
+      "lineHeight": 1.6,
+      "fontWeight": 600,
+      "sample": "Đổi model bằng một dòng",
+      "usage": "Tiêu đề card, nhóm nội dung."
+     },
+     {
+      "name": "h4",
+      "fontSize": "15px",
+      "lineHeight": 1.6,
+      "fontWeight": 700,
+      "sample": "Thanh ngang là nhịp cầu",
+      "usage": "Tiêu đề mục nhỏ trong danh sách, tên file tải xuống."
+     },
+     {
+      "name": "eyebrow",
+      "fontSize": "12px",
+      "lineHeight": 1.6,
+      "fontWeight": 600,
+      "letterSpacing": "0.22em",
+      "sample": "BRAND GUIDELINE · 11/2026",
+      "usage": "Kicker trên tiêu đề tiếng Việt, viết HOA. Màu `accent` trên nền tối, `ink` trên nền sáng. Nội dung không dấu: `brand-kicker`."
+     },
+     {
+      "name": "label",
+      "fontSize": "12px",
+      "lineHeight": 1.6,
+      "fontWeight": 600,
+      "letterSpacing": "0.03em",
+      "sample": "Reversed / nền tối",
+      "usage": "Nhãn dưới hình, chú thích nút, tab."
+     }
+    ]
+   },
+   {
+    "name": "Nội dung · Inter",
+    "family": "body",
+    "styles": [
+     {
+      "name": "lead",
+      "fontSize": "17px",
+      "lineHeight": 1.6,
+      "fontWeight": 400,
+      "sample": "Một API duy nhất để truy cập model ngôn ngữ, giọng nói, hình ảnh và video.",
+      "usage": "Đoạn mở đầu dưới tiêu đề hero."
+     },
+     {
+      "name": "body",
+      "fontSize": "16px",
+      "lineHeight": 1.6,
+      "fontWeight": 400,
+      "sample": "Dùng được SDK OpenAI bạn đang có — chỉ cần đổi base_url và API key.",
+      "usage": "Văn bản thường."
+     },
+     {
+      "name": "body-strong",
+      "fontSize": "16px",
+      "lineHeight": 1.6,
+      "fontWeight": 600,
+      "sample": "Giá tính theo token, hiển thị bằng VND và USD.",
+      "usage": "Nhấn mạnh trong đoạn văn."
+     },
+     {
+      "name": "body-sm",
+      "fontSize": "14px",
+      "lineHeight": 1.6,
+      "fontWeight": 400,
+      "sample": "Một điểm truy cập cho cả hệ sinh thái model.",
+      "usage": "Nội dung card, danh sách."
+     },
+     {
+      "name": "caption",
+      "fontSize": "13px",
+      "lineHeight": 1.6,
+      "fontWeight": 400,
+      "sample": "Cập nhật 11 / 2026",
+      "usage": "Chú thích, metadata, ghi chú."
+     }
+    ]
+   },
+   {
+    "name": "Code · JetBrains Mono",
+    "family": "mono",
+    "styles": [
+     {
+      "name": "code",
+      "fontSize": "13.5px",
+      "lineHeight": 1.75,
+      "fontWeight": 400,
+      "sample": "client.chat.completions.create(model=\"qwen-…\")",
+      "usage": "Khối code, tên model, endpoint, tham số. Inline code: 0.92em."
+     }
+    ]
+   }
+  ]
+ },
+ "spacing": {
+  "note": "Brand Guideline không định nghĩa thang khoảng cách riêng; đây là các giá trị lặp lại trong trang Guideline, giữ nguyên số đo.",
+  "tokens": [
+   {
+    "name": "space-1",
+    "value": "4px",
+    "usage": "Khe giữa các nút trong segmented control."
+   },
+   {
+    "name": "space-2",
+    "value": "8px",
+    "usage": "Khe icon–chữ, khe giữa các chip."
+   },
+   {
+    "name": "space-3",
+    "value": "12px",
+    "usage": "Khe trong hàng, padding badge."
+   },
+   {
+    "name": "space-4",
+    "value": "16px",
+    "usage": "Khe lưới asset, lề tối thiểu trên điện thoại."
+   },
+   {
+    "name": "space-5",
+    "value": "20px",
+    "usage": "Khe lưới card (grid gap)."
+   },
+   {
+    "name": "space-6",
+    "value": "26px",
+    "usage": "Padding trong card."
+   },
+   {
+    "name": "space-7",
+    "value": "32px",
+    "usage": "Padding specimen, khối lớn."
+   },
+   {
+    "name": "space-8",
+    "value": "44px",
+    "usage": "Khoảng cách logo hero → tiêu đề; padding hộp sơ đồ."
+   },
+   {
+    "name": "space-9",
+    "value": "56px",
+    "usage": "Padding dọc stage logo; padding section trên điện thoại."
+   },
+   {
+    "name": "space-10",
+    "value": "80px",
+    "usage": "Padding dọc section trên desktop."
+   }
+  ]
+ },
+ "radius": {
+  "tokens": [
+   {
+    "name": "radius-sm",
+    "value": "8px",
+    "usage": "Ô icon nhỏ 30px, khung logo, ô màu trong bảng cặp màu."
+   },
+   {
+    "name": "radius-md",
+    "value": "10px",
+    "usage": "Nút, menu, segmented control (rãnh), nút tải."
+   },
+   {
+    "name": "radius-lg",
+    "value": "14px",
+    "usage": "Ô asset, ô icon pack, ô xem trước tương phản."
+   },
+   {
+    "name": "radius-xl",
+    "value": "18px",
+    "usage": "Card, stage logo, swatch, khối code — bán kính chính của thương hiệu."
+   },
+   {
+    "name": "radius-pill",
+    "value": "999px",
+    "usage": "Pill, badge, tagline, ô nhập dạng viên thuốc. App icon và biểu tượng sản phẩm: bo 22% cạnh (không phải token)."
+   }
+  ]
+ },
+ "shadow": {
+  "tokens": [
+   {
+    "name": "shadow-sm",
+    "value": {
+     "light": "0 2px 8px rgba(4,24,55,.12)",
+     "dark": "0 2px 8px rgba(0,0,0,.4)"
+    },
+    "usage": "Tab đang chọn trong segmented control."
+   },
+   {
+    "name": "shadow-md",
+    "value": {
+     "light": "0 6px 16px rgba(4,24,55,.08)",
+     "dark": "0 6px 16px rgba(0,0,0,.4)"
+    },
+    "usage": "Hover của hàng, link card."
+   },
+   {
+    "name": "shadow-lg",
+    "value": {
+     "light": "0 12px 30px rgba(4,24,55,.12)",
+     "dark": "0 12px 30px rgba(0,0,0,.45)"
+    },
+    "usage": "Hover của card / swatch (kèm nhấc lên 3px)."
+   },
+   {
+    "name": "shadow-xl",
+    "value": {
+     "light": "0 24px 60px rgba(4,24,55,.18)",
+     "dark": "0 24px 60px rgba(0,0,0,.55)"
+    },
+    "usage": "Menu thả xuống, popover."
+   }
+  ]
+ },
+ "gradient": {
+  "note": "Avibi Flow — gradient của chữ A, copy từ file Figma của team design (Linear · 3 stops · 126.93°).",
+  "tokens": [
+   {
+    "name": "avibi-flow",
+    "value": "linear-gradient(126.93deg, #0157FF -0.16%, #0065F2 51.59%, #0FCDFF 103.33%)",
+    "usage": "Chữ A, mảng nhấn lớn (hero, ảnh bìa), gạch chân số section, chấm danh sách. KHÔNG dùng cho nút, chữ nhỏ, đoạn văn dài hay icon; không đảo chiều."
+   }
+  ]
+ },
+ "layout": {
+  "tokens": [
+   {
+    "name": "content-max",
+    "value": "1060px",
+    "usage": "Chiều rộng tối đa vùng nội dung."
+   },
+   {
+    "name": "gutter",
+    "value": "28px",
+    "usage": "Lề trái/phải vùng nội dung trên desktop (18px ≤680px, 14px ≤400px)."
+   }
+  ]
+ }
+}
