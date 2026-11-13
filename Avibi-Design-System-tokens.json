@@ -433,7 +433,7 @@
       "fontWeight": 600,
       "letterSpacing": "-0.01em",
       "sample": "AiBox",
-      "usage": "Tên sản phẩm khi viết bằng chữ (SemiBold 600). Trong logo sản phẩm dùng file gốc: chữ hoa cao bằng chữ A, chữ thường cao bằng “vibi”."
+      "usage": "Tên sản phẩm khi viết bằng chữ trong giao diện. Trong logo sản phẩm luôn dùng file gốc: chữ hoa cao bằng chữ A, chữ thường cao bằng “vibi”, nét và chấm chữ i đồng nhất với “vibi”."
      },
      {
       "name": "brand-tagline",

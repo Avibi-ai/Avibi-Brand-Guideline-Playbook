@@ -64,7 +64,7 @@ Ba màu lõi của logo, mã màu theo file Figma của team design: `navy` #041
 
 ## Kiểu chữ
 
-Chữ "vibi" trong logo dùng **Urbanist SemiBold 600** — sans-serif hình học, nét đều — nhưng Urbanist chỉ có bộ Latin và Latin mở rộng, không có chữ tiếng Việt dấu chồng (ặ, ế, ộ, ữ…). Hệ thống chữ có bốn vai trò, đều miễn phí trên Google Fonts (tải với `subset=vietnamese`):
+Chữ "vibi" và tên sản phẩm trong logo dùng font **Urbanist** — sans-serif hình học, nét đều — nhưng Urbanist chỉ có bộ Latin và Latin mở rộng, không có chữ tiếng Việt dấu chồng (ặ, ế, ộ, ữ…). Hệ thống chữ có bốn vai trò, đều miễn phí trên Google Fonts (tải với `subset=vietnamese`):
 
 - `--font-logo` **Urbanist** — chữ "vibi", tên sản phẩm và chữ không dấu: `brand-display` 700, `brand-lockup` 600, `brand-tagline` 400, `brand-kicker`. Dùng cho tên sản phẩm, số liệu lớn (300+ model), nhãn và con số trên ấn phẩm, số section. **Không** dùng cho tiêu đề hay đoạn văn tiếng Việt có dấu.
 - `--font-head` **Plus Jakarta Sans** — tiêu đề tiếng Việt: `display` 800, `h2` 700, `h3` 600, `h4` 700, `eyebrow`, `label`; và **slogan** (`slogan`, Medium 500). Slogan trong logo đã được chuyển thành nét vẽ trong file — không gõ lại.
@@ -101,15 +101,15 @@ Dùng component `Logo` hoặc file gốc trong nhóm asset **Logos**, **Symbols*
 
 ## Logo sản phẩm
 
-- Logo Avibi + tên sản phẩm đặt ngay sau, **không có vạch ngăn**. Tên sản phẩm Urbanist SemiBold: **mọi chữ hoa cao bằng chữ A** của Avibi, **mọi chữ thường cao bằng "vibi"**.
+- Logo Avibi + tên sản phẩm đặt ngay sau, **không có vạch ngăn**. Tên sản phẩm dùng font Urbanist (nét chữ và chấm chữ i đã chỉnh đồng nhất với "vibi" trong file): **mọi chữ hoa cao bằng chữ A** của Avibi, **mọi chữ thường cao bằng "vibi"**.
 - Slogan sản phẩm một dòng dưới logo, căn đều từ mép trái chữ A đến mép phải tên sản phẩm. Plus Jakarta Sans Medium 500, đã chuyển thành nét vẽ.
 - Ba logo sản phẩm dùng **cùng một tỉ lệ**: đặt cạnh nhau, chữ Avibi, tên sản phẩm và slogan cùng cỡ. Cỡ tối thiểu kèm slogan: 240px rộng.
-- **App icon sản phẩm** (mỗi sản phẩm một bản): ô trắng, bo góc 22%, viền mảnh `line-strong`, chữ A giữ gradient (không bóng), tên sản phẩm Urbanist SemiBold navy căn giữa dưới chữ A; tối thiểu 80px.
+- **App icon sản phẩm** (mỗi sản phẩm một bản): ô trắng, bo góc 22%, viền mảnh `line-strong`, chữ A giữ gradient (không bóng), tên sản phẩm font Urbanist, navy, căn giữa dưới chữ A; tối thiểu 80px.
 - **Biểu tượng sản phẩm** (website: menu, thẻ sản phẩm, trang tài liệu): như app icon nhưng chữ A chiếm 62% chiều ngang ô, tên cao 17% cạnh ô, không bóng; tối thiểu 64px. Trên nền tối giữ nguyên ô trắng.
 
 ## Chữ ký email
 
-Gmail không tải font riêng: chữ ký dùng Arial, chữ navy, logo là ảnh PNG nền trắng (`Avibi-Email-Logo.png`, đọc được cả khi Gmail ở chế độ tối) lấy từ trang Playbook. Chữ ký đầy đủ cho email mới: tên, chức danh · phòng ban, CÔNG TY TNHH TRÍ TUỆ NHÂN TẠO AVIBI, địa chỉ, một dòng điện thoại | email | website, đường kẻ rồi logo. Chữ ký reply một dòng (chữ A + tên + chức danh + số điện thoại) khi trả lời/chuyển tiếp. Công cụ tạo chữ ký nằm ở mục 12 của Playbook.
+Gmail không tải font riêng: chữ ký dùng Arial, chữ navy, logo là ảnh PNG nền trắng (`Avibi-Email-Logo.png`, đọc được cả khi Gmail ở chế độ tối) lấy từ trang Playbook. Chữ ký đầy đủ cho email mới: tên, chức danh · phòng ban, CÔNG TY TNHH TRÍ TUỆ NHÂN TẠO AVIBI, địa chỉ, một dòng điện thoại | email | website, đường kẻ rồi logo. Cuối chữ ký đầy đủ có dòng CONFIDENTIALITY NOTICE (chỉ tiếng Anh, chữ 10px xám). Chữ ký reply một dòng (chữ A + tên + chức danh + số điện thoại) khi trả lời/chuyển tiếp. Có bản tiếng Việt và tiếng Anh (bản tiếng Anh: AVIBI AI COMPANY LIMITED, số điện thoại dạng +84). Công cụ tạo chữ ký nằm ở mục 12 của Playbook.
 
 ## Iconography
 
